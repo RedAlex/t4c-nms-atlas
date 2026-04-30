@@ -1,0 +1,51 @@
+name: Suggestion
+description: Proposer une amelioration du projet
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci pour votre idee. Decris le besoin concret et la valeur attendue.
+  - type: input
+    id: summary
+    attributes:
+      label: Titre de la suggestion
+      placeholder: Ajouter un export PNG de la carte active
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Probleme ou besoin
+      description: Quel probleme cette suggestion resout-elle ?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposition
+      description: Decris la solution ideale
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considerees
+      description: Solutions alternatives ou contournements
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Portee
+      options:
+        - UI/UX
+        - Donnees cartes/POI
+        - Performance
+        - Build/Release
+        - Documentation
+        - Securite
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Liens wiki, captures, exemples similaires

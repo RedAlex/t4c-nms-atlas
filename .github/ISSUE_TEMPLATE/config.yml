@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions generales
+    url: https://github.com/RedAlex/t4c-nms-atlas/discussions
+    about: Pour les questions d'usage et les echanges non lies a un bug.

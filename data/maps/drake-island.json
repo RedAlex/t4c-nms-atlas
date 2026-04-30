@@ -1,0 +1,49 @@
+﻿{
+    "map":  {
+                "id":  "drake-island",
+                "name":  "Drake Island",
+                "summary":  "Ile de fin de jeu avec zones extremes, Les Abysses et RedWall.",
+                "image":  "data/images/regions/drake-island/drake-island.jpg",
+                "nmsImage":  "data/images/regions/drake-island/drake-island-general.jpg",
+                "abetsicImage":  "data/images/regions/drake-island/autre/drake-island-abetsic.jpg",
+                "calibration": {
+                    "gamePoints": [
+                        { "name": "Point de calibration 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
+                        { "name": "Point de calibration 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
+                        { "name": "Point de calibration 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
+                    ]
+                },
+                "pois": [
+                    { "type": "lieux",     "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "di-abysses", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Drake_Island" },
+                    { "type": "pnj",      "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "di-abysses", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Drake_Island" },
+                    { "type": "monstres", "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "di-abysses", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Drake_Island" }
+                ],
+                "_meta":  {
+                              "checkUrls":  [
+                                                "https://t4c.fandom.com/fr/wiki/Cartes_Drake_Island",
+                                                "https://nmsrevolution.com/map.php"
+                                            ],
+                              "nmsSourceUrl":  "https://t4c.fandom.com/fr/wiki/Cartes_Drake_Island",
+                              "abetsicSourceUrl":  "https://t4c.fandom.com/fr/wiki/Cartes_Drake_Island",
+                              "checkedAt":  "2026-04-26",
+                              "lastModified":  null,
+                              "etag":  null
+                          },
+                "subMaps":  [
+                                {
+                                    "id":  "di-abysses",
+                                    "name":  "Les Abysses",
+                                    "image":  "data/images/regions/drake-island/sous-sol/les-abysses.jpg",
+                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Les_Abysses",
+                                    "hotspot":  null
+                                },
+                                {
+                                    "id":  "di-redwall",
+                                    "name":  "RedWall",
+                                    "image":  "data/images/regions/drake-island/autre/redwall.jpg",
+                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/RedWall",
+                                    "hotspot":  null
+                                }
+                            ]
+            }
+}

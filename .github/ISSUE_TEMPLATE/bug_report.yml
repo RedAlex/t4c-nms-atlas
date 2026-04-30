@@ -1,0 +1,67 @@
+name: Rapport de bug
+description: Signaler un probleme reproductible
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci pour le signalement. Merci d'etre precis pour aider au diagnostic.
+  - type: input
+    id: summary
+    attributes:
+      label: Resume du bug
+      description: En une phrase
+      placeholder: Le clic droit sur un POI n'ouvre pas le wiki
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Etapes pour reproduire
+      description: Liste numerotee des etapes
+      placeholder: |
+        1. Ouvrir l'application
+        2. Aller sur Raven's Dust
+        3. Clic droit sur un POI
+        4. Observer le resultat
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Resultat attendu
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Resultat observe
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severite
+      options:
+        - critique
+        - elevee
+        - moyenne
+        - faible
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version de l'application
+      placeholder: v0.1.0
+  - type: input
+    id: os
+    attributes:
+      label: Systeme
+      placeholder: Windows 11
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / captures
+      description: Colle les logs utiles et/ou ajoute des captures

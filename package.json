@@ -1,0 +1,22 @@
+{
+  "name": "t4c-nms-atlas",
+  "version": "0.1.0",
+  "description": "Carte interactive telechargeable T4C NMS Revolution",
+  "main": "electron/main.cjs",
+  "author": "Atlas NMS Revolution contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RedAlex/t4c-nms-atlas"
+  },
+  "scripts": {
+    "dev": "electron .",
+    "build:win": "node scripts/build-win.cjs",
+    "check-updates": "node scripts/check-updates.cjs"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.0.0",
+    "archiver": "^7.0.1",
+    "electron": "^41.3.0"
+  }
+}

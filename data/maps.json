@@ -1,0 +1,9 @@
+﻿{
+    "_source":  "t4c.fandom.com/fr via API MediaWiki Fandom",
+    "mapFiles":  [
+                     "data/maps/arakas.json",
+                     "data/maps/raven-dust.json",
+                     "data/maps/stoneheim.json",
+                     "data/maps/drake-island.json"
+                 ]
+}
