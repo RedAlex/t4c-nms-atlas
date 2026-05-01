@@ -1,70 +1,94 @@
 ﻿{
-    "map":  {
-                "id":  "raven-dust",
-                "name":  "Raven\u0027s Dust",
-                "summary":  "Deuxieme ile principale. Zones plus hostiles et quetes intermediaires.",
-                "image":  "data/images/regions/raven-dust/ravendust.png",
-                "nmsImage":  "https://static.wikia.nocookie.net/t4c/images/f/ff/Ravensdust.jpg/revision/latest/scale-to-width-down/1000?cb=20160228012151&path-prefix=fr",
-                "abetsicImage":  "data/images/regions/raven-dust/autre/raven-dust-abetsic.gif",
-                "calibration": {
-                    "gamePoints": [
-                        { "name": "Point de calibration 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-                        { "name": "Point de calibration 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-                        { "name": "Point de calibration 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
-                    ]
-                },
-                "pois": [
-                    { "type": "lieux",     "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "rd-nms", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust" },
-                    { "type": "pnj",      "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "rd-nms", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust" },
-                    { "type": "monstres", "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "rd-nms", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust" }
-                ],
-                "_meta":  {
-                              "checkUrls":  [
-                                                "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust",
-                                                "https://nmsrevolution.com/map.php"
-                                            ],
-                              "nmsSourceUrl":  "https://t4c.fandom.com/fr/wiki/Ile_de_Raven%27s_Dust",
-                              "abetsicSourceUrl":  "https://t4c.fandom.com/fr/wiki/Raven%27s_Dust_(Abetsic)",
-                              "checkedAt":  "2026-04-26",
-                              "lastModified":  null,
-                              "etag":  null
-                          },
-                "subMaps":  [
-                                {
-                                    "id":  "rd-nms",
-                                    "name":  "Raven\u0027s Dust (NMS)",
-                                    "image":  "data/images/regions/raven-dust/raven-dust-general.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Ile_de_Raven%27s_Dust",
-                                    "hotspot":  null
-                                },
-                                {
-                                    "id":  "rd-silversky",
-                                    "name":  "SilverSky",
-                                    "image":  "data/images/regions/raven-dust/ville/silversky.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/SilverSky",
-                                    "hotspot":  null
-                                },
-                                {
-                                    "id":  "rd-chateau-royal",
-                                    "name":  "Chateau Royal",
-                                    "image":  "data/images/regions/raven-dust/ville/chateau-royal.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Le_ch%C3%A2teau_royal",
-                                    "hotspot":  null
-                                },
-                                {
-                                    "id":  "rd-cave-anrak",
-                                    "name":  "Cave d\u0027Anrak",
-                                    "image":  "data/images/regions/raven-dust/grotte/cave-anrak.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Cave_d%27Anrak",
-                                    "hotspot":  null
-                                },
-                                {
-                                    "id":  "rd-crypte",
-                                    "name":  "Crypte RD",
-                                    "image":  "data/images/regions/raven-dust/sous-sol/crypte-rd.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/La_crypte_RD",
-                                    "hotspot":  null
-                                }
-                            ]
-            }
+  "map": {
+    "id": "raven-dust",
+    "name": "Raven\u0027s Dust",
+    "summary": "Deuxieme ile principale. Zones plus hostiles et quetes intermediaires.",
+    "image": "data/images/regions/raven-dust/ravendust.png",
+    "nmsImage": "https://static.wikia.nocookie.net/t4c/images/f/ff/Ravensdust.jpg/revision/latest/scale-to-width-down/1000?cb=20160228012151&path-prefix=fr",
+    "abetsicImage": "data/images/regions/raven-dust/autre/raven-dust-abetsic.gif",
+    "calibration": {
+      "gamePoints": [
+        { "name": "Point de calibration 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
+        { "name": "Point de calibration 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
+        { "name": "Point de calibration 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
+      ]
+    },
+    "pois": [
+      {
+        "type": "lieux",
+        "name": "TODO",
+        "gameX": 0,
+        "gameY": 0,
+        "description": "",
+        "openSubMapId": "rd-nms",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust"
+      },
+      {
+        "type": "pnj",
+        "name": "TODO",
+        "gameX": 0,
+        "gameY": 0,
+        "description": "",
+        "openSubMapId": "rd-nms",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust"
+      },
+      {
+        "type": "monstres",
+        "name": "TODO",
+        "gameX": 0,
+        "gameY": 0,
+        "description": "",
+        "openSubMapId": "rd-nms",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust"
+      }
+    ],
+    "_meta": {
+      "checkUrls": [
+        "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust",
+        "https://nmsrevolution.com/map.php"
+      ],
+      "nmsSourceUrl": "https://t4c.fandom.com/fr/wiki/Ile_de_Raven%27s_Dust",
+      "abetsicSourceUrl": "https://t4c.fandom.com/fr/wiki/Raven%27s_Dust_(Abetsic)",
+      "checkedAt": "2026-04-26",
+      "lastModified": null,
+      "etag": null
+    },
+    "subMaps": [
+      {
+        "id": "rd-nms",
+        "name": "Raven\u0027s Dust (NMS)",
+        "image": "data/images/regions/raven-dust/raven-dust-general.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Ile_de_Raven%27s_Dust",
+        "hotspot": null
+      },
+      {
+        "id": "rd-silversky",
+        "name": "SilverSky",
+        "image": "data/images/regions/raven-dust/ville/silversky.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/SilverSky",
+        "hotspot": null
+      },
+      {
+        "id": "rd-chateau-royal",
+        "name": "Chateau Royal",
+        "image": "data/images/regions/raven-dust/ville/chateau-royal.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Le_ch%C3%A2teau_royal",
+        "hotspot": null
+      },
+      {
+        "id": "rd-cave-anrak",
+        "name": "Cave d\u0027Anrak",
+        "image": "data/images/regions/raven-dust/grotte/cave-anrak.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cave_d%27Anrak",
+        "hotspot": null
+      },
+      {
+        "id": "rd-crypte",
+        "name": "Crypte RD",
+        "image": "data/images/regions/raven-dust/sous-sol/crypte-rd.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/La_crypte_RD",
+        "hotspot": null
+      }
+    ]
+  }
 }

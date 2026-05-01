@@ -138,7 +138,9 @@ body {
   min-height: 360px;
   aspect-ratio: 1 / 1;
   cursor: pointer;
-  transition: transform 220ms ease, border-color 220ms ease;
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease;
   animation: rise 500ms ease both;
   display: flex;
   flex-direction: column;
@@ -291,7 +293,9 @@ body {
   border-radius: 10px;
   background: rgba(7, 20, 38, 0.22);
   cursor: pointer;
-  transition: background 180ms ease, transform 180ms ease;
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
 }
 
 .zone:hover,
@@ -317,7 +321,9 @@ body {
   cursor: pointer;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
-  transition: transform 120ms ease, box-shadow 120ms ease;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
 }
 
 .poi.pnj {
@@ -373,7 +379,9 @@ body {
   pointer-events: none;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity 140ms ease, transform 140ms ease;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease;
   z-index: 12;
 }
 
@@ -503,7 +511,7 @@ body {
   overflow-x: auto;
   padding: 0.8rem 0 0.2rem;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.15) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 
 .submap-tile {
@@ -517,7 +525,9 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  transition: border-color 180ms ease, transform 180ms ease;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
   color: var(--paper);
   font-family: inherit;
 }
@@ -611,7 +621,9 @@ body {
     flex-wrap: wrap;
   }
 
-  .btn, .btn.ghost, .btn.primary {
+  .btn,
+  .btn.ghost,
+  .btn.primary {
     flex: 1;
     min-width: 120px;
   }
@@ -765,7 +777,9 @@ body {
     padding: 0.45rem 0.6rem;
   }
 
-  .btn, .btn.ghost, .btn.primary {
+  .btn,
+  .btn.ghost,
+  .btn.primary {
     font-size: 0.85rem;
     padding: 0.45rem 0.7rem;
     border-radius: 8px;
@@ -777,7 +791,9 @@ body {
     gap: 0.4rem;
   }
 
-  .btn, .btn.ghost, .btn.primary {
+  .btn,
+  .btn.ghost,
+  .btn.primary {
     width: 100%;
     min-width: unset;
   }

@@ -38,14 +38,14 @@ Dans chaque `map` regional:
 
 1. Ouvrir le fichier region dans `data/maps/`.
 2. Ajouter une entree dans `map.pois[]` avec les champs suivants:
-    - `type`: `lieux`, `pnj` ou `monstres`
-    - `name`: nom affiche
-    - `description`: texte du tooltip
-    - Position:
-       - soit `gameX` + `gameY` (recommande, base sur la calibration)
-       - soit `x` + `y` (pourcentage direct 0-100)
-    - `openSubMapId`: id d'une sous-carte existante dans `map.subMaps[]`
-    - `wikiUrl`: lien wiki a ouvrir au clic droit
+   - `type`: `lieux`, `pnj` ou `monstres`
+   - `name`: nom affiche
+   - `description`: texte du tooltip
+   - Position:
+     - soit `gameX` + `gameY` (recommande, base sur la calibration)
+     - soit `x` + `y` (pourcentage direct 0-100)
+   - `openSubMapId`: id d'une sous-carte existante dans `map.subMaps[]`
+   - `wikiUrl`: lien wiki a ouvrir au clic droit
 3. Verifier que `openSubMapId` reference bien une sous-carte presente dans `subMaps`.
 4. Verifier l'affichage dans l'app (filtre, tooltip, clic gauche, clic droit).
 
@@ -53,13 +53,13 @@ Exemple minimal:
 
 ```json
 {
-   "type": "pnj",
-   "name": "Marchand",
-   "description": "Vendeur principal de la ville.",
-   "gameX": 2850,
-   "gameY": 1080,
-   "openSubMapId": "arakas-general",
-   "wikiUrl": "https://t4c.fandom.com/fr/wiki/LightHaven"
+  "type": "pnj",
+  "name": "Marchand",
+  "description": "Vendeur principal de la ville.",
+  "gameX": 2850,
+  "gameY": 1080,
+  "openSubMapId": "arakas-general",
+  "wikiUrl": "https://t4c.fandom.com/fr/wiki/LightHaven"
 }
 ```
 

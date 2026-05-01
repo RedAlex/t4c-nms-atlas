@@ -14,7 +14,7 @@
 ## Sources et verification
 
 - Sources utilisees (wiki, site officiel, captures):
-  - 
+  -
 - Verification manuelle effectuee:
   - [ ] Navigation Monde -> Carte -> Sous-carte
   - [ ] Filtres Lieux / Pnj / Monstres

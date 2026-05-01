@@ -9,15 +9,15 @@ Application bureau Windows (Electron) telechargeable. Toutes les cartes sont en 
 ## Fonctionnalites actuelles
 
 - Page monde avec les 4 regions : Arakas, Raven's Dust, Stoneheim, Drake Island
-- (En cours)Vue carte principale (image Abetsic) avec points d'interet positionnés par coordonnées de jeu 
+- (En cours)Vue carte principale (image Abetsic) avec points d'interet positionnés par coordonnées de jeu
 - Filtres exclusifs : Lieux / PNJ / Monstres
 - Tooltip au survol d'un POI (nom, description, type)
 - Clic gauche sur un POI : ouvre la sous-carte associee
 - Clic droit sur un POI : ouvre la page wiki correspondante dans le navigateur
-- (En cours)Vue sous-carte avec image détaillée et lien wiki 
+- (En cours)Vue sous-carte avec image détaillée et lien wiki
 - Affichage/masquage des titres de POI
 - Navigation 3 niveaux : Monde > Carte > Sous-carte
-- (En test) Mise à jour automatique au démarrage : vérifie la dernière Release GitHub et propose la mise à jour si une version plus récente est disponible 
+- (En test) Mise à jour automatique au démarrage : vérifie la dernière Release GitHub et propose la mise à jour si une version plus récente est disponible
 - Version bureau compilable en `.exe` (Windows)
 
 ## Lancer le projet en développement
@@ -37,6 +37,7 @@ npm run build:win
 ```
 
 Resultat dans `release/` :
+
 - `Atlas NMS Revolution-win32-x64/` — dossier executables
 - `atlas-nms-revolution.zip` — archive distribuable
 

@@ -16,38 +16,38 @@ const state = {
   showSubmapGridCoords: false,
 };
 
-const worldView    = document.getElementById("world-view");
-const mapView      = document.getElementById("map-view");
-const submapView   = document.getElementById("submap-view");
-const mapCards     = document.getElementById("map-cards");
-const mapStage     = document.getElementById("map-stage");
-const zoneLayer    = document.getElementById("zone-layer");
-const mapBgImg     = document.getElementById("map-bg-img");
+const worldView = document.getElementById("world-view");
+const mapView = document.getElementById("map-view");
+const submapView = document.getElementById("submap-view");
+const mapCards = document.getElementById("map-cards");
+const mapStage = document.getElementById("map-stage");
+const zoneLayer = document.getElementById("zone-layer");
+const mapBgImg = document.getElementById("map-bg-img");
 const mapHoverCard = document.getElementById("map-hover-card");
-const activeMapTitle   = document.getElementById("active-map-title");
+const activeMapTitle = document.getElementById("active-map-title");
 const activeMapCaption = document.getElementById("active-map-caption");
-const activeSubmapTitle   = document.getElementById("active-submap-title");
+const activeSubmapTitle = document.getElementById("active-submap-title");
 const activeSubmapCaption = document.getElementById("active-submap-caption");
-const submapBgImg  = document.getElementById("submap-bg-img");
-const submapStage  = document.getElementById("submap-stage");
+const submapBgImg = document.getElementById("submap-bg-img");
+const submapStage = document.getElementById("submap-stage");
 const submapZoneLayer = document.getElementById("submap-zone-layer");
 const submapHoverCard = document.getElementById("submap-hover-card");
 const submapWikiLink = document.getElementById("submap-wiki-link");
-const submapFilterLieux    = document.getElementById("submap-filter-lieux");
-const submapFilterPnj      = document.getElementById("submap-filter-pnj");
+const submapFilterLieux = document.getElementById("submap-filter-lieux");
+const submapFilterPnj = document.getElementById("submap-filter-pnj");
 const submapFilterMonstres = document.getElementById("submap-filter-monstres");
 const submapTogglePoiTitlesBtn = document.getElementById("submap-toggle-poi-titles");
 const submapToggleGridCoordsBtn = document.getElementById("submap-toggle-grid-coords");
 const submapDevCoords = document.getElementById("submap-dev-coords");
-const backToWorld  = document.getElementById("back-to-world");
-const backToMap    = document.getElementById("back-to-map");
-const filterLieux  = document.getElementById("filter-lieux");
-const filterPnj    = document.getElementById("filter-pnj");
+const backToWorld = document.getElementById("back-to-world");
+const backToMap = document.getElementById("back-to-map");
+const filterLieux = document.getElementById("filter-lieux");
+const filterPnj = document.getElementById("filter-pnj");
 const filterMonstres = document.getElementById("filter-monstres");
 const togglePoiTitlesBtn = document.getElementById("toggle-poi-titles");
 const toggleGridCoordsBtn = document.getElementById("toggle-grid-coords");
 const mapDevCoords = document.getElementById("map-dev-coords");
-const devLabel     = document.getElementById("dev-label");
+const devLabel = document.getElementById("dev-label");
 
 // Pages avec leurs titres respectifs
 const pageLabels = {
@@ -59,7 +59,9 @@ const pageLabels = {
 init();
 
 function updateDevLabel(pageName, specificName) {
-  if (!config.isDev || !devLabel) return;
+  if (!config.isDev || !devLabel) {
+    return;
+  }
   const baseTitle = pageLabels[pageName] || "Inconnu";
   const fullTitle = specificName ? `${baseTitle}: ${specificName}` : baseTitle;
   devLabel.textContent = fullTitle;
@@ -68,7 +70,9 @@ function updateDevLabel(pageName, specificName) {
 
 async function init() {
   const data = await loadMapsData();
-  if (!data?.maps?.length) return;
+  if (!data?.maps?.length) {
+    return;
+  }
   state.maps = data.maps;
   renderWorldCards();
   backToWorld.addEventListener("click", showWorldView);
@@ -77,11 +81,21 @@ async function init() {
   filterPnj.addEventListener("click", () => toggleFilter("pnj"));
   filterMonstres.addEventListener("click", () => toggleFilter("monstres"));
   togglePoiTitlesBtn.addEventListener("click", togglePoiTitles);
-  if (submapFilterLieux)    submapFilterLieux.addEventListener("click", () => toggleSubmapFilter("lieux"));
-  if (submapFilterPnj)      submapFilterPnj.addEventListener("click", () => toggleSubmapFilter("pnj"));
-  if (submapFilterMonstres) submapFilterMonstres.addEventListener("click", () => toggleSubmapFilter("monstres"));
-  if (submapTogglePoiTitlesBtn) submapTogglePoiTitlesBtn.addEventListener("click", toggleSubmapPoiTitles);
-  if (submapToggleGridCoordsBtn) submapToggleGridCoordsBtn.addEventListener("click", toggleSubmapGridCoords);
+  if (submapFilterLieux) {
+    submapFilterLieux.addEventListener("click", () => toggleSubmapFilter("lieux"));
+  }
+  if (submapFilterPnj) {
+    submapFilterPnj.addEventListener("click", () => toggleSubmapFilter("pnj"));
+  }
+  if (submapFilterMonstres) {
+    submapFilterMonstres.addEventListener("click", () => toggleSubmapFilter("monstres"));
+  }
+  if (submapTogglePoiTitlesBtn) {
+    submapTogglePoiTitlesBtn.addEventListener("click", toggleSubmapPoiTitles);
+  }
+  if (submapToggleGridCoordsBtn) {
+    submapToggleGridCoordsBtn.addEventListener("click", toggleSubmapGridCoords);
+  }
   if (submapStage) {
     submapStage.addEventListener("mousemove", handleSubmapStageMouseMove);
     submapStage.addEventListener("mouseleave", hideSubmapDevCoords);
@@ -92,7 +106,9 @@ async function init() {
   mapStage.addEventListener("click", handleMapStageClick);
   mapBgImg.addEventListener("load", updateZoneLayerLayout);
   window.addEventListener("resize", updateZoneLayerLayout);
-  if (submapBgImg) submapBgImg.addEventListener("load", updateSubmapZoneLayerLayout);
+  if (submapBgImg) {
+    submapBgImg.addEventListener("load", updateSubmapZoneLayerLayout);
+  }
   window.addEventListener("resize", updateSubmapZoneLayerLayout);
   if (toggleGridCoordsBtn) {
     toggleGridCoordsBtn.addEventListener("click", toggleGridCoords);
@@ -105,7 +121,9 @@ async function init() {
 async function loadMapsData() {
   try {
     const response = await fetch("data/maps.json");
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
     const data = await response.json();
 
     // Nouveau format: index avec fichiers regionaux
@@ -115,11 +133,15 @@ async function loadMapsData() {
     }
 
     // Ancien format: toutes les cartes dans maps.json
-    if (Array.isArray(data?.maps)) return data;
+    if (Array.isArray(data?.maps)) {
+      return data;
+    }
 
     return null;
   } catch (_err) {
-    if (window.desktopAPI?.readMapsData) return window.desktopAPI.readMapsData();
+    if (window.desktopAPI?.readMapsData) {
+      return window.desktopAPI.readMapsData();
+    }
     return null;
   }
 }
@@ -127,7 +149,9 @@ async function loadMapsData() {
 async function loadMapsFromFiles(mapFiles) {
   const requests = mapFiles.map(async (filePath) => {
     const response = await fetch(filePath);
-    if (!response.ok) throw new Error(`HTTP ${response.status} on ${filePath}`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} on ${filePath}`);
+    }
     const data = await response.json();
     return data?.map || null;
   });
@@ -145,9 +169,9 @@ function renderWorldCards() {
     card.type = "button";
     card.className = "map-card";
     card.style.animationDelay = `${index * 80}ms`;
-     const worldImage = map.nmsImage || map.image;
-     const worldSourceUrl = map._meta?.nmsSourceUrl || map._meta?.checkUrls?.[0] || "#";
-     const safeWorldSourceUrl = normalizeUrlCandidate(worldSourceUrl) || "#";
+    const worldImage = map.nmsImage || map.image;
+    const worldSourceUrl = map._meta?.nmsSourceUrl || map._meta?.checkUrls?.[0] || "#";
+    const safeWorldSourceUrl = normalizeUrlCandidate(worldSourceUrl) || "#";
 
     if (worldImage) {
       const image = document.createElement("img");
@@ -219,7 +243,9 @@ function showWorldView() {
 function openMap(mapId) {
   state.activeMap = state.maps.find((m) => m.id === mapId) || null;
   state.activeSubMap = null;
-  if (!state.activeMap) return;
+  if (!state.activeMap) {
+    return;
+  }
 
   worldView.classList.add("hidden");
   submapView.classList.add("hidden");
@@ -240,7 +266,8 @@ function openMap(mapId) {
   renderInteractivePoints();
 
   const mapImgSource = document.getElementById("map-img-source");
-  const wikiUrl = state.activeMap._meta?.abetsicSourceUrl || state.activeMap._meta?.checkUrls?.[0] || "#";
+  const wikiUrl =
+    state.activeMap._meta?.abetsicSourceUrl || state.activeMap._meta?.checkUrls?.[0] || "#";
   setSourceLink(mapImgSource, wikiUrl);
 
   updateFilterDisplay();
@@ -252,7 +279,9 @@ function openMap(mapId) {
 function openSubMap(subMapId) {
   const subMaps = state.activeMap.subMaps || [];
   state.activeSubMap = subMaps.find((s) => s.id === subMapId) || null;
-  if (!state.activeSubMap) return;
+  if (!state.activeSubMap) {
+    return;
+  }
 
   mapView.classList.add("hidden");
   submapView.classList.remove("hidden");
@@ -279,7 +308,6 @@ function openSubMap(subMapId) {
   renderSubmapPois();
 }
 
-
 // ── Filtres ──────────────────────────────────────────────────────────────────
 
 function toggleFilter(filterName) {
@@ -297,7 +325,9 @@ function toggleSubmapFilter(filterName) {
 function updateFilterButtons() {
   ["lieux", "pnj", "monstres"].forEach((filterName) => {
     const button = document.getElementById(`filter-${filterName}`);
-    if (!button) return;
+    if (!button) {
+      return;
+    }
     button.classList.toggle("active", state.activeFilter === filterName);
   });
 }
@@ -305,7 +335,9 @@ function updateFilterButtons() {
 function updateSubmapFilterButtons() {
   ["lieux", "pnj", "monstres"].forEach((filterName) => {
     const button = document.getElementById(`submap-filter-${filterName}`);
-    if (!button) return;
+    if (!button) {
+      return;
+    }
     button.classList.toggle("active", state.activeSubmapFilter === filterName);
   });
 }
@@ -330,7 +362,7 @@ function toggleSubmapPoiTitles() {
 
 function updateFilterDisplay() {
   const mapImgSource = document.getElementById("map-img-source");
-  
+
   // Afficher/masquer le texte source selon le filtre "lieux"
   if (mapImgSource) {
     if (state.activeFilter === "lieux") {
@@ -346,7 +378,9 @@ function updateFilterDisplay() {
 // ── POI interactifs ──────────────────────────────────────────────────────────
 
 function renderInteractivePoints() {
-  if (!zoneLayer) return;
+  if (!zoneLayer) {
+    return;
+  }
   zoneLayer.innerHTML = "";
   zoneLayer.classList.toggle("titles-hidden", !state.showPoiTitles);
   hideMapHoverCard();
@@ -357,7 +391,9 @@ function renderInteractivePoints() {
 
   visiblePois.forEach((poi) => {
     const position = resolvePoiPosition(poi, gameToPercent);
-    if (!position) return;
+    if (!position) {
+      return;
+    }
 
     const marker = document.createElement("button");
     marker.type = "button";
@@ -399,12 +435,18 @@ function renderInteractivePoints() {
 
 function renderCalibrationMarkers(gameToPercent) {
   const points = state.activeMap?.calibration?.gamePoints || [];
-  if (!Array.isArray(points) || !gameToPercent) return;
+  if (!Array.isArray(points) || !gameToPercent) {
+    return;
+  }
 
   points.forEach((point, index) => {
-    if (typeof point?.gameX !== "number" || typeof point?.gameY !== "number") return;
+    if (typeof point?.gameX !== "number" || typeof point?.gameY !== "number") {
+      return;
+    }
     const position = gameToPercent(point.gameX, point.gameY);
-    if (!position) return;
+    if (!position) {
+      return;
+    }
 
     const marker = document.createElement("button");
     marker.type = "button";
@@ -435,14 +477,16 @@ function renderCalibrationMarkers(gameToPercent) {
 }
 
 function updateZoneLayerLayout() {
-  if (!mapStage || !zoneLayer) return;
+  if (!mapStage || !zoneLayer) {
+    return;
+  }
 
   const rect = mapStage.getBoundingClientRect();
   const displayRect = getDisplayedImageRect(
     rect.width,
     rect.height,
     mapBgImg?.naturalWidth || 0,
-    mapBgImg?.naturalHeight || 0,
+    mapBgImg?.naturalHeight || 0
   );
 
   zoneLayer.style.left = `${displayRect.left}px`;
@@ -452,14 +496,16 @@ function updateZoneLayerLayout() {
 }
 
 function updateSubmapZoneLayerLayout() {
-  if (!submapStage || !submapZoneLayer) return;
+  if (!submapStage || !submapZoneLayer) {
+    return;
+  }
 
   const rect = submapStage.getBoundingClientRect();
   const displayRect = getDisplayedImageRect(
     rect.width,
     rect.height,
     submapBgImg?.naturalWidth || 0,
-    submapBgImg?.naturalHeight || 0,
+    submapBgImg?.naturalHeight || 0
   );
 
   submapZoneLayer.style.left = `${displayRect.left}px`;
@@ -471,7 +517,9 @@ function updateSubmapZoneLayerLayout() {
 // ── POI sous-carte ────────────────────────────────────────────────────────────
 
 function renderSubmapPois() {
-  if (!submapZoneLayer) return;
+  if (!submapZoneLayer) {
+    return;
+  }
   submapZoneLayer.innerHTML = "";
   submapZoneLayer.classList.toggle("titles-hidden", !state.showSubmapPoiTitles);
   hideSubmapHoverCard();
@@ -482,7 +530,9 @@ function renderSubmapPois() {
 
   visiblePois.forEach((poi) => {
     const position = resolvePoiPosition(poi, gameToPercent);
-    if (!position) return;
+    if (!position) {
+      return;
+    }
 
     const marker = document.createElement("button");
     marker.type = "button";
@@ -506,7 +556,9 @@ function renderSubmapPois() {
     marker.addEventListener("contextmenu", (event) => {
       event.preventDefault();
       const wikiUrl = normalizeUrlCandidate(poi.wikiUrl);
-      if (wikiUrl) window.open(wikiUrl, "_blank", "noopener");
+      if (wikiUrl) {
+        window.open(wikiUrl, "_blank", "noopener");
+      }
     });
 
     submapZoneLayer.appendChild(marker);
@@ -519,12 +571,18 @@ function renderSubmapPois() {
 
 function renderSubmapCalibrationMarkers(gameToPercent) {
   const points = state.activeSubMap?.calibration?.gamePoints || [];
-  if (!Array.isArray(points) || !gameToPercent) return;
+  if (!Array.isArray(points) || !gameToPercent) {
+    return;
+  }
 
   points.forEach((point, index) => {
-    if (typeof point?.gameX !== "number" || typeof point?.gameY !== "number") return;
+    if (typeof point?.gameX !== "number" || typeof point?.gameY !== "number") {
+      return;
+    }
     const position = gameToPercent(point.gameX, point.gameY);
-    if (!position) return;
+    if (!position) {
+      return;
+    }
 
     const marker = document.createElement("button");
     marker.type = "button";
@@ -555,7 +613,9 @@ function renderSubmapCalibrationMarkers(gameToPercent) {
 }
 
 function showSubmapHoverCard(event, poi) {
-  if (!submapHoverCard || !submapStage) return;
+  if (!submapHoverCard || !submapStage) {
+    return;
+  }
 
   submapHoverCard.textContent = "";
 
@@ -587,35 +647,48 @@ function showSubmapHoverCard(event, poi) {
 }
 
 function showSubmapHoverCardFromMarker(marker, poi) {
-  if (!submapStage) return;
+  if (!submapStage) {
+    return;
+  }
   const markerRect = marker.getBoundingClientRect();
   showSubmapHoverCard(
-    { clientX: markerRect.left + markerRect.width / 2, clientY: markerRect.top + markerRect.height / 2 },
-    poi,
+    {
+      clientX: markerRect.left + markerRect.width / 2,
+      clientY: markerRect.top + markerRect.height / 2,
+    },
+    poi
   );
 }
 
 function hideSubmapHoverCard() {
-  if (!submapHoverCard) return;
+  if (!submapHoverCard) {
+    return;
+  }
   submapHoverCard.classList.remove("visible");
 }
 
 function hideSubmapDevCoords() {
-  if (!submapDevCoords) return;
+  if (!submapDevCoords) {
+    return;
+  }
   submapDevCoords.classList.add("hidden");
 }
 
 function getPointerPercentOnSubmap(event) {
-  if (!submapStage) return null;
+  if (!submapStage) {
+    return null;
+  }
 
   const rect = submapStage.getBoundingClientRect();
-  if (!rect.width || !rect.height) return null;
+  if (!rect.width || !rect.height) {
+    return null;
+  }
 
   const displayRect = getDisplayedImageRect(
     rect.width,
     rect.height,
     submapBgImg?.naturalWidth || 0,
-    submapBgImg?.naturalHeight || 0,
+    submapBgImg?.naturalHeight || 0
   );
 
   const px = event.clientX - rect.left;
@@ -636,7 +709,9 @@ function getPointerPercentOnSubmap(event) {
 }
 
 function handleSubmapStageMouseMove(event) {
-  if (!config.isDev || !state.showSubmapGridCoords) return;
+  if (!config.isDev || !state.showSubmapGridCoords) {
+    return;
+  }
 
   const percent = getPointerPercentOnSubmap(event);
   if (!percent) {
@@ -644,7 +719,9 @@ function handleSubmapStageMouseMove(event) {
     return;
   }
 
-  if (!submapDevCoords) return;
+  if (!submapDevCoords) {
+    return;
+  }
   const gameToPercent = createGameToPercentTransform(state.activeSubMap?.calibration);
   if (gameToPercent) {
     // Affichage en coordonnées brutes % si pas de calibration inverse
@@ -656,11 +733,17 @@ function handleSubmapStageMouseMove(event) {
 }
 
 async function handleSubmapStageClick(event) {
-  if (!config.isDev || !state.showSubmapGridCoords) return;
-  if (event.button !== 0) return;
+  if (!config.isDev || !state.showSubmapGridCoords) {
+    return;
+  }
+  if (event.button !== 0) {
+    return;
+  }
 
   const percent = getPointerPercentOnSubmap(event);
-  if (!percent) return;
+  if (!percent) {
+    return;
+  }
 
   const text = `${percent.x.toFixed(2)},${percent.y.toFixed(2)}`;
   const copied = await copyTextToClipboard(text);
@@ -673,16 +756,24 @@ async function handleSubmapStageClick(event) {
 function toggleSubmapGridCoords() {
   state.showSubmapGridCoords = !state.showSubmapGridCoords;
 
-  if (!submapToggleGridCoordsBtn) return;
-  submapToggleGridCoordsBtn.textContent = state.showSubmapGridCoords ? "Calibration ON" : "Calibration OFF";
+  if (!submapToggleGridCoordsBtn) {
+    return;
+  }
+  submapToggleGridCoordsBtn.textContent = state.showSubmapGridCoords
+    ? "Calibration ON"
+    : "Calibration OFF";
   submapToggleGridCoordsBtn.classList.toggle("active", state.showSubmapGridCoords);
 
-  if (!state.showSubmapGridCoords) hideSubmapDevCoords();
+  if (!state.showSubmapGridCoords) {
+    hideSubmapDevCoords();
+  }
   renderSubmapPois();
 }
 
 function showMapHoverCard(event, poi) {
-  if (!mapHoverCard || !mapStage) return;
+  if (!mapHoverCard || !mapStage) {
+    return;
+  }
 
   mapHoverCard.textContent = "";
 
@@ -714,32 +805,42 @@ function showMapHoverCard(event, poi) {
 }
 
 function showMapHoverCardFromMarker(marker, poi) {
-  if (!mapStage) return;
+  if (!mapStage) {
+    return;
+  }
   const markerRect = marker.getBoundingClientRect();
   const stageRect = mapStage.getBoundingClientRect();
 
   showMapHoverCard(
     {
-      clientX: markerRect.left - 0 + (markerRect.width / 2),
-      clientY: markerRect.top - 0 + (markerRect.height / 2),
+      clientX: markerRect.left - 0 + markerRect.width / 2,
+      clientY: markerRect.top - 0 + markerRect.height / 2,
     },
-    poi,
+    poi
   );
 
-  if (!stageRect.width) hideMapHoverCard();
+  if (!stageRect.width) {
+    hideMapHoverCard();
+  }
 }
 
 function hideMapHoverCard() {
-  if (!mapHoverCard) return;
+  if (!mapHoverCard) {
+    return;
+  }
   mapHoverCard.classList.remove("visible");
 }
 
 function handlePoiOpenMap(poi) {
-  if (!state.activeMap) return;
+  if (!state.activeMap) {
+    return;
+  }
 
   const subMaps = state.activeMap.subMaps || [];
   const targetSubMapId = poi.openSubMapId || subMaps[0]?.id;
-  if (!targetSubMapId) return;
+  if (!targetSubMapId) {
+    return;
+  }
 
   openSubMap(targetSubMapId);
 }
@@ -749,19 +850,27 @@ function handlePoiOpenWiki(poi) {
     normalizeUrlCandidate(poi?.wikiUrl) ||
     buildWikiSearchUrl(poi?.name) ||
     normalizeUrlCandidate(state.activeMap?._meta?.checkUrls?.[0]);
-  if (!wikiUrl) return;
+  if (!wikiUrl) {
+    return;
+  }
 
   window.open(wikiUrl, "_blank", "noopener");
 }
 
 function normalizeUrlCandidate(url) {
-  if (typeof url !== "string") return null;
+  if (typeof url !== "string") {
+    return null;
+  }
   const trimmed = url.trim();
-  if (!trimmed) return null;
+  if (!trimmed) {
+    return null;
+  }
 
   try {
     const parsed = new URL(trimmed);
-    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return null;
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+      return null;
+    }
     return parsed.toString();
   } catch (_err) {
     return null;
@@ -769,7 +878,9 @@ function normalizeUrlCandidate(url) {
 }
 
 function setSourceLink(container, url) {
-  if (!container) return;
+  if (!container) {
+    return;
+  }
   const safeUrl = normalizeUrlCandidate(url);
   if (!safeUrl) {
     container.textContent = "";
@@ -787,10 +898,14 @@ function setSourceLink(container, url) {
 }
 
 function buildWikiSearchUrl(poiName) {
-  if (typeof poiName !== "string") return null;
+  if (typeof poiName !== "string") {
+    return null;
+  }
 
   const trimmedName = poiName.trim();
-  if (!trimmedName) return null;
+  if (!trimmedName) {
+    return null;
+  }
 
   const baseUrl =
     "https://t4c.fandom.com/fr/wiki/Sp%C3%A9cial:Recherche?scope=internal&navigationSearch=true&query=";
@@ -821,16 +936,22 @@ function applyDevUiVisibility() {
 function toggleGridCoords() {
   state.showGridCoords = !state.showGridCoords;
 
-  if (!toggleGridCoordsBtn) return;
+  if (!toggleGridCoordsBtn) {
+    return;
+  }
   toggleGridCoordsBtn.textContent = state.showGridCoords ? "Calibration ON" : "Calibration OFF";
   toggleGridCoordsBtn.classList.toggle("active", state.showGridCoords);
 
-  if (!state.showGridCoords) hideMapDevCoords();
+  if (!state.showGridCoords) {
+    hideMapDevCoords();
+  }
   renderInteractivePoints();
 }
 
 function handleMapStageMouseMove(event) {
-  if (!config.isDev || !state.showGridCoords) return;
+  if (!config.isDev || !state.showGridCoords) {
+    return;
+  }
 
   const percent = getPointerPercentOnMap(event);
   if (!percent) {
@@ -838,7 +959,9 @@ function handleMapStageMouseMove(event) {
     return;
   }
 
-  if (!mapDevCoords) return;
+  if (!mapDevCoords) {
+    return;
+  }
   const displayX = (percent.x / 100) * 5000;
   const displayY = (percent.y / 100) * 5000;
   mapDevCoords.textContent = `GX ${displayX.toFixed(2)} | GY ${displayY.toFixed(2)}`;
@@ -850,16 +973,24 @@ async function handleMapStageClick(event) {
 }
 
 async function handleCalibrationClickCopy(event) {
-  if (!config.isDev || !state.showGridCoords) return false;
-  if (event.button !== 0) return false;
+  if (!config.isDev || !state.showGridCoords) {
+    return false;
+  }
+  if (event.button !== 0) {
+    return false;
+  }
 
   const percent = getPointerPercentOnMap(event);
-  if (!percent) return false;
+  if (!percent) {
+    return false;
+  }
 
   const coords = percentToDisplayCoords(percent);
   const text = `${coords.x.toFixed(2)},${coords.y.toFixed(2)}`;
   const copied = await copyTextToClipboard(text);
-  if (!copied) return false;
+  if (!copied) {
+    return false;
+  }
 
   if (mapDevCoords) {
     mapDevCoords.textContent = `GX ${coords.x.toFixed(2)} | GY ${coords.y.toFixed(2)} (copie)`;
@@ -905,21 +1036,27 @@ async function copyTextToClipboard(text) {
 }
 
 function hideMapDevCoords() {
-  if (!mapDevCoords) return;
+  if (!mapDevCoords) {
+    return;
+  }
   mapDevCoords.classList.add("hidden");
 }
 
 function getPointerPercentOnMap(event) {
-  if (!mapStage) return null;
+  if (!mapStage) {
+    return null;
+  }
 
   const rect = mapStage.getBoundingClientRect();
-  if (!rect.width || !rect.height) return null;
+  if (!rect.width || !rect.height) {
+    return null;
+  }
 
   const displayRect = getDisplayedImageRect(
     rect.width,
     rect.height,
     mapBgImg?.naturalWidth || 0,
-    mapBgImg?.naturalHeight || 0,
+    mapBgImg?.naturalHeight || 0
   );
 
   const px = event.clientX - rect.left;
@@ -974,7 +1111,9 @@ function resolvePoiPosition(poi, gameToPercent) {
 
 function createGameToPercentTransform(calibration) {
   const gamePoints = calibration?.gamePoints;
-  if (!Array.isArray(gamePoints)) return null;
+  if (!Array.isArray(gamePoints)) {
+    return null;
+  }
 
   const pairedPoints = gamePoints
     .filter(
@@ -983,7 +1122,7 @@ function createGameToPercentTransform(calibration) {
         typeof point?.gameY === "number" &&
         typeof point?.mapX === "number" &&
         typeof point?.mapY === "number" &&
-        !(point.gameX === 0 && point.gameY === 0 && point.mapX === 0 && point.mapY === 0),
+        !(point.gameX === 0 && point.gameY === 0 && point.mapX === 0 && point.mapY === 0)
     )
     .map((point) => ({
       gameX: point.gameX,
@@ -992,7 +1131,9 @@ function createGameToPercentTransform(calibration) {
       y: (point.mapY / 5000) * 100,
     }));
 
-  if (pairedPoints.length < 3) return null;
+  if (pairedPoints.length < 3) {
+    return null;
+  }
   return createAffineTransform(pairedPoints, "gameX", "gameY", "x", "y");
 }
 
@@ -1004,15 +1145,19 @@ function createAffineTransform(anchors, sxKey, syKey, txKey, tyKey) {
       typeof p[sxKey] === "number" &&
       typeof p[syKey] === "number" &&
       typeof p[txKey] === "number" &&
-      typeof p[tyKey] === "number",
+      typeof p[tyKey] === "number"
   );
-  if (!valid) return null;
+  if (!valid) {
+    return null;
+  }
 
   const det =
     p1[sxKey] * (p2[syKey] - p3[syKey]) +
     p2[sxKey] * (p3[syKey] - p1[syKey]) +
     p3[sxKey] * (p1[syKey] - p2[syKey]);
-  if (Math.abs(det) < 1e-9) return null;
+  if (Math.abs(det) < 1e-9) {
+    return null;
+  }
 
   const a =
     (p1[txKey] * (p2[syKey] - p3[syKey]) +

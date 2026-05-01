@@ -1,67 +1,164 @@
 ﻿{
-    "map":  {
-                "id":  "arakas",
-                "name":  "Arakas",
-                "summary":  "Premiere ile et zone de depart. Contient LightHaven, WindHowl et Silversky.",
-                "image":  "data/images/regions/arakas/arakas.png",
-                "nmsImage":  "data/images/regions/arakas/arakas-general.jpg",
-                "abetsicImage":  "data/images/regions/arakas/autre/arakas-abetsic.gif",
-                "calibration": {
-                    "gamePoints": [
-                        { "name": "Cercle de pierre druide", "gameX": 2790, "gameY": 175,  "mapX": 3963.43, "mapY": 690.87  },
-                        { "name": "Spawn Temple Lighthaven",       "gameX": 2939, "gameY": 1064, "mapX": 4354.92, "mapY": 3136.32 },
-                        { "name": "Entré Est Wildhowl",          "gameX": 1815, "gameY": 1296, "mapX": 1415.94, "mapY": 3780.47 }
-                    ]
-                },
-                "pois":  [
-                    { "type": "lieux", "name": "LightHaven", "gameX": 2850, "gameY": 1080, "description": "Ville de depart principale d'Arakas.", "openSubMapId": "lighthaven", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral" },
-                    { "type": "lieux", "name": "WindHowl",   "gameX": 1700, "gameY": 1290, "description": "Zone cotiere reliee aux quetes de debut.",    "openSubMapId": "arakas-general", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral" }
-                ],
-                "_meta":  {
-                              "checkUrls":  [
-                                                "https://t4c.fandom.com/fr/wiki/Cartes_Arakas",
-                                                "https://nmsrevolution.com/map.php"
-                                            ],
-                              "nmsSourceUrl":  "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral",
-                              "abetsicSourceUrl":  "https://static.wikia.nocookie.net/t4c/images/f/fe/Arakasnexus1.gif/revision/latest?cb=20190921100756\u0026path-prefix=fr",
-                              "checkedAt":  "2026-04-26",
-                              "lastModified":  null,
-                              "etag":  null
-                          },
-                "subMaps":  [
-                                {
-                                    "id":  "lighthaven",
-                                    "name":  "LightHaven",
-                                    "image":  "https://static.wikia.nocookie.net/t4c/images/0/0e/Lighthaven-NMS-lieux7.jpg/revision/latest/scale-to-width-down/1000?cb=20190808184948&path-prefix=fr",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral",
-                                    "hotspot":  null,
-                                    "calibration": {
-                                        "gamePoints": []
-                                    },
-                                    "pois": [
-                                        { "type": "lieux",     "name": "Entrée principale",  "x": 50, "y": 48, "description": "[DEMO] Porte d'entrée de LightHaven.",    "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral" },
-                                        { "type": "lieux",     "name": "Temple du spawn",    "x": 62, "y": 35, "description": "[DEMO] Point de respawn des aventuriers.", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral" },
-                                        { "type": "pnj",       "name": "Marchand général",   "x": 38, "y": 55, "description": "[DEMO] Vend des consommables de base.",    "wikiUrl": "" },
-                                        { "type": "pnj",       "name": "Forgeron",           "x": 70, "y": 60, "description": "[DEMO] Répare et forge les équipements.", "wikiUrl": "" },
-                                        { "type": "monstres",  "name": "Zone d'araignées",   "x": 20, "y": 70, "description": "[DEMO] Araignées de niveau 1-5.",          "wikiUrl": "" }
-                                    ]
-                                },
-                                {
-                                    "id":  "arakas-general",
-                                    "name":  "Arakas General",
-                                    "image":  "data/images/regions/arakas/arakas-general.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral",
-                                    "hotspot":  null,
-                                    "calibration": {
-                                        "gamePoints": []
-                                    },
-                                    "pois": [
-                                        { "type": "lieux",     "name": "LightHaven",         "x": 55, "y": 45, "description": "[DEMO] Ville principale d'Arakas.",        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral" },
-                                        { "type": "lieux",     "name": "WindHowl",           "x": 30, "y": 65, "description": "[DEMO] Zone côtière au sud-ouest.",        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral" },
-                                        { "type": "pnj",       "name": "Garde de la route",  "x": 45, "y": 55, "description": "[DEMO] Surveille les passages.",            "wikiUrl": "" },
-                                        { "type": "monstres",  "name": "Loups sauvages",     "x": 20, "y": 40, "description": "[DEMO] Loups de niveau 3-8.",              "wikiUrl": "" }
-                                    ]
-                                }
-                            ]
-            }
+  "map": {
+    "id": "arakas",
+    "name": "Arakas",
+    "summary": "Premiere ile et zone de depart. Contient LightHaven, WindHowl et Silversky.",
+    "image": "data/images/regions/arakas/arakas.png",
+    "nmsImage": "data/images/regions/arakas/arakas-general.jpg",
+    "abetsicImage": "data/images/regions/arakas/autre/arakas-abetsic.gif",
+    "calibration": {
+      "gamePoints": [
+        {
+          "name": "Cercle de pierre druide",
+          "gameX": 2790,
+          "gameY": 175,
+          "mapX": 3963.43,
+          "mapY": 690.87
+        },
+        {
+          "name": "Spawn Temple Lighthaven",
+          "gameX": 2939,
+          "gameY": 1064,
+          "mapX": 4354.92,
+          "mapY": 3136.32
+        },
+        {
+          "name": "Entré Est Wildhowl",
+          "gameX": 1815,
+          "gameY": 1296,
+          "mapX": 1415.94,
+          "mapY": 3780.47
+        }
+      ]
+    },
+    "pois": [
+      {
+        "type": "lieux",
+        "name": "LightHaven",
+        "gameX": 2850,
+        "gameY": 1080,
+        "description": "Ville de depart principale d'Arakas.",
+        "openSubMapId": "lighthaven",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral"
+      },
+      {
+        "type": "lieux",
+        "name": "WindHowl",
+        "gameX": 1700,
+        "gameY": 1290,
+        "description": "Zone cotiere reliee aux quetes de debut.",
+        "openSubMapId": "arakas-general",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral"
+      }
+    ],
+    "_meta": {
+      "checkUrls": [
+        "https://t4c.fandom.com/fr/wiki/Cartes_Arakas",
+        "https://nmsrevolution.com/map.php"
+      ],
+      "nmsSourceUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral",
+      "abetsicSourceUrl": "https://static.wikia.nocookie.net/t4c/images/f/fe/Arakasnexus1.gif/revision/latest?cb=20190921100756\u0026path-prefix=fr",
+      "checkedAt": "2026-04-26",
+      "lastModified": null,
+      "etag": null
+    },
+    "subMaps": [
+      {
+        "id": "lighthaven",
+        "name": "LightHaven",
+        "image": "https://static.wikia.nocookie.net/t4c/images/0/0e/Lighthaven-NMS-lieux7.jpg/revision/latest/scale-to-width-down/1000?cb=20190808184948&path-prefix=fr",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral",
+        "hotspot": null,
+        "calibration": {
+          "gamePoints": []
+        },
+        "pois": [
+          {
+            "type": "lieux",
+            "name": "Entrée principale",
+            "x": 50,
+            "y": 48,
+            "description": "[DEMO] Porte d'entrée de LightHaven.",
+            "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral"
+          },
+          {
+            "type": "lieux",
+            "name": "Temple du spawn",
+            "x": 62,
+            "y": 35,
+            "description": "[DEMO] Point de respawn des aventuriers.",
+            "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral"
+          },
+          {
+            "type": "pnj",
+            "name": "Marchand général",
+            "x": 38,
+            "y": 55,
+            "description": "[DEMO] Vend des consommables de base.",
+            "wikiUrl": ""
+          },
+          {
+            "type": "pnj",
+            "name": "Forgeron",
+            "x": 70,
+            "y": 60,
+            "description": "[DEMO] Répare et forge les équipements.",
+            "wikiUrl": ""
+          },
+          {
+            "type": "monstres",
+            "name": "Zone d'araignées",
+            "x": 20,
+            "y": 70,
+            "description": "[DEMO] Araignées de niveau 1-5.",
+            "wikiUrl": ""
+          }
+        ]
+      },
+      {
+        "id": "arakas-general",
+        "name": "Arakas General",
+        "image": "data/images/regions/arakas/arakas-general.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral",
+        "hotspot": null,
+        "calibration": {
+          "gamePoints": []
+        },
+        "pois": [
+          {
+            "type": "lieux",
+            "name": "LightHaven",
+            "x": 55,
+            "y": 45,
+            "description": "[DEMO] Ville principale d'Arakas.",
+            "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral"
+          },
+          {
+            "type": "lieux",
+            "name": "WindHowl",
+            "x": 30,
+            "y": 65,
+            "description": "[DEMO] Zone côtière au sud-ouest.",
+            "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral"
+          },
+          {
+            "type": "pnj",
+            "name": "Garde de la route",
+            "x": 45,
+            "y": 55,
+            "description": "[DEMO] Surveille les passages.",
+            "wikiUrl": ""
+          },
+          {
+            "type": "monstres",
+            "name": "Loups sauvages",
+            "x": 20,
+            "y": 40,
+            "description": "[DEMO] Loups de niveau 3-8.",
+            "wikiUrl": ""
+          }
+        ]
+      }
+    ]
+  }
 }

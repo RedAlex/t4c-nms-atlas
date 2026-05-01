@@ -1,63 +1,87 @@
 ﻿{
-    "map":  {
-                "id":  "stoneheim",
-                "name":  "Stoneheim",
-                "summary":  "Troisieme ile principale. Contient StoneCrest, les caves et les donjons avances.",
-                "image":  "data/images/regions/stoneheim/stoneheim.png",
-                "nmsImage":  "data/images/regions/stoneheim/stoneheim-general.jpg",
-                "abetsicImage":  "data/images/regions/stoneheim/autre/stoneheim-abetsic.jpg",
-                "calibration": {
-                    "gamePoints": [
-                        { "name": "Point de calibration 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-                        { "name": "Point de calibration 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-                        { "name": "Point de calibration 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
-                    ]
-                },
-                "pois": [
-                    { "type": "lieux",     "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "sh-general", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim" },
-                    { "type": "pnj",      "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "sh-general", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim" },
-                    { "type": "monstres", "name": "TODO", "gameX": 0, "gameY": 0, "description": "", "openSubMapId": "sh-general", "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim" }
-                ],
-                "_meta":  {
-                              "checkUrls":  [
-                                                "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim",
-                                                "https://nmsrevolution.com/map.php"
-                                            ],
-                              "nmsSourceUrl":  "https://t4c.fandom.com/fr/wiki/Ile_de_Stoneheim",
-                              "abetsicSourceUrl":  "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim",
-                              "checkedAt":  "2026-04-26",
-                              "lastModified":  null,
-                              "etag":  null
-                          },
-                "subMaps":  [
-                                {
-                                    "id":  "sh-general",
-                                    "name":  "Stoneheim (NMS)",
-                                    "image":  "data/images/regions/stoneheim/stoneheim-general.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Ile_de_Stoneheim",
-                                    "hotspot":  null
-                                },
-                                {
-                                    "id":  "sh-stonecrest",
-                                    "name":  "StoneCrest",
-                                    "image":  "data/images/regions/stoneheim/ville/stonecrest.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/StoneCrest",
-                                    "hotspot":  null
-                                },
-                                {
-                                    "id":  "sh-cave-humterre",
-                                    "name":  "Cave Humterre",
-                                    "image":  "data/images/regions/stoneheim/grotte/cave-humterre.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Cartographie_Cave_Humterre",
-                                    "hotspot":  null
-                                },
-                                {
-                                    "id":  "sh-donjon-beholder",
-                                    "name":  "Donjon du Beholder",
-                                    "image":  "data/images/regions/stoneheim/sous-sol/donjon-beholder.jpg",
-                                    "wikiUrl":  "https://t4c.fandom.com/fr/wiki/Donjon_du_Beholder",
-                                    "hotspot":  null
-                                }
-                            ]
-            }
+  "map": {
+    "id": "stoneheim",
+    "name": "Stoneheim",
+    "summary": "Troisieme ile principale. Contient StoneCrest, les caves et les donjons avances.",
+    "image": "data/images/regions/stoneheim/stoneheim.png",
+    "nmsImage": "data/images/regions/stoneheim/stoneheim-general.jpg",
+    "abetsicImage": "data/images/regions/stoneheim/autre/stoneheim-abetsic.jpg",
+    "calibration": {
+      "gamePoints": [
+        { "name": "Point de calibration 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
+        { "name": "Point de calibration 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
+        { "name": "Point de calibration 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
+      ]
+    },
+    "pois": [
+      {
+        "type": "lieux",
+        "name": "TODO",
+        "gameX": 0,
+        "gameY": 0,
+        "description": "",
+        "openSubMapId": "sh-general",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim"
+      },
+      {
+        "type": "pnj",
+        "name": "TODO",
+        "gameX": 0,
+        "gameY": 0,
+        "description": "",
+        "openSubMapId": "sh-general",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim"
+      },
+      {
+        "type": "monstres",
+        "name": "TODO",
+        "gameX": 0,
+        "gameY": 0,
+        "description": "",
+        "openSubMapId": "sh-general",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim"
+      }
+    ],
+    "_meta": {
+      "checkUrls": [
+        "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim",
+        "https://nmsrevolution.com/map.php"
+      ],
+      "nmsSourceUrl": "https://t4c.fandom.com/fr/wiki/Ile_de_Stoneheim",
+      "abetsicSourceUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim",
+      "checkedAt": "2026-04-26",
+      "lastModified": null,
+      "etag": null
+    },
+    "subMaps": [
+      {
+        "id": "sh-general",
+        "name": "Stoneheim (NMS)",
+        "image": "data/images/regions/stoneheim/stoneheim-general.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Ile_de_Stoneheim",
+        "hotspot": null
+      },
+      {
+        "id": "sh-stonecrest",
+        "name": "StoneCrest",
+        "image": "data/images/regions/stoneheim/ville/stonecrest.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/StoneCrest",
+        "hotspot": null
+      },
+      {
+        "id": "sh-cave-humterre",
+        "name": "Cave Humterre",
+        "image": "data/images/regions/stoneheim/grotte/cave-humterre.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartographie_Cave_Humterre",
+        "hotspot": null
+      },
+      {
+        "id": "sh-donjon-beholder",
+        "name": "Donjon du Beholder",
+        "image": "data/images/regions/stoneheim/sous-sol/donjon-beholder.jpg",
+        "wikiUrl": "https://t4c.fandom.com/fr/wiki/Donjon_du_Beholder",
+        "hotspot": null
+      }
+    ]
+  }
 }

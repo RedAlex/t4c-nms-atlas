@@ -12,10 +12,12 @@
 > ⚠️ Copilot ne doit PAS demander à l'utilisateur de lancer le build — il doit le faire automatiquement via le terminal.
 
 `.\build.bat` effectue dans l'ordre :
+
 1. Fermeture des instances existantes
 2. Build complet (electron-packager + zip)
 3. Lancement automatique de l'application
 
 Le build produit :
+
 - `release/Atlas NMS Revolution-win32-x64/` — dossier extrait prêt à lancer
 - `release/atlas-nms-revolution.zip` — archive distribuable
