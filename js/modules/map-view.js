@@ -6,7 +6,7 @@
 import state, { updateState } from "./state.js";
 import { getDisplayedImageRect } from "./utils.js";
 import { setSourceLink, updateDevLabel } from "./ui-helpers.js";
-import { renderInteractivePoints } from "./poi-renderer.js";
+import { renderInteractivePoints, getPointerPercentOnMap } from "./poi-renderer.js";
 import { updateFilterDisplay, updateFilterButtons } from "./filters.js";
 import config from "./config.js";
 
@@ -89,9 +89,7 @@ export function updateZoneLayerLayout() {
  * Gère le mouvement de la souris sur la carte
  * @param {MouseEvent} event - Événement souris
  */
-export async function handleMapStageMouseMove(event) {
-  const { getPointerPercentOnMap } = await import("./poi-renderer.js");
-
+export function handleMapStageMouseMove(event) {
   if (!config.isDev || !state.showGridCoords) {
     return;
   }

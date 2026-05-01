@@ -4,7 +4,8 @@
  */
 
 import state, { updateState } from "./state.js";
-import { normalizeUrlCandidate, getDisplayedImageRect } from "./utils.js";
+import { normalizeUrlCandidate, getDisplayedImageRect, copyTextToClipboard } from "./utils.js";
+import config from "./config.js";
 import { setSourceLink, updateDevLabel } from "./ui-helpers.js";
 import { renderSubmapPois, getPointerPercentOnSubmap } from "./poi-renderer.js";
 import { updateSubmapFilterButtons } from "./filters.js";
@@ -85,9 +86,7 @@ export function updateSubmapZoneLayerLayout() {
  * Gère le mouvement de la souris sur la sous-carte
  * @param {MouseEvent} event - Événement souris
  */
-export async function handleSubmapStageMouseMove(event) {
-  const config = (await import("./config.js")).default;
-
+export function handleSubmapStageMouseMove(event) {
   if (!config.isDev || !state.showSubmapGridCoords) {
     return;
   }
@@ -113,10 +112,7 @@ export async function handleSubmapStageMouseMove(event) {
  * Gère le clic sur la sous-carte
  * @param {MouseEvent} event - Événement souris
  */
-export async function handleSubmapStageClick(event) {
-  const config = (await import("./config.js")).default;
-  const { copyTextToClipboard } = await import("./utils.js");
-
+export function handleSubmapStageClick(event) {
   if (!config.isDev || !state.showSubmapGridCoords) {
     return;
   }
@@ -131,9 +127,10 @@ export async function handleSubmapStageClick(event) {
 
   const text = `${percent.x.toFixed(2)},${percent.y.toFixed(2)}`;
   const submapDevCoords = document.getElementById("submap-dev-coords");
-  const copied = await copyTextToClipboard(text);
-  if (copied && submapDevCoords) {
-    submapDevCoords.textContent = `X ${percent.x.toFixed(2)}% | Y ${percent.y.toFixed(2)}% (copie)`;
-    submapDevCoords.classList.remove("hidden");
-  }
+  copyTextToClipboard(text).then((copied) => {
+    if (copied && submapDevCoords) {
+      submapDevCoords.textContent = `X ${percent.x.toFixed(2)}% | Y ${percent.y.toFixed(2)}% (copie)`;
+      submapDevCoords.classList.remove("hidden");
+    }
+  });
 }
