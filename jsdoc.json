@@ -1,0 +1,15 @@
+{
+  "source": {
+    "include": ["app.js", "js/modules"],
+    "includePattern": ".+\\.js$"
+  },
+  "opts": {
+    "destination": "docs/",
+    "recurse": true
+  },
+  "plugins": [],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}
