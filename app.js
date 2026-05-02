@@ -5,7 +5,7 @@
  */
 
 import { loadMapsData } from "./js/modules/data-loader.js";
-import { updateState } from "./js/modules/state.js";
+import state, { updateState } from "./js/modules/state.js";
 import { renderWorldCards, showWorldView } from "./js/modules/world-view.js";
 import { openMap, updateZoneLayerLayout, handleMapStageMouseMove } from "./js/modules/map-view.js";
 import {
@@ -184,6 +184,23 @@ async function init() {
   }
 
   window.addEventListener("resize", updateSubmapZoneLayerLayout);
+
+  // Navigation clavier — Esc pour revenir en arrière
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") {
+      return;
+    }
+    const submapView = document.getElementById("submap-view");
+    const mapView = document.getElementById("map-view");
+    const favoritesView = document.getElementById("favorites-view");
+    if (submapView && !submapView.classList.contains("hidden")) {
+      openMap(state.activeMap.id);
+    } else if (mapView && !mapView.classList.contains("hidden")) {
+      showWorldView();
+    } else if (favoritesView && !favoritesView.classList.contains("hidden")) {
+      showWorldView();
+    }
+  });
 
   applyDevUiVisibility();
   updateFilterButtons();

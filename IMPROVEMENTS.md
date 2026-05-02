@@ -141,10 +141,11 @@ Enrichir l'expérience utilisateur avec features manquantes
   - **Impact**: Trouvable parmi 100+ POI
   - **Effort**: 2-3h
 
-- [ ] **P3.2** - Système favoris (localStorage)
-  - Ajouter bouton ⭐ sur POI
-  - Sauvegarder favoris dans localStorage
-  - Vue "Mes favoris"
+- [x] **P3.2** - Système favoris (localStorage) ✅
+  - ✅ Bouton ⭐ sur chaque POI (carte et sous-carte), visible au survol
+  - ✅ Sauvegarde favoris dans localStorage (clé `atlasFavorites`)
+  - ✅ Vue "Mes favoris" avec liste, bouton Ouvrir / Retirer
+  - ✅ `js/modules/favorites.js` — module complet (load, toggle, render)
   - **Impact**: Utilisateur crée sa propre carte
   - **Effort**: 2-3h
 

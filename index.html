@@ -29,7 +29,7 @@
     </header>
 
     <main class="layout">
-      <section id="world-view" class="panel">
+      <section id="world-view" class="panel" aria-label="Vue monde — choisissez une carte">
         <div class="panel-head row">
           <div>
             <h2>Monde</h2>
@@ -39,7 +39,7 @@
             <button id="open-favorites" class="btn ghost" type="button">Mes favoris</button>
           </div>
         </div>
-        <div class="search-row">
+        <div class="search-row" role="search" aria-label="Recherche dans le monde">
           <label class="search-label" for="world-search-input">Recherche monde</label>
           <input
             id="world-search-input"
@@ -70,14 +70,14 @@
       </section>
 
       <!-- Vue carte principale -->
-      <section id="map-view" class="panel hidden" aria-live="polite">
+      <section id="map-view" class="panel hidden" aria-live="polite" aria-label="Vue carte principale">
         <div class="panel-head row">
           <div>
             <h2 id="active-map-title">Carte</h2>
             <p id="active-map-caption">Cliquez une sous-carte pour l'afficher</p>
           </div>
           <div class="actions">
-            <button id="back-to-world" class="btn ghost">&#8592; Mondes</button>
+            <button id="back-to-world" class="btn ghost" type="button" aria-label="Retour à la liste des mondes">&#8592; Mondes</button>
           </div>
         </div>
         <div class="filter-buttons">
@@ -89,7 +89,7 @@
             Calibration OFF
           </button>
         </div>
-        <div class="search-row compact">
+        <div class="search-row compact" role="search" aria-label="Recherche dans la carte">
           <label class="search-label" for="map-search-input">Recherche POI</label>
           <input
             id="map-search-input"
@@ -112,15 +112,15 @@
       </section>
 
       <!-- Vue sous-carte -->
-      <section id="submap-view" class="panel hidden" aria-live="polite">
+      <section id="submap-view" class="panel hidden" aria-live="polite" aria-label="Vue sous-carte">
         <div class="panel-head row">
           <div>
             <h2 id="active-submap-title">Sous-carte</h2>
             <p id="active-submap-caption"></p>
           </div>
           <div class="actions">
-            <button id="back-to-map" class="btn ghost">&#8592; Carte</button>
-            <a id="submap-wiki-link" class="btn ghost" target="_blank" rel="noopener">Wiki</a>
+            <button id="back-to-map" class="btn ghost" type="button" aria-label="Retour à la carte principale">&#8592; Carte</button>
+            <a id="submap-wiki-link" class="btn ghost" target="_blank" rel="noopener" aria-label="Ouvrir le wiki pour cette sous-carte">Wiki</a>
           </div>
         </div>
         <div class="filter-buttons">
@@ -138,7 +138,7 @@
             Calibration OFF
           </button>
         </div>
-        <div class="search-row compact">
+        <div class="search-row compact" role="search" aria-label="Recherche dans la sous-carte">
           <label class="search-label" for="submap-search-input">Recherche POI</label>
           <input
             id="submap-search-input"

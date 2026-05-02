@@ -8,8 +8,30 @@ import { normalizeUrlCandidate, fuzzyMatchText } from "./utils.js";
 import { updateDevLabel } from "./ui-helpers.js";
 
 /**
- * Rend les cartes du monde
+ * Calcule le taux de complétude d'une carte (POI non-TODO / total POI)
+ * @param {Object} map - Objet carte
+ * @returns {{ named: number, total: number, pct: number, status: string }}
  */
+function computeCompletion(map) {
+  const allPois = [
+    ...(map.pois || []),
+    ...(map.subMaps || []).flatMap((sub) => sub.pois || []),
+  ];
+  const total = allPois.length;
+  const named = allPois.filter((p) => p.name && p.name !== "TODO").length;
+  const pct = total === 0 ? 0 : Math.round((named / total) * 100);
+  let status;
+  if (total === 0 || pct === 0) {
+    status = "vide";
+  } else if (pct === 100) {
+    status = "complet";
+  } else {
+    status = "en-cours";
+  }
+  return { named, total, pct, status };
+}
+
+
 export function renderWorldCards() {
   const mapCards = document.getElementById("map-cards");
   const searchCount = document.getElementById("world-search-count");
@@ -89,6 +111,20 @@ export function renderWorldCards() {
     checkedBadge.className = "badge muted";
     checkedBadge.textContent = `verifie ${checkedAt}`;
     badges.appendChild(checkedBadge);
+
+    const completion = computeCompletion(map);
+    const completionBadge = document.createElement("span");
+    completionBadge.className = `badge completion-badge completion-${completion.status}`;
+    completionBadge.textContent =
+      completion.status === "complet"
+        ? `Complet (${completion.total} POI)`
+        : completion.status === "en-cours"
+          ? `En cours ${completion.pct}% (${completion.named}/${completion.total})`
+          : `Incomplet (${completion.total} POI)`;
+    completionBadge.title =
+      `${completion.named} POI nommés sur ${completion.total} total` +
+      (completion.total === 0 ? " — aucun POI défini" : "");
+    badges.appendChild(completionBadge);
 
     body.appendChild(badges);
     card.appendChild(body);

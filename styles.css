@@ -151,6 +151,12 @@ body {
   border-color: rgba(255, 214, 77, 0.7);
 }
 
+.map-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-color: rgba(255, 214, 77, 0.7);
+}
+
 .map-card-img {
   width: 100%;
   height: 56%;
@@ -192,6 +198,25 @@ body {
   padding: 0.15rem 0.5rem;
 }
 
+.completion-badge {
+  font-weight: 600;
+}
+
+.completion-complet {
+  border-color: #3ecf6e;
+  color: #3ecf6e;
+}
+
+.completion-en-cours {
+  border-color: #f5c542;
+  color: #f5c542;
+}
+
+.completion-vide {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.45);
+}
+
 .actions {
   display: flex;
   gap: 0.5rem;
@@ -203,7 +228,13 @@ body {
   font-family: inherit;
   font-weight: 700;
   padding: 0.55rem 0.9rem;
+  min-height: 44px;
   cursor: pointer;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .btn.primary {
@@ -271,11 +302,17 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   padding: 0.6rem 1.1rem;
+  min-height: 44px;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.08);
   color: #a8b4c8;
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 220ms ease;
+}
+
+.btn-filter:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .btn-filter:hover {
@@ -365,6 +402,17 @@ body {
   transition:
     transform 120ms ease,
     box-shadow 120ms ease;
+}
+
+/* Zone de clic étendue pour touch (44×44px min) */
+.poi::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
 }
 
 .poi.pnj {
