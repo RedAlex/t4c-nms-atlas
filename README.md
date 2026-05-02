@@ -61,9 +61,11 @@ Guide pratique: voir `CONTRIBUTING.md` (section "Ajouter un POI").
 
 ## Données et attribution
 
-- Ce projet ne contient que des informations publiques issues du wiki officiel t4c.fandom.com/fr.
-- Les assets cartographiques proviennent du wiki officiel T4C NMS Revolution.
-- Les assets proprietaires ne doivent pas etre commites sans autorisation explicite.
+- **The 4th Coming (T4C)** est une marque déposée et une propriété intellectuelle de **Dialsoft LLC**. Les noms d'objets, statistiques de sorts, caractéristiques de monstres et tout autre élément issu de l'univers du jeu sont la propriété exclusive de leurs auteurs respectifs.
+- Ce projet est une Fan-App non officielle à but purement informatif. Il n'est en aucun cas affilié, approuvé ou soutenu par Dialsoft LLC ou les exploitants officiels des serveurs T4C.
+- Les informations publiques proviennent du [wiki officiel T4C NMS](https://t4c.fandom.com/fr) et du site [T4C NMS Révolution](https://nmsrevolution.com/).
+- Les assets cartographiques utilisés sont issus des sources publiques du wiki officiel T4C NMS Revolution.
+- Les assets propriétaires ne doivent pas être commités sans autorisation explicite.
 
 ## Roadmap
 
@@ -75,3 +77,10 @@ Guide pratique: voir `CONTRIBUTING.md` (section "Ajouter un POI").
 ## Licence
 
 MIT. Voir `LICENSE`.
+
+## Credits des sources d'information
+
+- [Wiki officiel T4C (fr)](https://t4c.fandom.com/fr)
+- [Site officiel NMS Revolution](https://www.nms-revolution.com)
+- [t4c-nms-overview par Bignole (code source)](https://github.com/gobeline-dev/t4c-nms-overview)
+- [t4c-nms-overview par Bignole (site)](https://gobeline-dev.github.io/t4c-nms-overview/)
