@@ -104,11 +104,12 @@ Couvrir tests unitaires + e2e + automatiser builds
   - **Impact**: Validation flux utilisateur complet
   - **Effort**: 5-6h
 
-- [ ] **P2.4** - GitHub Actions CI/CD
-  - Créer `.github/workflows/build.yml`
-  - Auto-build sur push tag (release)
-  - Auto-build exe + zip release assets
-  - Linter + tests dans CI
+- [x] **P2.4** - GitHub Actions CI/CD
+  - ✅ `.github/workflows/build.yml` créé
+  - ✅ Auto-build sur push/PR + publication release sur tag `v*`
+  - ✅ Upload artefacts Windows (`atlas-nms-revolution.zip` + dossier packagé)
+  - ✅ Publication release assets (ZIP + `Atlas NMS Revolution.exe`)
+  - ✅ Linter + tests unitaires dans CI
   - **Impact**: Zéro builds manuels
   - **Effort**: 2-3h
 
