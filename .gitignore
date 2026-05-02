@@ -1,6 +1,7 @@
 node_modules/
 release/
 docs/
+version/
 *.exe
 .DS_Store
 Thumbs.db

@@ -16,14 +16,24 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{js,json,html,css,md}\" --ignore-path .gitignore",
-    "docs": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "changelog": "node scripts/changelog.mjs",
+    "release:patch": "npm version patch && node scripts/changelog.mjs",
+    "release:minor": "npm version minor && node scripts/changelog.mjs",
+    "release:major": "npm version major && node scripts/changelog.mjs"
   },
   "devDependencies": {
     "@electron/packager": "^20.0.0",
+    "@vitest/coverage-v8": "^3.2.0",
     "archiver": "^7.0.1",
     "electron": "^41.4.0",
     "eslint": "^8.56.0",
+    "happy-dom": "^20.9.0",
     "jsdoc": "^4.0.4",
-    "prettier": "^3.1.1"
+    "prettier": "^3.1.1",
+    "vitest": "^3.2.0"
   }
 }

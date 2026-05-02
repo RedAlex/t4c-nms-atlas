@@ -38,6 +38,13 @@ async function init() {
   updateState("maps", data.maps);
   renderWorldCards();
 
+  // Affiche la version de l'application
+  const appVersionEl = document.getElementById("app-version");
+  if (appVersionEl) {
+    const version = window.desktopAPI?.appVersion || "dev";
+    appVersionEl.textContent = `v${version}`;
+  }
+
   // Récupère les éléments DOM
   const backToWorld = document.getElementById("back-to-world");
   const backToMap = document.getElementById("back-to-map");

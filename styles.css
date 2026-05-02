@@ -462,6 +462,12 @@ body {
   padding: 0 1rem 1.2rem;
 }
 
+.app-version {
+  font-size: 0.75rem;
+  color: #5a6a84;
+  margin-top: 0.25rem;
+}
+
 @keyframes rise {
   from {
     opacity: 0;

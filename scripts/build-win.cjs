@@ -2,6 +2,7 @@ const fs = require("fs");
 const fsp = require("fs/promises");
 const path = require("path");
 const archiver = require("archiver");
+const { version } = require("../package.json");
 
 const projectRoot = path.resolve(__dirname, "..");
 const releaseDir = path.join(projectRoot, "release");
@@ -36,6 +37,7 @@ async function runPackager() {
     out: releaseDir,
     overwrite: true,
     prune: true,
+    appVersion: version,
     ignore: [/^\/release$/],
   });
 
