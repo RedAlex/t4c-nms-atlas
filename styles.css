@@ -166,8 +166,11 @@ body {
 }
 
 .map-card-body {
-  padding: 0.9rem;
+  padding: 1rem 1.1rem 0.9rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
 .badge.muted {
@@ -178,11 +181,51 @@ body {
 .map-card-body h3 {
   margin: 0;
   font-family: "Bebas Neue", sans-serif;
-  font-size: 1.7rem;
+  font-size: 1.55rem;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
 }
 
-.map-card-body p {
-  color: #d5deed;
+.card-summary {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #c6d2e6;
+}
+
+.completion-badge {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+}
+
+.completion-complet {
+  background: rgba(62, 207, 110, 0.12);
+  border: 1px solid rgba(62, 207, 110, 0.45);
+  color: #5ddf8a;
+}
+
+.completion-en-cours {
+  background: rgba(245, 197, 66, 0.1);
+  border: 1px solid rgba(245, 197, 66, 0.4);
+  color: #f5c542;
+}
+
+.completion-vide {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(200, 210, 230, 0.55);
+}
+
+.card-meta {
+  margin: auto 0 0;
+  padding-top: 0.5rem;
+  font-size: 0.72rem;
+  color: rgba(180, 196, 220, 0.55);
+  letter-spacing: 0.01em;
 }
 
 .badges {
@@ -192,29 +235,10 @@ body {
 }
 
 .badge {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 999px;
-  padding: 0.15rem 0.5rem;
-}
-
-.completion-badge {
-  font-weight: 600;
-}
-
-.completion-complet {
-  border-color: #3ecf6e;
-  color: #3ecf6e;
-}
-
-.completion-en-cours {
-  border-color: #f5c542;
-  color: #f5c542;
-}
-
-.completion-vide {
-  border-color: rgba(255, 255, 255, 0.25);
-  color: rgba(255, 255, 255, 0.45);
+  padding: 0.2rem 0.6rem;
 }
 
 .actions {

@@ -96,37 +96,27 @@ export function renderWorldCards() {
     body.appendChild(title);
 
     const summary = document.createElement("p");
+    summary.className = "card-summary";
     summary.textContent = map.summary || "";
     body.appendChild(summary);
 
-    const badges = document.createElement("div");
-    badges.className = "badges";
-
-    const countBadge = document.createElement("span");
-    countBadge.className = "badge";
-    countBadge.textContent = `${(map.subMaps || []).length} sous-cartes`;
-    badges.appendChild(countBadge);
-
-    const checkedBadge = document.createElement("span");
-    checkedBadge.className = "badge muted";
-    checkedBadge.textContent = `verifie ${checkedAt}`;
-    badges.appendChild(checkedBadge);
-
     const completion = computeCompletion(map);
     const completionBadge = document.createElement("span");
-    completionBadge.className = `badge completion-badge completion-${completion.status}`;
+    completionBadge.className = `completion-badge completion-${completion.status}`;
     completionBadge.textContent =
       completion.status === "complet"
-        ? `Complet (${completion.total} POI)`
+        ? `✓ Complet — ${completion.total} POI`
         : completion.status === "en-cours"
-          ? `En cours ${completion.pct}% (${completion.named}/${completion.total})`
-          : `Incomplet (${completion.total} POI)`;
+          ? `${completion.pct}% complété — ${completion.named}/${completion.total} POI`
+          : `En cours — ${completion.total} POI définis`;
     completionBadge.title =
-      `${completion.named} POI nommés sur ${completion.total} total` +
-      (completion.total === 0 ? " — aucun POI défini" : "");
-    badges.appendChild(completionBadge);
+      `${completion.named} POI nommés sur ${completion.total} total`;
+    body.appendChild(completionBadge);
 
-    body.appendChild(badges);
+    const meta = document.createElement("p");
+    meta.className = "card-meta";
+    meta.textContent = `${(map.subMaps || []).length} sous-cartes · vérifié ${checkedAt}`;
+    body.appendChild(meta);
     card.appendChild(body);
     card.addEventListener("click", () => {
       import("./map-view.js").then(({ openMap }) => {
