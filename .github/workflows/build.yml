@@ -68,9 +68,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: windows-build
-          path: |
-            release/atlas-nms-revolution.zip
-            release/Atlas NMS Revolution-win32-x64/**
+          path: release/atlas-nms-revolution.zip
 
   release:
     name: Create GitHub Release
@@ -83,12 +81,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: windows-build
-          path: .
+          path: artifacts
 
       - name: Publish release assets
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
-          files: |
-            release/atlas-nms-revolution.zip
-            release/Atlas NMS Revolution-win32-x64/Atlas NMS Revolution.exe
+          files: artifacts/atlas-nms-revolution.zip
