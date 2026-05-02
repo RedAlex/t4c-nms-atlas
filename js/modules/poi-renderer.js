@@ -26,7 +26,10 @@ export function renderInteractivePoints() {
   const gameToPercent = createGameToPercentTransform(state.activeMap?.calibration);
   const pois = state.activeMap?.pois || [];
   const query = state.mapSearchQuery || "";
-  const typedPois = pois.filter((poi) => poi.type === state.activeFilter);
+  const typedPois =
+    state.activeFilter === "favoris"
+      ? pois.filter((poi) => isPoiFavorite(poi))
+      : pois.filter((poi) => poi.type === state.activeFilter);
   const visiblePois = typedPois.filter((poi) => fuzzyMatchText(poi.name || "", query));
 
   if (mapSearchCount) {
@@ -39,18 +42,20 @@ export function renderInteractivePoints() {
       return;
     }
 
-    const marker = document.createElement("button");
-    marker.type = "button";
+    const marker = document.createElement("div");
     marker.className = `poi ${poi.type}`;
     if (query) {
       marker.classList.add("search-match");
     }
+    marker.setAttribute("role", "button");
+    marker.tabIndex = 0;
     marker.style.left = `${position.x}%`;
     marker.style.top = `${position.y}%`;
     marker.setAttribute("aria-label", poi.name || poi.type);
     if (poi.openSubMapId) {
       marker.dataset.submapId = poi.openSubMapId;
     }
+    marker.classList.toggle("favorite", isPoiFavorite(poi));
     if (poi.name) {
       const title = document.createElement("span");
       title.className = "poi-title";
@@ -67,7 +72,7 @@ export function renderInteractivePoints() {
         mapStage,
         poi,
         event,
-        "Clic: ouvrir carte | Clic droit: wiki"
+        "Clic: ouvrir carte | Shift+Clic: favori | Clic droit: wiki"
       );
     });
     marker.addEventListener("mousemove", (event) => {
@@ -76,14 +81,34 @@ export function renderInteractivePoints() {
         mapStage,
         poi,
         event,
-        "Clic: ouvrir carte | Clic droit: wiki"
+        "Clic: ouvrir carte | Shift+Clic: favori | Clic droit: wiki"
       );
     });
     marker.addEventListener("mouseleave", () => hideHoverCard(mapHoverCard));
     marker.addEventListener("blur", () => hideHoverCard(mapHoverCard));
     marker.addEventListener("click", async (event) => {
+      if (event.shiftKey) {
+        event.preventDefault();
+        event.stopPropagation();
+        const added = togglePoiFavorite(poi);
+        marker.classList.toggle("favorite", added);
+        if (state.activeFilter === "favoris") {
+          renderInteractivePoints();
+        }
+        return;
+      }
       if (await handleCalibrationClickCopy(event)) {
         event.stopPropagation();
+        return;
+      }
+      handlePoiOpenMap(poi);
+    });
+    marker.addEventListener("keydown", async (event) => {
+      if (event.key !== "Enter" && event.key !== " ") {
+        return;
+      }
+      event.preventDefault();
+      if (await handleCalibrationClickCopy(event)) {
         return;
       }
       handlePoiOpenMap(poi);
@@ -92,19 +117,6 @@ export function renderInteractivePoints() {
       event.preventDefault();
       handlePoiOpenWiki(poi);
     });
-
-    const favBtn = document.createElement("button");
-    favBtn.type = "button";
-    favBtn.className = `poi-fav-btn${isPoiFavorite(poi) ? " active" : ""}`;
-    favBtn.setAttribute("aria-label", isPoiFavorite(poi) ? "Retirer des favoris" : "Ajouter aux favoris");
-    favBtn.textContent = "\u2605";
-    favBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const added = togglePoiFavorite(poi);
-      favBtn.classList.toggle("active", added);
-      favBtn.setAttribute("aria-label", added ? "Retirer des favoris" : "Ajouter aux favoris");
-    });
-    marker.appendChild(favBtn);
 
     zoneLayer.appendChild(marker);
   });
@@ -181,7 +193,10 @@ export function renderSubmapPois() {
   const gameToPercent = createGameToPercentTransform(state.activeSubMap?.calibration);
   const pois = state.activeSubMap?.pois || [];
   const query = state.submapSearchQuery || "";
-  const typedPois = pois.filter((poi) => poi.type === state.activeSubmapFilter);
+  const typedPois =
+    state.activeSubmapFilter === "favoris"
+      ? pois.filter((poi) => isPoiFavorite(poi))
+      : pois.filter((poi) => poi.type === state.activeSubmapFilter);
   const visiblePois = typedPois.filter((poi) => fuzzyMatchText(poi.name || "", query));
 
   if (submapSearchCount) {
@@ -194,15 +209,17 @@ export function renderSubmapPois() {
       return;
     }
 
-    const marker = document.createElement("button");
-    marker.type = "button";
+    const marker = document.createElement("div");
     marker.className = `poi ${poi.type}`;
     if (query) {
       marker.classList.add("search-match");
     }
+    marker.setAttribute("role", "button");
+    marker.tabIndex = 0;
     marker.style.left = `${position.x}%`;
     marker.style.top = `${position.y}%`;
     marker.setAttribute("aria-label", poi.name || poi.type);
+    marker.classList.toggle("favorite", isPoiFavorite(poi));
 
     if (poi.name) {
       const title = document.createElement("span");
@@ -215,13 +232,37 @@ export function renderSubmapPois() {
     const submapHoverCard = document.getElementById("submap-hover-card");
 
     marker.addEventListener("mouseenter", (event) => {
-      showHoverCard(submapHoverCard, submapStage, poi, event, "Clic droit: wiki");
+      showHoverCard(
+        submapHoverCard,
+        submapStage,
+        poi,
+        event,
+        "Shift+Clic: favori | Clic droit: wiki"
+      );
     });
     marker.addEventListener("mousemove", (event) => {
-      showHoverCard(submapHoverCard, submapStage, poi, event, "Clic droit: wiki");
+      showHoverCard(
+        submapHoverCard,
+        submapStage,
+        poi,
+        event,
+        "Shift+Clic: favori | Clic droit: wiki"
+      );
     });
     marker.addEventListener("mouseleave", () => hideHoverCard(submapHoverCard));
     marker.addEventListener("blur", () => hideHoverCard(submapHoverCard));
+    marker.addEventListener("click", (event) => {
+      if (!event.shiftKey) {
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      const added = togglePoiFavorite(poi);
+      marker.classList.toggle("favorite", added);
+      if (state.activeSubmapFilter === "favoris") {
+        renderSubmapPois();
+      }
+    });
     marker.addEventListener("contextmenu", (event) => {
       event.preventDefault();
       const wikiUrl =
@@ -232,19 +273,6 @@ export function renderSubmapPois() {
         window.open(wikiUrl, "_blank", "noopener");
       }
     });
-
-    const favBtn = document.createElement("button");
-    favBtn.type = "button";
-    favBtn.className = `poi-fav-btn${isPoiFavorite(poi) ? " active" : ""}`;
-    favBtn.setAttribute("aria-label", isPoiFavorite(poi) ? "Retirer des favoris" : "Ajouter aux favoris");
-    favBtn.textContent = "\u2605";
-    favBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const added = togglePoiFavorite(poi);
-      favBtn.classList.toggle("active", added);
-      favBtn.setAttribute("aria-label", added ? "Retirer des favoris" : "Ajouter aux favoris");
-    });
-    marker.appendChild(favBtn);
 
     submapZoneLayer.appendChild(marker);
   });

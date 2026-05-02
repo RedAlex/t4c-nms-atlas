@@ -9,6 +9,7 @@ import { setSourceLink, updateDevLabel } from "./ui-helpers.js";
 import { renderInteractivePoints, getPointerPercentOnMap } from "./poi-renderer.js";
 import { updateFilterDisplay, updateFilterButtons } from "./filters.js";
 import config from "./config.js";
+import { isPoiFavorite } from "./favorites.js";
 
 /**
  * Ouvre une carte
@@ -39,6 +40,10 @@ export function openMap(mapId) {
     mapSearchCount.textContent = "";
   }
 
+  const mapPois = state.activeMap.pois || [];
+  const hasFavoriteOnMap = mapPois.some((poi) => isPoiFavorite(poi));
+  updateState("activeFilter", hasFavoriteOnMap ? "favoris" : "lieux");
+
   worldView.classList.add("hidden");
   submapView.classList.add("hidden");
   mapView.classList.remove("hidden");
@@ -46,6 +51,24 @@ export function openMap(mapId) {
 
   activeMapTitle.textContent = state.activeMap.name;
   activeMapCaption.textContent = `Version Abetsic — ${(state.activeMap.subMaps || []).length} sous-cartes disponibles`;
+
+  const mapCalibBadge = document.getElementById("map-calib-badge");
+  if (mapCalibBadge) {
+    if (config.isDev) {
+      const calibPoints = (state.activeMap.calibration?.gamePoints || []).filter(
+        (p) => p.gameX !== 0 || p.gameY !== 0 || p.mapX !== 0 || p.mapY !== 0,
+      ).length;
+      const calibMax = 3;
+      mapCalibBadge.className = `completion-badge calib-badge calib-${
+        calibPoints === calibMax ? "ok" : calibPoints === 0 ? "none" : "partial"
+      }`;
+      mapCalibBadge.textContent = `Calib. ${calibPoints}/${calibMax}`;
+      mapCalibBadge.title = `Calibration : ${calibPoints} point(s) valide(s) sur ${calibMax} requis.`;
+      mapCalibBadge.classList.remove("hidden");
+    } else {
+      mapCalibBadge.classList.add("hidden");
+    }
+  }
 
   const mapImage = state.activeMap.image || state.activeMap.abetsicImage;
   if (mapImage) {

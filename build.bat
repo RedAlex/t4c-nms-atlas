@@ -1,6 +1,7 @@
 @echo off
 REM Script de build et lancement pour Atlas NMS Revolution
 REM Peut être exécuté depuis n'importe quel répertoire
+REM Usage: build.bat [--dev]
 
 REM Obtenir le répertoire du script
 cd /d "%~dp0"
@@ -15,7 +16,7 @@ call npm.cmd run build:win
 
 if %errorlevel% equ 0 (
     echo Build réussi ! Lancement de l'application...
-    start "" ".\release\Atlas NMS Revolution-win32-x64\Atlas NMS Revolution.exe"
+    start "" ".\release\Atlas NMS Revolution-win32-x64\Atlas NMS Revolution.exe" %*
 ) else (
     echo Erreur lors du build !
     exit /b 1

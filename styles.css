@@ -220,6 +220,30 @@ body {
   color: rgba(200, 210, 230, 0.55);
 }
 
+/* ── Badge calibration (dev uniquement) ── */
+.calib-badge {
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.76rem;
+}
+
+.calib-ok {
+  background: rgba(62, 207, 110, 0.1);
+  border: 1px solid rgba(62, 207, 110, 0.35);
+  color: #5ddf8a;
+}
+
+.calib-partial {
+  background: rgba(245, 197, 66, 0.08);
+  border: 1px solid rgba(245, 197, 66, 0.35);
+  color: #f5c542;
+}
+
+.calib-none {
+  background: rgba(220, 80, 80, 0.08);
+  border: 1px solid rgba(220, 80, 80, 0.35);
+  color: #e07070;
+}
+
 .card-meta {
   margin: auto 0 0;
   padding-top: 0.5rem;
@@ -470,6 +494,24 @@ body {
     0 0 18px rgba(255, 214, 77, 0.6);
 }
 
+.poi.favorite {
+  border-color: #f5c542;
+  box-shadow:
+    0 0 0 4px rgba(245, 197, 66, 0.25),
+    0 0 12px rgba(245, 197, 66, 0.45);
+}
+
+.poi.favorite::after {
+  content: "★";
+  position: absolute;
+  top: -14px;
+  right: -12px;
+  font-size: 12px;
+  line-height: 1;
+  color: #f5c542;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
 .poi-title {
   position: absolute;
   top: -1.35rem;
@@ -713,39 +755,6 @@ body {
 
 .submap-zone-layer.titles-hidden .poi-title {
   display: none;
-}
-
-/* ── Bouton favori sur POI ── */
-.poi-fav-btn {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  z-index: 3;
-  width: 18px;
-  height: 18px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.55);
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 11px;
-  line-height: 18px;
-  text-align: center;
-  cursor: pointer;
-  opacity: 0;
-  transition:
-    opacity 0.15s,
-    color 0.15s;
-}
-
-.poi:hover .poi-fav-btn,
-.poi:focus-within .poi-fav-btn {
-  opacity: 1;
-}
-
-.poi-fav-btn.active {
-  color: #f5c542;
-  opacity: 1;
 }
 
 /* ── Vue Favoris ── */

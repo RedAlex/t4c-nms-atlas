@@ -1,7 +1,7 @@
 # 🚀 Plan d'Amélioration - Atlas NMS Revolution
 
 **Date**: 1 mai 2026  
-**Statut**: PHASE 1 ✅ COMPLÉTÉE | PHASE 2-4 ⏳ En attente
+**Statut**: PHASE 1, 2 & 3 ✅ COMPLÉTÉES | PHASE 4 ⏳ En attente
 
 ---
 
@@ -149,14 +149,14 @@ Enrichir l'expérience utilisateur avec features manquantes
   - **Impact**: Utilisateur crée sa propre carte
   - **Effort**: 2-3h
 
-- [ ] **P3.3** - Indicateurs complétude régions
+- [x] **P3.3** - Indicateurs complétude régions
   - Ajouter % POI calibrés par région
   - Badge "Complet / En cours / Incomplet" sur cartes
   - Tooltip statistiques
   - **Impact**: Transparence sur contenu
   - **Effort**: 1-2h
 
-- [ ] **P3.4** - Améliorer accessibilité
+- [x] **P3.4** - Améliorer accessibilité
   - Ajouter aria-labels manquants
   - Vérifier contraste texte (WCAG AA)
   - Navigation clavier complète (Tab, Enter, Esc)
@@ -164,7 +164,7 @@ Enrichir l'expérience utilisateur avec features manquantes
   - **Impact**: Utilisateurs malvoyants
   - **Effort**: 2-3h
 
-- [ ] **P3.5** - Responsive design (mobile)
+- [x] **P3.5** - Responsive design (mobile)
   - Media queries tablet + mobile
   - Touch-friendly (zones cliquables 44x44px min)
   - Test iPhone/Android

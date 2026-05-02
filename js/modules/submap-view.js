@@ -9,6 +9,7 @@ import config from "./config.js";
 import { setSourceLink, updateDevLabel } from "./ui-helpers.js";
 import { renderSubmapPois, getPointerPercentOnSubmap } from "./poi-renderer.js";
 import { updateSubmapFilterButtons } from "./filters.js";
+import { isPoiFavorite } from "./favorites.js";
 
 /**
  * Ouvre une sous-carte
@@ -38,6 +39,10 @@ export function openSubMap(subMapId) {
     submapSearchCount.textContent = "";
   }
 
+  const submapPois = state.activeSubMap.pois || [];
+  const hasFavoriteOnSubmap = submapPois.some((poi) => isPoiFavorite(poi));
+  updateState("activeSubmapFilter", hasFavoriteOnSubmap ? "favoris" : "lieux");
+
   mapView.classList.add("hidden");
   submapView.classList.remove("hidden");
   updateDevLabel("submap-view", state.activeSubMap.name);
@@ -49,6 +54,24 @@ export function openSubMap(subMapId) {
 
   activeSubmapTitle.textContent = state.activeSubMap.name;
   activeSubmapCaption.textContent = state.activeMap.name;
+
+  const submapCalibBadge = document.getElementById("submap-calib-badge");
+  if (submapCalibBadge) {
+    if (config.isDev) {
+      const calibPoints = (state.activeSubMap.calibration?.gamePoints || []).filter(
+        (p) => p.gameX !== 0 || p.gameY !== 0 || p.mapX !== 0 || p.mapY !== 0,
+      ).length;
+      const calibMax = 3;
+      submapCalibBadge.className = `completion-badge calib-badge calib-${
+        calibPoints === calibMax ? "ok" : calibPoints === 0 ? "none" : "partial"
+      }`;
+      submapCalibBadge.textContent = `Calib. ${calibPoints}/${calibMax}`;
+      submapCalibBadge.title = `Calibration sous-carte : ${calibPoints} point(s) valide(s) sur ${calibMax} requis.`;
+      submapCalibBadge.classList.remove("hidden");
+    } else {
+      submapCalibBadge.classList.add("hidden");
+    }
+  }
   submapBgImg.src = state.activeSubMap.image;
   submapBgImg.alt = state.activeSubMap.name;
 

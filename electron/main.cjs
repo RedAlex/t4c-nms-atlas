@@ -2,6 +2,8 @@ const { app, BrowserWindow, shell } = require("electron");
 const path = require("path");
 const { checkForUpdates } = require("./updater.cjs");
 
+const isDev = process.argv.includes("--dev");
+
 function isExternalHttpUrl(rawUrl) {
   try {
     const parsed = new URL(rawUrl);
@@ -41,7 +43,9 @@ function createWindow() {
     shell.openExternal(url);
   });
 
-  mainWindow.loadFile(path.join(__dirname, "..", "index.html"));
+  mainWindow.loadFile(path.join(__dirname, "..", "index.html"), {
+    query: isDev ? { dev: "1" } : {},
+  });
 
   mainWindow.webContents.once("did-finish-load", () => {
     checkForUpdates(mainWindow);

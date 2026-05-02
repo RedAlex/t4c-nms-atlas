@@ -55,10 +55,12 @@ async function init() {
   const filterLieux = document.getElementById("filter-lieux");
   const filterPnj = document.getElementById("filter-pnj");
   const filterMonstres = document.getElementById("filter-monstres");
+  const filterFavoris = document.getElementById("filter-favoris");
   const togglePoiTitlesBtn = document.getElementById("toggle-poi-titles");
   const submapFilterLieux = document.getElementById("submap-filter-lieux");
   const submapFilterPnj = document.getElementById("submap-filter-pnj");
   const submapFilterMonstres = document.getElementById("submap-filter-monstres");
+  const submapFilterFavoris = document.getElementById("submap-filter-favoris");
   const submapTogglePoiTitlesBtn = document.getElementById("submap-toggle-poi-titles");
   const submapToggleGridCoordsBtn = document.getElementById("submap-toggle-grid-coords");
   const submapStage = document.getElementById("submap-stage");
@@ -80,14 +82,25 @@ async function init() {
     const { getState } = await import("./js/modules/state.js");
     openMap(getState("activeMap").id);
   });
-  filterLieux.addEventListener("click", () => {
+  filterLieux.addEventListener("click", async () => {
     toggleFilter("lieux");
+    const { renderInteractivePoints } = await import("./js/modules/poi-renderer.js");
+    renderInteractivePoints();
   });
-  filterPnj.addEventListener("click", () => {
+  filterPnj.addEventListener("click", async () => {
     toggleFilter("pnj");
+    const { renderInteractivePoints } = await import("./js/modules/poi-renderer.js");
+    renderInteractivePoints();
   });
-  filterMonstres.addEventListener("click", () => {
+  filterMonstres.addEventListener("click", async () => {
     toggleFilter("monstres");
+    const { renderInteractivePoints } = await import("./js/modules/poi-renderer.js");
+    renderInteractivePoints();
+  });
+  filterFavoris.addEventListener("click", async () => {
+    toggleFilter("favoris");
+    const { renderInteractivePoints } = await import("./js/modules/poi-renderer.js");
+    renderInteractivePoints();
   });
   togglePoiTitlesBtn.addEventListener("click", async () => {
     togglePoiTitles();
@@ -130,6 +143,13 @@ async function init() {
   if (submapFilterMonstres) {
     submapFilterMonstres.addEventListener("click", async () => {
       toggleSubmapFilter("monstres");
+      const { renderSubmapPois } = await import("./js/modules/poi-renderer.js");
+      renderSubmapPois();
+    });
+  }
+  if (submapFilterFavoris) {
+    submapFilterFavoris.addEventListener("click", async () => {
+      toggleSubmapFilter("favoris");
       const { renderSubmapPois } = await import("./js/modules/poi-renderer.js");
       renderSubmapPois();
     });

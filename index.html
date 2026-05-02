@@ -75,6 +75,7 @@
           <div>
             <h2 id="active-map-title">Carte</h2>
             <p id="active-map-caption">Cliquez une sous-carte pour l'afficher</p>
+            <span id="map-calib-badge" class="completion-badge calib-badge hidden"></span>
           </div>
           <div class="actions">
             <button id="back-to-world" class="btn ghost" type="button" aria-label="Retour à la liste des mondes">&#8592; Mondes</button>
@@ -84,6 +85,7 @@
           <button id="filter-lieux" class="btn-filter active" data-filter="lieux">Lieux</button>
           <button id="filter-pnj" class="btn-filter" data-filter="pnj">Pnj</button>
           <button id="filter-monstres" class="btn-filter" data-filter="monstres">Monstres</button>
+          <button id="filter-favoris" class="btn-filter" data-filter="favoris">Favorie</button>
           <button id="toggle-poi-titles" class="btn-filter active" type="button">Titres ON</button>
           <button id="toggle-grid-coords" class="btn-filter hidden" type="button">
             Calibration OFF
@@ -117,6 +119,7 @@
           <div>
             <h2 id="active-submap-title">Sous-carte</h2>
             <p id="active-submap-caption"></p>
+            <span id="submap-calib-badge" class="completion-badge calib-badge hidden"></span>
           </div>
           <div class="actions">
             <button id="back-to-map" class="btn ghost" type="button" aria-label="Retour à la carte principale">&#8592; Carte</button>
@@ -130,6 +133,9 @@
           <button id="submap-filter-pnj" class="btn-filter" data-filter="pnj">Pnj</button>
           <button id="submap-filter-monstres" class="btn-filter" data-filter="monstres">
             Monstres
+          </button>
+          <button id="submap-filter-favoris" class="btn-filter" data-filter="favoris">
+            Favorie
           </button>
           <button id="submap-toggle-poi-titles" class="btn-filter active" type="button">
             Titres ON

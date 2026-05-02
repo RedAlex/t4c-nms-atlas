@@ -1,4 +1,4 @@
-const { contextBridge } = require("electron");
+const { contextBridge, ipcRenderer } = require("electron");
 const fs = require("fs/promises");
 const path = require("path");
 const { version } = require("../package.json");

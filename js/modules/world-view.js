@@ -6,11 +6,12 @@
 import state from "./state.js";
 import { normalizeUrlCandidate, fuzzyMatchText } from "./utils.js";
 import { updateDevLabel } from "./ui-helpers.js";
+import config from "./config.js";
 
 /**
- * Calcule le taux de complétude d'une carte (POI non-TODO / total POI)
+ * Calcule les statistiques de documentation d'une carte (POI saisis / total définis)
  * @param {Object} map - Objet carte
- * @returns {{ named: number, total: number, pct: number, status: string }}
+ * @returns {{ documented: number, total: number, status: string }}
  */
 function computeCompletion(map) {
   const allPois = [
@@ -18,17 +19,16 @@ function computeCompletion(map) {
     ...(map.subMaps || []).flatMap((sub) => sub.pois || []),
   ];
   const total = allPois.length;
-  const named = allPois.filter((p) => p.name && p.name !== "TODO").length;
-  const pct = total === 0 ? 0 : Math.round((named / total) * 100);
+  const documented = allPois.filter((p) => p.name && p.name !== "TODO").length;
   let status;
-  if (total === 0 || pct === 0) {
+  if (total === 0) {
     status = "vide";
-  } else if (pct === 100) {
+  } else if (documented === total) {
     status = "complet";
   } else {
     status = "en-cours";
   }
-  return { named, total, pct, status };
+  return { documented, total, status };
 }
 
 
@@ -103,16 +103,29 @@ export function renderWorldCards() {
     const completion = computeCompletion(map);
     const completionBadge = document.createElement("span");
     completionBadge.className = `completion-badge completion-${completion.status}`;
-    completionBadge.textContent =
-      completion.status === "complet"
-        ? `✓ Complet — ${completion.total} POI`
-        : completion.status === "en-cours"
-          ? `${completion.pct}% complété — ${completion.named}/${completion.total} POI`
-          : `En cours — ${completion.total} POI définis`;
-    completionBadge.title =
-      `${completion.named} POI nommés sur ${completion.total} total`;
+    if (completion.total === 0) {
+      completionBadge.textContent = "Aucun POI saisi";
+      completionBadge.title = "Aucun point d'intérêt n'a encore été saisi pour cette carte.";
+    } else {
+      completionBadge.textContent = `${completion.documented} POI documentés`;
+      completionBadge.title =
+        `${completion.documented} POI avec un nom sur ${completion.total} entrées au total.` +
+        (completion.total !== completion.documented
+          ? ` (${completion.total - completion.documented} marqueurs TODO restants)`
+          : " — tous les marqueurs sont renseignés.");
+    }
     body.appendChild(completionBadge);
-
+    if (config.isDev) {
+      const calibPoints = (map.calibration?.gamePoints || []).filter(
+        (p) => p.gameX !== 0 || p.gameY !== 0 || p.mapX !== 0 || p.mapY !== 0,
+      ).length;
+      const calibMax = 3;
+      const calibBadge = document.createElement("span");
+      calibBadge.className = `completion-badge calib-badge calib-${calibPoints === calibMax ? "ok" : calibPoints === 0 ? "none" : "partial"}`;
+      calibBadge.textContent = `Calib. ${calibPoints}/${calibMax}`;
+      calibBadge.title = `Calibration carte principale : ${calibPoints} point(s) sur ${calibMax} requis.`;
+      body.appendChild(calibBadge);
+    }
     const meta = document.createElement("p");
     meta.className = "card-meta";
     meta.textContent = `${(map.subMaps || []).length} sous-cartes · vérifié ${checkedAt}`;

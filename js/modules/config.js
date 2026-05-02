@@ -5,7 +5,9 @@
 
 const config = {
   /** Mode développement pour outils de calibration */
-  isDev: false,
+  isDev:
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("dev") === "1",
 };
 
 export default config;

@@ -28,7 +28,7 @@ export function toggleSubmapFilter(filterName) {
  * Met à jour les boutons de filtre (carte principale)
  */
 export function updateFilterButtons() {
-  ["lieux", "pnj", "monstres"].forEach((filterName) => {
+  ["lieux", "pnj", "monstres", "favoris"].forEach((filterName) => {
     const button = document.getElementById(`filter-${filterName}`);
     if (!button) {
       return;
@@ -41,7 +41,7 @@ export function updateFilterButtons() {
  * Met à jour les boutons de filtre (sous-carte)
  */
 export function updateSubmapFilterButtons() {
-  ["lieux", "pnj", "monstres"].forEach((filterName) => {
+  ["lieux", "pnj", "monstres", "favoris"].forEach((filterName) => {
     const button = document.getElementById(`submap-filter-${filterName}`);
     if (!button) {
       return;
