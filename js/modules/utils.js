@@ -49,6 +49,56 @@ export function buildWikiSearchUrl(poiName) {
 }
 
 /**
+ * Normalise une valeur texte pour la recherche
+ * @param {string} value - Valeur source
+ * @returns {string} Texte normalise
+ */
+export function normalizeSearchText(value) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['’`]/g, " ")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Vérifie si un texte matche une recherche fuzzy
+ * @param {string} text - Texte cible
+ * @param {string} query - Recherche utilisateur
+ * @returns {boolean} True si match
+ */
+export function fuzzyMatchText(text, query) {
+  const normalizedText = normalizeSearchText(text);
+  const normalizedQuery = normalizeSearchText(query);
+
+  if (!normalizedQuery) {
+    return true;
+  }
+  if (!normalizedText) {
+    return false;
+  }
+  if (normalizedText.includes(normalizedQuery)) {
+    return true;
+  }
+
+  // Fuzzy simple: les lettres de la query doivent apparaitre dans l'ordre
+  let cursor = 0;
+  for (let i = 0; i < normalizedText.length && cursor < normalizedQuery.length; i += 1) {
+    if (normalizedText[i] === normalizedQuery[cursor]) {
+      cursor += 1;
+    }
+  }
+
+  return cursor === normalizedQuery.length;
+}
+
+/**
  * Copie du texte vers le presse-papiers
  * @param {string} text - Texte à copier
  * @returns {Promise<boolean>} Succès de la copie

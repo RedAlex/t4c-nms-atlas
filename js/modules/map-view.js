@@ -24,8 +24,19 @@ export function openMap(mapId) {
 
   updateState("activeMap", state.maps.find((m) => m.id === mapId) || null);
   updateState("activeSubMap", null);
+  updateState("mapSearchQuery", "");
+  updateState("submapSearchQuery", "");
   if (!state.activeMap) {
     return;
+  }
+
+  const mapSearchInput = document.getElementById("map-search-input");
+  if (mapSearchInput) {
+    mapSearchInput.value = "";
+  }
+  const mapSearchCount = document.getElementById("map-search-count");
+  if (mapSearchCount) {
+    mapSearchCount.textContent = "";
   }
 
   worldView.classList.add("hidden");

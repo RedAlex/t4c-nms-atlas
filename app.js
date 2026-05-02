@@ -62,6 +62,9 @@ async function init() {
   const mapBgImg = document.getElementById("map-bg-img");
   const submapBgImg = document.getElementById("submap-bg-img");
   const toggleGridCoordsBtn = document.getElementById("toggle-grid-coords");
+  const worldSearchInput = document.getElementById("world-search-input");
+  const mapSearchInput = document.getElementById("map-search-input");
+  const submapSearchInput = document.getElementById("submap-search-input");
 
   // Événements - Vue Monde
   backToWorld.addEventListener("click", showWorldView);
@@ -152,6 +155,28 @@ async function init() {
   if (submapBgImg) {
     submapBgImg.addEventListener("load", updateSubmapZoneLayerLayout);
   }
+
+  if (worldSearchInput) {
+    worldSearchInput.addEventListener("input", () => {
+      updateState("worldSearchQuery", worldSearchInput.value || "");
+      renderWorldCards();
+    });
+  }
+  if (mapSearchInput) {
+    mapSearchInput.addEventListener("input", async () => {
+      updateState("mapSearchQuery", mapSearchInput.value || "");
+      const { renderInteractivePoints } = await import("./js/modules/poi-renderer.js");
+      renderInteractivePoints();
+    });
+  }
+  if (submapSearchInput) {
+    submapSearchInput.addEventListener("input", async () => {
+      updateState("submapSearchQuery", submapSearchInput.value || "");
+      const { renderSubmapPois } = await import("./js/modules/poi-renderer.js");
+      renderSubmapPois();
+    });
+  }
+
   window.addEventListener("resize", updateSubmapZoneLayerLayout);
 
   applyDevUiVisibility();

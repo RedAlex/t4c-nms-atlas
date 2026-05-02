@@ -7,13 +7,14 @@ import state from "./state.js";
 import { createGameToPercentTransform, resolvePoiPosition } from "./calibration.js";
 import { getDisplayedImageRect, copyTextToClipboard, percentToDisplayCoords } from "./utils.js";
 import { showHoverCard, hideHoverCard } from "./ui-helpers.js";
-import { normalizeUrlCandidate, buildWikiSearchUrl } from "./utils.js";
+import { normalizeUrlCandidate, buildWikiSearchUrl, fuzzyMatchText } from "./utils.js";
 
 /**
  * Rend les points d'intérêt interactifs (carte principale)
  */
 export function renderInteractivePoints() {
   const zoneLayer = document.getElementById("zone-layer");
+  const mapSearchCount = document.getElementById("map-search-count");
   if (!zoneLayer) {
     return;
   }
@@ -23,7 +24,13 @@ export function renderInteractivePoints() {
 
   const gameToPercent = createGameToPercentTransform(state.activeMap?.calibration);
   const pois = state.activeMap?.pois || [];
-  const visiblePois = pois.filter((poi) => poi.type === state.activeFilter);
+  const query = state.mapSearchQuery || "";
+  const typedPois = pois.filter((poi) => poi.type === state.activeFilter);
+  const visiblePois = typedPois.filter((poi) => fuzzyMatchText(poi.name || "", query));
+
+  if (mapSearchCount) {
+    mapSearchCount.textContent = query ? `${visiblePois.length} resultat(s)` : "";
+  }
 
   visiblePois.forEach((poi) => {
     const position = resolvePoiPosition(poi, gameToPercent);
@@ -34,6 +41,9 @@ export function renderInteractivePoints() {
     const marker = document.createElement("button");
     marker.type = "button";
     marker.className = `poi ${poi.type}`;
+    if (query) {
+      marker.classList.add("search-match");
+    }
     marker.style.left = `${position.x}%`;
     marker.style.top = `${position.y}%`;
     marker.setAttribute("aria-label", poi.name || poi.type);
@@ -146,6 +156,7 @@ export function renderCalibrationMarkers(gameToPercent) {
  */
 export function renderSubmapPois() {
   const submapZoneLayer = document.getElementById("submap-zone-layer");
+  const submapSearchCount = document.getElementById("submap-search-count");
   if (!submapZoneLayer) {
     return;
   }
@@ -155,7 +166,13 @@ export function renderSubmapPois() {
 
   const gameToPercent = createGameToPercentTransform(state.activeSubMap?.calibration);
   const pois = state.activeSubMap?.pois || [];
-  const visiblePois = pois.filter((poi) => poi.type === state.activeSubmapFilter);
+  const query = state.submapSearchQuery || "";
+  const typedPois = pois.filter((poi) => poi.type === state.activeSubmapFilter);
+  const visiblePois = typedPois.filter((poi) => fuzzyMatchText(poi.name || "", query));
+
+  if (submapSearchCount) {
+    submapSearchCount.textContent = query ? `${visiblePois.length} resultat(s)` : "";
+  }
 
   visiblePois.forEach((poi) => {
     const position = resolvePoiPosition(poi, gameToPercent);
@@ -166,6 +183,9 @@ export function renderSubmapPois() {
     const marker = document.createElement("button");
     marker.type = "button";
     marker.className = `poi ${poi.type}`;
+    if (query) {
+      marker.classList.add("search-match");
+    }
     marker.style.left = `${position.x}%`;
     marker.style.top = `${position.y}%`;
     marker.setAttribute("aria-label", poi.name || poi.type);

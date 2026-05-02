@@ -4,7 +4,7 @@
  */
 
 import state from "./state.js";
-import { normalizeUrlCandidate } from "./utils.js";
+import { normalizeUrlCandidate, fuzzyMatchText } from "./utils.js";
 import { updateDevLabel } from "./ui-helpers.js";
 
 /**
@@ -12,12 +12,25 @@ import { updateDevLabel } from "./ui-helpers.js";
  */
 export function renderWorldCards() {
   const mapCards = document.getElementById("map-cards");
+  const searchCount = document.getElementById("world-search-count");
   if (!mapCards) {
     return;
   }
 
   mapCards.innerHTML = "";
-  state.maps.forEach((map, index) => {
+  const query = state.worldSearchQuery || "";
+  const filteredMaps = state.maps.filter((map) => {
+    const haystack = `${map.name || ""} ${map.summary || ""}`;
+    return fuzzyMatchText(haystack, query);
+  });
+
+  if (searchCount) {
+    searchCount.textContent = query
+      ? `${filteredMaps.length} resultat(s) sur ${state.maps.length}`
+      : "";
+  }
+
+  filteredMaps.forEach((map, index) => {
     const card = document.createElement("button");
     card.type = "button";
     card.className = "map-card";

@@ -13,6 +13,9 @@ const state = {
   showSubmapPoiTitles: true,
   showGridCoords: false,
   showSubmapGridCoords: false,
+  worldSearchQuery: "",
+  mapSearchQuery: "",
+  submapSearchQuery: "",
 };
 
 /**

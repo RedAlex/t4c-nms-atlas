@@ -133,10 +133,11 @@ Enrichir l'expérience utilisateur avec features manquantes
 
 ### Tâches
 
-- [ ] **P3.1** - Ajouter recherche (fuzzy find)
-  - Ajouter champ recherche monde/carte
-  - Implémenter fuzzy match sur noms POI
-  - Highlight résultats
+- [x] **P3.1** - Ajouter recherche (fuzzy find)
+  - ✅ Champs recherche ajoutés (Monde, Carte, Sous-carte)
+  - ✅ Fuzzy match implémenté sur noms POI (+ recherche monde)
+  - ✅ Highlight visuel des résultats (`.poi.search-match`) + compteur de résultats
+  - ✅ Fonctions utilitaires testées (`normalizeSearchText`, `fuzzyMatchText`)
   - **Impact**: Trouvable parmi 100+ POI
   - **Effort**: 2-3h
 

@@ -34,6 +34,17 @@
           <h2>Monde</h2>
           <p>Choisissez une carte</p>
         </div>
+        <div class="search-row">
+          <label class="search-label" for="world-search-input">Recherche monde</label>
+          <input
+            id="world-search-input"
+            class="search-input"
+            type="search"
+            placeholder="Ex: arakas, drake"
+            autocomplete="off"
+          />
+          <p id="world-search-count" class="search-count"></p>
+        </div>
         <div id="map-cards" class="map-cards"></div>
       </section>
 
@@ -56,6 +67,17 @@
           <button id="toggle-grid-coords" class="btn-filter hidden" type="button">
             Calibration OFF
           </button>
+        </div>
+        <div class="search-row compact">
+          <label class="search-label" for="map-search-input">Recherche POI</label>
+          <input
+            id="map-search-input"
+            class="search-input"
+            type="search"
+            placeholder="Ex: temple, marchand"
+            autocomplete="off"
+          />
+          <p id="map-search-count" class="search-count"></p>
         </div>
         <div class="map-stage-wrap">
           <div id="map-stage" class="map-stage">
@@ -94,6 +116,17 @@
           <button id="submap-toggle-grid-coords" class="btn-filter hidden" type="button">
             Calibration OFF
           </button>
+        </div>
+        <div class="search-row compact">
+          <label class="search-label" for="submap-search-input">Recherche POI</label>
+          <input
+            id="submap-search-input"
+            class="search-input"
+            type="search"
+            placeholder="Ex: spawn, garde"
+            autocomplete="off"
+          />
+          <p id="submap-search-count" class="search-count"></p>
         </div>
         <div class="map-stage-wrap">
           <div id="submap-stage" class="submap-stage">

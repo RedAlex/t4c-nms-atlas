@@ -24,8 +24,18 @@ export function openSubMap(subMapId) {
 
   const subMaps = state.activeMap.subMaps || [];
   updateState("activeSubMap", subMaps.find((s) => s.id === subMapId) || null);
+  updateState("submapSearchQuery", "");
   if (!state.activeSubMap) {
     return;
+  }
+
+  const submapSearchInput = document.getElementById("submap-search-input");
+  if (submapSearchInput) {
+    submapSearchInput.value = "";
+  }
+  const submapSearchCount = document.getElementById("submap-search-count");
+  if (submapSearchCount) {
+    submapSearchCount.textContent = "";
   }
 
   mapView.classList.add("hidden");

@@ -2,6 +2,8 @@ import { describe, it, expect } from "vitest";
 import {
   normalizeUrlCandidate,
   buildWikiSearchUrl,
+  normalizeSearchText,
+  fuzzyMatchText,
   getDisplayedImageRect,
   percentToDisplayCoords,
 } from "../../js/modules/utils.js";
@@ -102,5 +104,34 @@ describe("percentToDisplayCoords", () => {
     const coords = percentToDisplayCoords({ x: 100, y: 100 });
     expect(coords.x).toBe(5000);
     expect(coords.y).toBe(5000);
+  });
+});
+
+describe("normalizeSearchText", () => {
+  it("retourne une chaine vide pour une valeur non string", () => {
+    expect(normalizeSearchText(null)).toBe("");
+    expect(normalizeSearchText(12)).toBe("");
+  });
+
+  it("retire les accents et normalise les espaces", () => {
+    expect(normalizeSearchText("  Templé   du   Späwn ")).toBe("temple du spawn");
+  });
+});
+
+describe("fuzzyMatchText", () => {
+  it("match en mode includes", () => {
+    expect(fuzzyMatchText("Temple du spawn", "spawn")).toBe(true);
+  });
+
+  it("match en mode fuzzy subsequence", () => {
+    expect(fuzzyMatchText("marchand general", "mrg")).toBe(true);
+  });
+
+  it("retourne false si la recherche ne match pas", () => {
+    expect(fuzzyMatchText("forgeron", "xyz")).toBe(false);
+  });
+
+  it("retourne true si query vide", () => {
+    expect(fuzzyMatchText("forgeron", "")).toBe(true);
   });
 });
