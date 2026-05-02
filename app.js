@@ -24,6 +24,7 @@ import {
 } from "./js/modules/filters.js";
 import { updateDevLabel, applyDevUiVisibility } from "./js/modules/ui-helpers.js";
 import { handleCalibrationClickCopy } from "./js/modules/poi-renderer.js";
+import { loadFavoritesFromStorage, showFavoritesView } from "./js/modules/favorites.js";
 
 init();
 
@@ -36,6 +37,7 @@ async function init() {
     return;
   }
   updateState("maps", data.maps);
+  loadFavoritesFromStorage();
   renderWorldCards();
 
   // Affiche la version de l'application
@@ -48,6 +50,8 @@ async function init() {
   // Récupère les éléments DOM
   const backToWorld = document.getElementById("back-to-world");
   const backToMap = document.getElementById("back-to-map");
+  const openFavoritesBtn = document.getElementById("open-favorites");
+  const backToWorldFromFavorites = document.getElementById("back-to-world-from-favorites");
   const filterLieux = document.getElementById("filter-lieux");
   const filterPnj = document.getElementById("filter-pnj");
   const filterMonstres = document.getElementById("filter-monstres");
@@ -68,6 +72,8 @@ async function init() {
 
   // Événements - Vue Monde
   backToWorld.addEventListener("click", showWorldView);
+  openFavoritesBtn?.addEventListener("click", showFavoritesView);
+  backToWorldFromFavorites?.addEventListener("click", showWorldView);
 
   // Événements - Vue Carte Principale
   backToMap.addEventListener("click", async () => {

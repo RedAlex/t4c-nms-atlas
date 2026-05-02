@@ -8,6 +8,7 @@ import { createGameToPercentTransform, resolvePoiPosition } from "./calibration.
 import { getDisplayedImageRect, copyTextToClipboard, percentToDisplayCoords } from "./utils.js";
 import { showHoverCard, hideHoverCard } from "./ui-helpers.js";
 import { normalizeUrlCandidate, buildWikiSearchUrl, fuzzyMatchText } from "./utils.js";
+import { isPoiFavorite, togglePoiFavorite } from "./favorites.js";
 
 /**
  * Rend les points d'intérêt interactifs (carte principale)
@@ -91,6 +92,19 @@ export function renderInteractivePoints() {
       event.preventDefault();
       handlePoiOpenWiki(poi);
     });
+
+    const favBtn = document.createElement("button");
+    favBtn.type = "button";
+    favBtn.className = `poi-fav-btn${isPoiFavorite(poi) ? " active" : ""}`;
+    favBtn.setAttribute("aria-label", isPoiFavorite(poi) ? "Retirer des favoris" : "Ajouter aux favoris");
+    favBtn.textContent = "\u2605";
+    favBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const added = togglePoiFavorite(poi);
+      favBtn.classList.toggle("active", added);
+      favBtn.setAttribute("aria-label", added ? "Retirer des favoris" : "Ajouter aux favoris");
+    });
+    marker.appendChild(favBtn);
 
     zoneLayer.appendChild(marker);
   });
@@ -218,6 +232,19 @@ export function renderSubmapPois() {
         window.open(wikiUrl, "_blank", "noopener");
       }
     });
+
+    const favBtn = document.createElement("button");
+    favBtn.type = "button";
+    favBtn.className = `poi-fav-btn${isPoiFavorite(poi) ? " active" : ""}`;
+    favBtn.setAttribute("aria-label", isPoiFavorite(poi) ? "Retirer des favoris" : "Ajouter aux favoris");
+    favBtn.textContent = "\u2605";
+    favBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const added = togglePoiFavorite(poi);
+      favBtn.classList.toggle("active", added);
+      favBtn.setAttribute("aria-label", added ? "Retirer des favoris" : "Ajouter aux favoris");
+    });
+    marker.appendChild(favBtn);
 
     submapZoneLayer.appendChild(marker);
   });

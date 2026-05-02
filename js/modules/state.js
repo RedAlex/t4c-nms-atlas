@@ -16,6 +16,7 @@ const state = {
   worldSearchQuery: "",
   mapSearchQuery: "",
   submapSearchQuery: "",
+  favorites: [],
 };
 
 /**

@@ -108,9 +108,11 @@ export function showWorldView() {
   const worldView = document.getElementById("world-view");
   const mapView = document.getElementById("map-view");
   const submapView = document.getElementById("submap-view");
+  const favoritesView = document.getElementById("favorites-view");
 
   submapView.classList.add("hidden");
   mapView.classList.add("hidden");
+  favoritesView?.classList.add("hidden");
   worldView.classList.remove("hidden");
   updateDevLabel("world-view");
 }

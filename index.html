@@ -30,9 +30,14 @@
 
     <main class="layout">
       <section id="world-view" class="panel">
-        <div class="panel-head">
-          <h2>Monde</h2>
-          <p>Choisissez une carte</p>
+        <div class="panel-head row">
+          <div>
+            <h2>Monde</h2>
+            <p>Choisissez une carte</p>
+          </div>
+          <div class="actions">
+            <button id="open-favorites" class="btn ghost" type="button">Mes favoris</button>
+          </div>
         </div>
         <div class="search-row">
           <label class="search-label" for="world-search-input">Recherche monde</label>
@@ -46,6 +51,22 @@
           <p id="world-search-count" class="search-count"></p>
         </div>
         <div id="map-cards" class="map-cards"></div>
+      </section>
+
+      <!-- Vue favoris -->
+      <section id="favorites-view" class="panel hidden" aria-live="polite">
+        <div class="panel-head row">
+          <div>
+            <h2>Mes favoris</h2>
+            <p id="favorites-count"></p>
+          </div>
+          <div class="actions">
+            <button id="back-to-world-from-favorites" class="btn ghost" type="button">
+              &#8592; Mondes
+            </button>
+          </div>
+        </div>
+        <div id="favorites-list" class="favorites-list"></div>
       </section>
 
       <!-- Vue carte principale -->
