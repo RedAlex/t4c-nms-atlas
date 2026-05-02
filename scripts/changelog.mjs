@@ -1,6 +1,13 @@
 /**
  * Génère le CHANGELOG.md depuis les commits conventionnels (git log)
  * Usage: node scripts/changelog.mjs
+ *
+ * IMPORTANT : Les messages de commits DOIVENT être rédigés en français.
+ * Format attendu : <type>[(<scope>)]: <sujet en français>
+ * Exemples :
+ *   feat: ajouter le système de favoris
+ *   fix(carte): corriger l'affichage des badges de calibration
+ *   chore: mettre à jour les dépendances
  */
 
 import { execSync } from "child_process";
@@ -40,7 +47,19 @@ function getCommits(fromTag) {
 
 function getLatestTag() {
   try {
-    return execSync("git describe --tags --abbrev=0", { encoding: "utf-8" }).trim();
+    const tag = execSync("git describe --tags --abbrev=0", { encoding: "utf-8" }).trim();
+    // Si le tag pointe exactement sur HEAD (cas "npm version" vient d'être exécuté),
+    // on cherche le tag précédent pour avoir une plage de commits non vide.
+    const tagCommit = execSync(`git rev-list -n 1 "${tag}"`, { encoding: "utf-8" }).trim();
+    const headCommit = execSync("git rev-parse HEAD", { encoding: "utf-8" }).trim();
+    if (tagCommit === headCommit) {
+      try {
+        return execSync(`git describe --tags --abbrev=0 "${tag}^"`, { encoding: "utf-8" }).trim();
+      } catch {
+        return null; // pas de tag précédent → prend tous les commits
+      }
+    }
+    return tag;
   } catch {
     return null;
   }
