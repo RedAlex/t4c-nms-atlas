@@ -1,9 +1,11 @@
 ﻿{
   "map": {
     "id": "arakas",
+    "worldId": 0,
     "name": "Arakas",
     "summary": "Premiere ile et zone de depart. Contient LightHaven, WindHowl et Silversky.",
     "image": "data/images/regions/arakas/arakas.png",
+    "hdImage": "data/images/worlds/world-0-arakas.png",
     "nmsImage": "data/images/regions/arakas/arakas-general.jpg",
     "abetsicImage": "data/images/regions/arakas/autre/arakas-abetsic.gif",
     "calibration": {
@@ -35,6 +37,9 @@
       {
         "type": "lieux",
         "name": "LightHaven",
+        "gx": 2850,
+        "gy": 1080,
+        "worldId": 0,
         "gameX": 2850,
         "gameY": 1080,
         "description": "Ville de depart principale d'Arakas.",
@@ -44,11 +49,26 @@
       {
         "type": "lieux",
         "name": "WindHowl",
+        "gx": 1700,
+        "gy": 1290,
+        "worldId": 0,
         "gameX": 1700,
         "gameY": 1290,
         "description": "Zone cotiere reliee aux quetes de debut.",
         "openSubMapId": "arakas-general",
         "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Arakas_G%C3%A9n%C3%A9ral"
+      },
+      {
+        "type": "portal",
+        "name": "Portail vers Drake Island",
+        "gx": 2500,
+        "gy": 500,
+        "worldId": 0,
+        "gameX": 2500,
+        "gameY": 500,
+        "description": "[DEMO] Portail de transition vers Drake Island.",
+        "targetMapId": "drake-island",
+        "wikiUrl": ""
       }
     ],
     "_meta": {

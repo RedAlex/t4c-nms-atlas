@@ -1,0 +1,105 @@
+{
+  "_version": 2,
+  "_source": "gobeline-dev/t4c-nms-overview (src/config/maps.ts)",
+  "_note": "Registre des mondes T4C NMS. Les images HD proviennent du projet Gobeline (Bignole). Coordonnées au format gx.gy.worldId, avec gx = imgPixelX/2 et gy = imgPixelY sur l'image HD.",
+  "worlds": [
+    {
+      "worldId": 0,
+      "id": "arakas",
+      "name": "Arakas / Stoneheim / Raven's Dust",
+      "imageUrl": "https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/map_HD_0_Arakas.png",
+      "imageLocalPath": "data/images/worlds/world-0-arakas.png",
+      "imageWidth": 6144,
+      "imageHeight": 3072,
+      "mapFiles": [
+        "data/maps/arakas.json",
+        "data/maps/raven-dust.json",
+        "data/maps/stoneheim.json"
+      ]
+    },
+    {
+      "worldId": 1,
+      "id": "leoworld",
+      "name": "Leoworld",
+      "imageUrl": "https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/map_HD_1_Leoworld.png",
+      "imageLocalPath": "data/images/worlds/world-1-leoworld.png",
+      "imageWidth": 6144,
+      "imageHeight": 3072,
+      "mapFiles": [
+        "data/maps/leoworld.json"
+      ]
+    },
+    {
+      "worldId": 2,
+      "id": "underworld",
+      "name": "Underworld",
+      "imageUrl": "https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/map_HD_2_Underworld.png",
+      "imageLocalPath": "data/images/worlds/world-2-underworld.png",
+      "imageWidth": 6144,
+      "imageHeight": 3072,
+      "mapFiles": [
+        "data/maps/underworld.json"
+      ]
+    },
+    {
+      "worldId": 3,
+      "id": "ravendust",
+      "name": "Drake Island",
+      "imageUrl": "https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/map_HD_3_RavenDust.png",
+      "imageLocalPath": "data/images/worlds/world-3-ravendust.png",
+      "imageWidth": 6144,
+      "imageHeight": 3072,
+      "mapFiles": [
+        "data/maps/drake-island.json"
+      ]
+    },
+    {
+      "worldId": 4,
+      "id": "stoneheim-ext",
+      "name": "Ile de Lune / Nieve",
+      "imageUrl": "https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/map_HD_4_Stoneheim.png",
+      "imageLocalPath": "data/images/worlds/world-4-stoneheim-ext.png",
+      "imageWidth": 6144,
+      "imageHeight": 3072,
+      "mapFiles": [
+        "data/maps/ile-lune-nieve.json"
+      ]
+    },
+    {
+      "worldId": 5,
+      "id": "ext4",
+      "name": "Extension 4",
+      "imageUrl": "https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/map_HD_5_Extension4.png",
+      "imageLocalPath": "data/images/worlds/world-5-ext4.png",
+      "imageWidth": 6144,
+      "imageHeight": 3072,
+      "mapFiles": [
+        "data/maps/extension-4.json"
+      ]
+    },
+    {
+      "worldId": 6,
+      "id": "ext5",
+      "name": "Extension 5",
+      "imageUrl": "https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/map_HD_6_Extension5.png",
+      "imageLocalPath": "data/images/worlds/world-6-ext5.png",
+      "imageWidth": 6144,
+      "imageHeight": 3072,
+      "mapFiles": [
+        "data/maps/extension-5.json"
+      ]
+    },
+    {
+      "worldId": 7,
+      "id": "ext6",
+      "name": "Extension 6",
+      "imageUrl": "https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/map_HD_7_Extension6.png",
+      "imageLocalPath": "data/images/worlds/world-7-ext6.png",
+      "imageWidth": 6144,
+      "imageHeight": 3072,
+      "mapFiles": [
+        "data/maps/extension-6.json"
+      ]
+    }
+  ]
+}

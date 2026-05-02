@@ -6,7 +6,7 @@
 
 import { loadMapsData } from "./js/modules/data-loader.js";
 import state, { updateState } from "./js/modules/state.js";
-import { renderWorldCards, showWorldView } from "./js/modules/world-view.js";
+import { renderWorldCards, renderWorldTabs, showWorldView } from "./js/modules/world-view.js";
 import { openMap, updateZoneLayerLayout, handleMapStageMouseMove } from "./js/modules/map-view.js";
 import {
   updateSubmapZoneLayerLayout,
@@ -37,8 +37,17 @@ async function init() {
     return;
   }
   updateState("maps", data.maps);
+  if (Array.isArray(data.worlds)) {
+    updateState("worlds", data.worlds);
+  }
   loadFavoritesFromStorage();
+  renderWorldTabs();
   renderWorldCards();
+
+  // Ouvrir la première carte par défaut
+  if (data.maps.length > 0) {
+    openMap(data.maps[0].id);
+  }
 
   // Affiche la version de l'application
   const appVersionEl = document.getElementById("app-version");

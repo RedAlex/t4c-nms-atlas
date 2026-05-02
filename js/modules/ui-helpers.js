@@ -106,6 +106,14 @@ export function showHoverCard(hoverCard, stage, poi, event, hintText) {
   description.textContent = poi.description || "Aucune description";
   hoverCard.appendChild(description);
 
+  // Affichage de la destination pour les portails
+  if (poi.type === "portal" && poi.targetMapId) {
+    const dest = document.createElement("p");
+    dest.className = "map-hover-portal-dest";
+    dest.textContent = `➜ ${poi.targetMapId}`;
+    hoverCard.appendChild(dest);
+  }
+
   const hint = document.createElement("p");
   hint.className = "map-hover-hint";
   hint.textContent = hintText || "Survol pour plus d'info";
@@ -121,37 +129,6 @@ export function showHoverCard(hoverCard, stage, poi, event, hintText) {
 }
 
 /**
- * Affiche une carte de survol depuis un marqueur
- * @param {HTMLElement} hoverCard - Élément carte de survol
- * @param {HTMLElement} stage - Élément stage
- * @param {HTMLElement} marker - Marqueur
- * @param {Object} poi - Point d'intérêt
- * @param {string} hintText - Texte d'indice
- */
-export function showHoverCardFromMarker(hoverCard, stage, marker, poi, hintText) {
-  if (!stage) {
-    return;
-  }
-  const markerRect = marker.getBoundingClientRect();
-  const stageRect = stage.getBoundingClientRect();
-
-  showHoverCard(
-    hoverCard,
-    stage,
-    poi,
-    {
-      clientX: markerRect.left + markerRect.width / 2,
-      clientY: markerRect.top + markerRect.height / 2,
-    },
-    hintText
-  );
-
-  if (!stageRect.width) {
-    hideHoverCard(hoverCard);
-  }
-}
-
-/**
  * Masque une carte de survol
  * @param {HTMLElement} hoverCard - Élément carte de survol
  */
@@ -162,13 +139,4 @@ export function hideHoverCard(hoverCard) {
   hoverCard.classList.remove("visible");
 }
 
-/**
- * Masque les coordonnées de développement
- * @param {HTMLElement} devCoords - Élément coordonnées dev
- */
-export function hideDevCoords(devCoords) {
-  if (!devCoords) {
-    return;
-  }
-  devCoords.classList.add("hidden");
-}
+

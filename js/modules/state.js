@@ -5,6 +5,8 @@
 
 const state = {
   maps: [],
+  worlds: [],
+  activeWorldId: 0,
   activeMap: null,
   activeSubMap: null,
   activeFilter: "lieux",

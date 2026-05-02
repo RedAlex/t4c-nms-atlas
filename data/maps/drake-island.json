@@ -1,6 +1,7 @@
 ﻿{
   "map": {
     "id": "drake-island",
+    "worldId": 3,
     "name": "Drake Island",
     "summary": "Ile de fin de jeu avec zones extremes, Les Abysses et RedWall.",
     "image": "data/images/regions/drake-island/drake-island.jpg",

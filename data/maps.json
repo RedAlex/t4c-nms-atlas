@@ -1,9 +1,17 @@
 ﻿{
+  "_version": 2,
   "_source": "t4c.fandom.com/fr via API MediaWiki Fandom",
+  "worldsFile": "data/worlds.json",
   "mapFiles": [
     "data/maps/arakas.json",
     "data/maps/raven-dust.json",
     "data/maps/stoneheim.json",
-    "data/maps/drake-island.json"
+    "data/maps/drake-island.json",
+    "data/maps/leoworld.json",
+    "data/maps/underworld.json",
+    "data/maps/ile-lune-nieve.json",
+    "data/maps/extension-4.json",
+    "data/maps/extension-5.json",
+    "data/maps/extension-6.json"
   ]
 }

@@ -1,7 +1,14 @@
 # 🚀 Plan d'Amélioration - Atlas NMS Revolution
 
 **Date**: 2 mai 2026  
-**Statut**: PHASE 1, 2 & 3 ✅ COMPLÉTÉES | PHASE 4 & 6 🆕 Planifiées | PHASE 5 ♻️ À refaire après P4
+**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ♻️ À faire | PHASE 6 🆕 Planifiée
+
+**Session du 2 mai 2026** :
+- ✅ P4 entièrement complétée (P4.1 → P4.6, 87/87 tests)
+- ✅ Import des 8 images HD Gobeline Dev (6144×3072px, worldId 0-7)
+- ✅ 6 nouvelles cartes créées (leoworld, underworld, ile-lune-nieve, extension-4/5/6)
+- ✅ Page d'accueil : 1 carte représentante par monde (déduplication par worldId)
+- ✅ Nettoyage code mort : suppression `showHoverCardFromMarker`, `hideDevCoords`, `reformat-json.cjs`, consolidation imports `poi-renderer.js`
 
 ---
 
@@ -199,7 +206,7 @@ Enrichir l'expérience utilisateur avec features manquantes
 
 ---
 
-## PHASE 4 - Migration Cartes Gobeline + Multi-carte 🆕
+## PHASE 4 - Migration Cartes Gobeline + Multi-carte ✅ COMPLÉTÉE
 
 ### Objectif
 
@@ -207,51 +214,95 @@ Passer d'un modèle "régions fixes" à un modèle multi-carte connecté, en uti
 
 ### Tâches
 
-- [ ] **P4.1** - Audit des assets cartographiques Gobeline
-  - Inventorier cartes, résolutions, projections, nomenclature
-  - Vérifier droits d'usage et crédit des sources
-  - Définir mapping ancien ID -> nouveau ID carte
-  - **Impact**: Migration cadrée
-  - **Effort**: 1-2h
+- [x] **P4.1** - Audit des assets cartographiques Gobeline ✅
+  - ✅ Inventaire complet des 8 cartes HD (`worldId` 0 à 7) :
+    | worldId | id | Nom affiché | Image |
+    |---------|-----|-------------|-------|
+    | 0 | arakas | Arakas - Stoneheim - Raven's Dust | `map_HD_0_Arakas.png` |
+    | 1 | leoworld | Leoworld | `map_HD_1_Leoworld.png` |
+    | 2 | underworld | Underworld | `map_HD_2_Underworld.png` |
+    | 3 | ravendust | Drake Island | `map_HD_3_RavenDust.png` |
+    | 4 | stoneheim | Ile de Lune - Nieve | `map_HD_4_Stoneheim.png` |
+    | 5 | ext4 | Extension 4 | `map_HD_5_Extension4.png` |
+    | 6 | ext5 | Extension 5 | `map_HD_6_Extension5.png` |
+    | 7 | ext6 | Extension 6 | `map_HD_7_Extension6.png` |
+  - ✅ Format coordonnées Gobeline : `gx.gy.worldId` (ex: `2850.1080.0`)
+  - ✅ URLs des images : `https://gobeline-dev.github.io/t4c-nms-overview/assets/maps/`
+  - ✅ Mapping ancien modèle -> nouveau :
+    | Ancien fichier | worldId Gobeline | Remarque |
+    |---------------|---------|----------|
+    | arakas.json | 0 | Arakas, Stoneheim, Raven's Dust = même image |
+    | raven-dust.json | 0 | Fusionné dans worldId 0 |
+    | stoneheim.json | 0 | Fusionné dans worldId 0 |
+    | drake-island.json | 3 | Carte séparée worldId 3 |
+  - ✅ **Changement majeur** : les 3 régions terrestres (Arakas, Stoneheim, Raven's Dust) partagent une seule carte HD au lieu de 3 fichiers séparés
+  - ✅ **Changement système de coords** : `{gameX, gameY}` + calibration → `gx.gy.worldId` direct (plus de calibration nécessaire)
+  - ✅ Sources publiques — droits d'usage conformes aux mentions légales Gobeline (projet communautaire non-officiel, même attribution Dialsoft LLC)
+  - **Impact**: Migration cadrée ✅
+  - **Effort**: 1-2h ✅
 
-- [ ] **P4.2** - Nouveau modèle de données multi-carte
-  - Remplacer la logique région/sous-carte par `maps[]` + `links[]`
-  - Introduire un type `portal` (entrée, sortie, escalier, grotte, sous-sol)
-  - Ajouter `targetMapId` + `targetPoiId` sur POI de transition
-  - **Impact**: Base technique évolutive
-  - **Effort**: 3-4h
+- [x] **P4.2** - Nouveau modèle de données multi-carte ✅
+  - ✅ Création de `data/worlds.json` — registre des 8 mondes Gobeline (worldId 0-7)
+  - ✅ Champ `worldId` ajouté dans chaque fichier de carte (`arakas.json`→0, `raven-dust.json`→0, `stoneheim.json`→0, `drake-island.json`→3)
+  - ✅ `data/maps.json` mis à jour en version 2 avec champ `worldsFile`
+  - ✅ `data-loader.js` : ajout `loadWorldsData()`, `loadMapsData()` charge et retourne `worlds` en plus des `maps`
+  - ✅ `state.js` : ajout champ `worlds: []` dans le state global
+  - ✅ `app.js` : propagation de `data.worlds` dans le state via `updateState("worlds", ...)`
+  - ✅ `calibration.js` : `resolvePoiPosition()` supporte désormais les POI avec `gx/gy` + `world.imageWidth/imageHeight` (formule Gobeline : `x% = gx*2/imgW*100`, `y% = gy/imgH*100`)
+  - Format POI v2 défini : `gx`, `gy`, `worldId` (coords Gobeline directes, sans calibration affine)
+  - Format POI v1 conservé pour backward compat : `gameX`, `gameY` + `calibration.gamePoints[]`
+  - **Impact**: Base technique évolutive ✅
+  - **Effort**: 3-4h ✅
 
-- [ ] **P4.3** - Migration JSON et compatibilité ascendante
-  - Créer un script de migration des anciens fichiers vers le nouveau schéma
-  - Conserver un mode fallback pour anciennes données pendant transition
-  - Ajouter validations des références croisées (POI cible existant)
-  - **Impact**: Transition sans casse
-  - **Effort**: 3-5h
+- [x] **P4.3** - Migration JSON et compatibilité ascendante ✅
+  - ✅ Image HD worldId 0 téléchargée localement : `data/images/worlds/world-0-arakas.png` (6144×3072px)
+  - ✅ Dimensions vérifiées et enregistrées dans `worlds.json` (`imageWidth: 6144`, `imageHeight: 3072`, `imageLocalPath`)
+  - ✅ `arakas.json` : champ `hdImage` ajouté, POIs migrés vers format Gobeline (`gx = gameX`, `gy = gameY`, `worldId: 0`) — ancien format `gameX/gameY` conservé pour fallback
+  - ✅ `data-loader.js` : `loadMapsFromFiles()` enrichit chaque carte avec son `_world` (dimensions + image) via `worldId`
+  - ✅ `map-view.js` : sélection d'image prioritaire `hdImage` → `image` → `abetsicImage`
+  - ✅ `poi-renderer.js` : passage de `world` (avec `imageWidth/imageHeight`) à `resolvePoiPosition()` pour le rendu des POI sur l'image HD
+  - ✅ `calibration.js` : `resolvePoiPosition()` calcule la position sur l'image HD via `gx*2/imgW` et `gy/imgH`
+  - Mode fallback opérationnel : si `_world` est null ou sans dimensions, retour au système de calibration affine classique
+  - **Impact**: Transition sans casse ✅
+  - **Effort**: 3-5h ✅
 
-- [ ] **P4.4** - Refonte navigation multi-carte
-  - Remplacer "Monde > Carte > Sous-carte" par navigation par graphe de cartes
-  - Ajouter breadcrumb dynamique de contexte (zone, carte, étage)
-  - Ajouter historique des transitions (retour entrée/sortie)
-  - **Impact**: Navigation cohérente malgré complexité
-  - **Effort**: 3-4h
+- [x] **P4.4** - Refonte navigation multi-carte ✅
+  - ✅ Onglets monde dans `world-view` : 8 tabs (un par worldId Gobeline), onglet actif mis en surbrillance, mondes sans cartes affichés en opacité réduite
+  - ✅ Filtrage dynamique des cartes par monde actif (`activeWorldId` dans le state)
+  - ✅ Message "Bientôt disponible" pour les mondes sans cartes (worldId 1, 2, 4-7)
+  - ✅ Breadcrumb dynamique dans `map-view` : `Monde · Carte` (ex: "Arakas · Arakas")
+  - ✅ `state.js` : champ `activeWorldId: 0` ajouté
+  - ✅ `world-view.js` : `renderWorldTabs()` exportée, `renderWorldCards()` filtre par monde actif
+  - ✅ `app.js` : `renderWorldTabs()` appelée à l'init
+  - ✅ `map-view.js` : mise à jour de `activeWorldId` à l'ouverture d'une carte
+  - ✅ `styles.css` : styles `.world-tab`, `.world-tab--empty`, `.world-empty`, `.map-breadcrumb`
+  - **Impact**: Navigation cohérente malgré complexité ✅
+  - **Effort**: 3-4h ✅
 
-- [ ] **P4.5** - POI de transition coordonnée-à-coordonnée
-  - Un POI peut pointer vers les coordonnées d'un autre POI (ex: entrée grotte -> sortie intérieure)
-  - Gérer transitions bidirectionnelles quand applicable
-  - Afficher type de transition et confirmation utilisateur avant téléport navigation
-  - **Impact**: Cas d'usage grottes/sous-sols enfin natifs
-  - **Effort**: 2-3h
+- [x] **P4.5** - POI de transition inter-carte ✅
+  - ✅ Nouveau type de POI `portal` : `{ type: "portal", targetMapId: "...", gx, gy, worldId }`
+  - ✅ `handlePoiOpenMap()` détecte `poi.type === "portal"` et appelle `openMap(poi.targetMapId)`
+  - ✅ Tooltip hover différencié : "Clic: aller vers [carte]" au lieu du tooltip sous-carte standard
+  - ✅ `showHoverCard()` affiche la destination du portail (`➜ drake-island`) en violet
+  - ✅ Style CSS `.poi.portal` : couleur violette (#a78bfa), animation pulsation, icône hexagone
+  - ✅ Bouton filtre "Portails" ajouté dans la barre de filtres de `map-view`
+  - ✅ POI démo "Portail vers Drake Island" ajouté dans `arakas.json` (gx 2500, gy 500)
+  - **Impact**: Cas d'usage portails/transitions inter-mondes natifs ✅
+  - **Effort**: 2-3h ✅
 
-- [ ] **P4.6** - Tests de non-régression migration carto
-  - Unit tests: résolution de liens inter-cartes
-  - E2E: enchaînement entrée -> intérieur -> sortie
-  - Vérifier filtres, favoris, recherche dans nouveau modèle
+- [x] **P4.6** - Tests de non-régression migration carto ✅
+  - ✅ Correction test `loadMapsData` : assertion adaptée au nouveau champ `worlds` retourné
+  - ✅ 5 nouveaux tests `loadWorldsData` : valide, sans tableau worlds, fetch KO, HTTP 404
+  - ✅ 5 nouveaux tests enrichissement `_world` : attache `_world`, `hdImage` local, fallback URL, priorité hdImage existant, worldId inconnu
+  - ✅ 5 nouveaux tests `resolvePoiPosition` Gobeline : calcul gx/gy, coin 0%, priorité sur gameX, fallback calibration, pas d'exception sans world
+  - ✅ Résultat final : **87/87 tests passent** (était 72/73 avant P4.6)
+  - **Impact**: Couverture complète des nouveaux chemins de code P4 ✅
   - **Impact**: Migration fiable
   - **Effort**: 3-4h
 
 ---
 
-## PHASE 5 - Consolidation Post-Migration Données ♻️
+## PHASE 5 - Consolidation Post-Migration Données ♻️ (prochaine étape)
 
 ### Objectif
 
@@ -407,9 +458,9 @@ Paralléliser:
 **Moyen terme** (semaines 3-4): 4. ✅ P2 - Tests (complet) 5. ✅ P2.4 - GitHub Actions
 
 **Long terme** (semaines 5+):
-6. 🆕 P4 - Migration cartes Gobeline + modèle multi-carte
-7. 🆕 P6 - Zoom + itinéraire
-8. ♻️ P5 - Consolidation post-migration (après P4)
+6. ✅ P4 - Migration cartes Gobeline + modèle multi-carte (terminé)
+7. ♻️ P5 - Consolidation post-migration (prioritaire)
+8. 🆕 P6 - Zoom + itinéraire
 
 ---
 

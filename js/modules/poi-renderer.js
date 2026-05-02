@@ -5,9 +5,8 @@
 
 import state from "./state.js";
 import { createGameToPercentTransform, resolvePoiPosition } from "./calibration.js";
-import { getDisplayedImageRect, copyTextToClipboard, percentToDisplayCoords } from "./utils.js";
+import { getDisplayedImageRect, copyTextToClipboard, percentToDisplayCoords, normalizeUrlCandidate, buildWikiSearchUrl, fuzzyMatchText } from "./utils.js";
 import { showHoverCard, hideHoverCard } from "./ui-helpers.js";
-import { normalizeUrlCandidate, buildWikiSearchUrl, fuzzyMatchText } from "./utils.js";
 import { isPoiFavorite, togglePoiFavorite } from "./favorites.js";
 
 /**
@@ -24,6 +23,7 @@ export function renderInteractivePoints() {
   hideHoverCard(document.getElementById("map-hover-card"));
 
   const gameToPercent = createGameToPercentTransform(state.activeMap?.calibration);
+  const world = state.activeMap?._world || null;
   const pois = state.activeMap?.pois || [];
   const query = state.mapSearchQuery || "";
   const typedPois =
@@ -37,7 +37,7 @@ export function renderInteractivePoints() {
   }
 
   visiblePois.forEach((poi) => {
-    const position = resolvePoiPosition(poi, gameToPercent);
+    const position = resolvePoiPosition(poi, gameToPercent, world);
     if (!position) {
       return;
     }
@@ -66,23 +66,20 @@ export function renderInteractivePoints() {
     const mapStage = document.getElementById("map-stage");
     const mapHoverCard = document.getElementById("map-hover-card");
 
+    const isPortal = poi.type === "portal";
+    const hintText = isPortal
+      ? `Clic: aller vers ${poi.targetMapId || "carte liée"}`
+      : "Clic: ouvrir carte | Shift+Clic: favori | Clic droit: wiki";
+
+    if (isPortal && poi.targetMapId) {
+      marker.dataset.targetMapId = poi.targetMapId;
+    }
+
     marker.addEventListener("mouseenter", (event) => {
-      showHoverCard(
-        mapHoverCard,
-        mapStage,
-        poi,
-        event,
-        "Clic: ouvrir carte | Shift+Clic: favori | Clic droit: wiki"
-      );
+      showHoverCard(mapHoverCard, mapStage, poi, event, hintText);
     });
     marker.addEventListener("mousemove", (event) => {
-      showHoverCard(
-        mapHoverCard,
-        mapStage,
-        poi,
-        event,
-        "Clic: ouvrir carte | Shift+Clic: favori | Clic droit: wiki"
-      );
+      showHoverCard(mapHoverCard, mapStage, poi, event, hintText);
     });
     marker.addEventListener("mouseleave", () => hideHoverCard(mapHoverCard));
     marker.addEventListener("blur", () => hideHoverCard(mapHoverCard));
@@ -339,6 +336,14 @@ export function renderSubmapCalibrationMarkers(gameToPercent) {
  */
 export function handlePoiOpenMap(poi) {
   if (!state.activeMap) {
+    return;
+  }
+
+  // Type portal : navigation vers une autre carte
+  if (poi.type === "portal" && poi.targetMapId) {
+    import("./map-view.js").then(({ openMap }) => {
+      openMap(poi.targetMapId);
+    });
     return;
   }
 

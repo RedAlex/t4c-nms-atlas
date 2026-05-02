@@ -1,5 +1,5 @@
 ﻿import { describe, it, expect, vi, beforeEach } from "vitest";
-import { loadMapsData, loadMapsFromFiles } from "../../js/modules/data-loader.js";
+import { loadMapsData, loadMapsFromFiles, loadWorldsData } from "../../js/modules/data-loader.js";
 
 beforeEach(() => {
   vi.restoreAllMocks();
@@ -22,7 +22,7 @@ describe("loadMapsData - format ancien (maps direct)", () => {
 
     const result = await loadMapsData();
 
-    expect(result).toEqual(mockData);
+    expect(result.maps).toEqual(mockData.maps);
     expect(fetch).toHaveBeenCalledWith("data/maps.json");
   });
 
@@ -116,5 +116,107 @@ describe("loadMapsFromFiles", () => {
   it("retourne un tableau vide si aucun fichier fourni", async () => {
     const result = await loadMapsFromFiles([]);
     expect(result).toEqual([]);
+  });
+});
+
+// ─── Tests P4 : loadWorldsData ───────────────────────────────────────────────
+describe("loadWorldsData (P4)", () => {
+  it("retourne le tableau worlds si worlds.json est valide", async () => {
+    const worldsData = { worlds: [{ worldId: 0, name: "Arakas" }, { worldId: 3, name: "Drake" }] };
+    global.fetch = vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve(worldsData) });
+
+    const result = await loadWorldsData("data/worlds.json");
+
+    expect(result).toHaveLength(2);
+    expect(result[0].worldId).toBe(0);
+    expect(result[1].worldId).toBe(3);
+  });
+
+  it("retourne null si worlds.json ne contient pas de tableau worlds", async () => {
+    global.fetch = vi.fn().mockResolvedValue({ ok: true, json: () => Promise.resolve({}) });
+
+    const result = await loadWorldsData("data/worlds.json");
+
+    expect(result).toBeNull();
+  });
+
+  it("retourne null si fetch échoue", async () => {
+    global.fetch = vi.fn().mockRejectedValue(new Error("Network error"));
+
+    const result = await loadWorldsData("data/worlds.json");
+
+    expect(result).toBeNull();
+  });
+
+  it("retourne null si HTTP 404", async () => {
+    global.fetch = vi.fn().mockResolvedValue({ ok: false, status: 404 });
+
+    const result = await loadWorldsData("data/worlds.json");
+
+    expect(result).toBeNull();
+  });
+});
+
+// ─── Tests P4 : enrichissement _world dans loadMapsFromFiles ─────────────────
+describe("loadMapsFromFiles - enrichissement world (P4)", () => {
+  const worlds = [
+    { worldId: 0, name: "Arakas", imageLocalPath: "data/images/worlds/world-0-arakas.png", imageWidth: 6144, imageHeight: 3072, imageUrl: "https://example.com/arakas.png" },
+    { worldId: 3, name: "Drake Island", imageLocalPath: null, imageWidth: null, imageHeight: null, imageUrl: "https://example.com/drake.png" },
+  ];
+
+  it("enrichit la carte avec _world si worldId correspond", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ map: { id: "arakas", worldId: 0 } }),
+    });
+
+    const result = await loadMapsFromFiles(["arakas.json"], worlds);
+
+    expect(result[0]._world).toMatchObject({ worldId: 0, name: "Arakas" });
+  });
+
+  it("attache hdImage depuis imageLocalPath du monde", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ map: { id: "arakas", worldId: 0 } }),
+    });
+
+    const result = await loadMapsFromFiles(["arakas.json"], worlds);
+
+    expect(result[0].hdImage).toBe("data/images/worlds/world-0-arakas.png");
+  });
+
+  it("tombe en fallback imageUrl si imageLocalPath est null", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ map: { id: "drake-island", worldId: 3 } }),
+    });
+
+    const result = await loadMapsFromFiles(["drake-island.json"], worlds);
+
+    expect(result[0].hdImage).toBe("https://example.com/drake.png");
+  });
+
+  it("priorise hdImage déjà présent dans la carte sur celui du monde", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ map: { id: "arakas", worldId: 0, hdImage: "custom.png" } }),
+    });
+
+    const result = await loadMapsFromFiles(["arakas.json"], worlds);
+
+    expect(result[0].hdImage).toBe("custom.png");
+  });
+
+  it("ne crash pas si worldId inconnu dans le registre", async () => {
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ map: { id: "unknown", worldId: 99 } }),
+    });
+
+    const result = await loadMapsFromFiles(["unknown.json"], worlds);
+
+    expect(result[0]._world).toBeUndefined();
+    expect(result[0].hdImage).toBeUndefined();
   });
 });

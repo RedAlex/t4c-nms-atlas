@@ -1,6 +1,7 @@
 ﻿{
   "map": {
     "id": "raven-dust",
+    "worldId": 0,
     "name": "Raven\u0027s Dust",
     "summary": "Deuxieme ile principale. Zones plus hostiles et quetes intermediaires.",
     "image": "data/images/regions/raven-dust/ravendust.png",

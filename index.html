@@ -31,26 +31,32 @@
     <main class="layout">
       <section id="world-view" class="panel" aria-label="Vue monde — choisissez une carte">
         <div class="panel-head row">
-          <div>
+          <div class="panel-head-left">
             <h2>Monde</h2>
-            <p>Choisissez une carte</p>
+            <p id="world-subtitle">Choisissez un monde</p>
+            <div class="search-row search-row--header" role="search" aria-label="Recherche dans le monde">
+              <label class="search-label" for="world-search-input">Recherche</label>
+              <input
+                id="world-search-input"
+                class="search-input"
+                type="search"
+                placeholder="Ex: arakas, drake"
+                autocomplete="off"
+              />
+              <p id="world-search-count" class="search-count"></p>
+            </div>
           </div>
           <div class="actions">
             <button id="open-favorites" class="btn ghost" type="button">Mes favoris</button>
           </div>
         </div>
-        <div class="search-row" role="search" aria-label="Recherche dans le monde">
-          <label class="search-label" for="world-search-input">Recherche monde</label>
-          <input
-            id="world-search-input"
-            class="search-input"
-            type="search"
-            placeholder="Ex: arakas, drake"
-            autocomplete="off"
-          />
-          <p id="world-search-count" class="search-count"></p>
+        <div id="world-cards-container">
+          <div id="map-cards-grid" class="map-cards"></div>
+          <div id="world-empty" class="world-empty hidden" aria-live="polite">
+            <p class="world-empty-title">Monde non disponible</p>
+            <p class="world-empty-sub">Les données pour ce monde seront ajoutées prochainement.</p>
+          </div>
         </div>
-        <div id="map-cards" class="map-cards"></div>
       </section>
 
       <!-- Vue favoris -->
@@ -73,6 +79,7 @@
       <section id="map-view" class="panel hidden" aria-live="polite" aria-label="Vue carte principale">
         <div class="panel-head row">
           <div>
+            <p id="map-breadcrumb" class="map-breadcrumb hidden"></p>
             <h2 id="active-map-title">Carte</h2>
             <p id="active-map-caption">Cliquez une sous-carte pour l'afficher</p>
             <span id="map-calib-badge" class="completion-badge calib-badge hidden"></span>
@@ -81,10 +88,12 @@
             <button id="back-to-world" class="btn ghost" type="button" aria-label="Retour à la liste des mondes">&#8592; Mondes</button>
           </div>
         </div>
+        <div id="map-tabs" class="world-tabs" role="tablist" aria-label="Selection de la carte"></div>
         <div class="filter-buttons">
           <button id="filter-lieux" class="btn-filter active" data-filter="lieux">Lieux</button>
           <button id="filter-pnj" class="btn-filter" data-filter="pnj">Pnj</button>
           <button id="filter-monstres" class="btn-filter" data-filter="monstres">Monstres</button>
+          <button id="filter-portal" class="btn-filter" data-filter="portal">Portails</button>
           <button id="filter-favoris" class="btn-filter" data-filter="favoris">Favorie</button>
           <button id="toggle-poi-titles" class="btn-filter active" type="button">Titres ON</button>
           <button id="toggle-grid-coords" class="btn-filter hidden" type="button">

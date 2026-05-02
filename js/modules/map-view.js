@@ -10,6 +10,7 @@ import { renderInteractivePoints, getPointerPercentOnMap } from "./poi-renderer.
 import { updateFilterDisplay, updateFilterButtons } from "./filters.js";
 import config from "./config.js";
 import { isPoiFavorite } from "./favorites.js";
+import { renderWorldTabs } from "./world-view.js";
 
 /**
  * Ouvre une carte
@@ -27,6 +28,9 @@ export function openMap(mapId) {
   updateState("activeSubMap", null);
   updateState("mapSearchQuery", "");
   updateState("submapSearchQuery", "");
+  if (state.activeMap && typeof state.activeMap.worldId === "number") {
+    updateState("activeWorldId", state.activeMap.worldId);
+  }
   if (!state.activeMap) {
     return;
   }
@@ -49,6 +53,17 @@ export function openMap(mapId) {
   mapView.classList.remove("hidden");
   updateDevLabel("map-view", state.activeMap.name);
 
+  // Mettre à jour les onglets de sélection de carte
+  renderWorldTabs();
+
+  // Breadcrumb monde actif
+  const world = state.activeMap._world || (state.worlds || []).find((w) => w.worldId === state.activeMap.worldId) || null;
+  const mapBreadcrumb = document.getElementById("map-breadcrumb");
+  if (mapBreadcrumb) {
+    mapBreadcrumb.textContent = world ? `${world.name.split(" / ")[0]} · ${state.activeMap.name}` : state.activeMap.name;
+    mapBreadcrumb.classList.remove("hidden");
+  }
+
   activeMapTitle.textContent = state.activeMap.name;
   activeMapCaption.textContent = `Version Abetsic — ${(state.activeMap.subMaps || []).length} sous-cartes disponibles`;
 
@@ -70,7 +85,8 @@ export function openMap(mapId) {
     }
   }
 
-  const mapImage = state.activeMap.image || state.activeMap.abetsicImage;
+  // Image prioritaire : HD locale/Gobeline → Abetsic → image de base
+  const mapImage = state.activeMap.hdImage || state.activeMap.image || state.activeMap.abetsicImage;
   if (mapImage) {
     mapBgImg.src = mapImage;
     mapBgImg.alt = `Carte ${state.activeMap.name}`;

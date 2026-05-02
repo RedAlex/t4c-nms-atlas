@@ -1,0 +1,31 @@
+{
+  "map": {
+    "id": "underworld",
+    "worldId": 2,
+    "name": "Underworld",
+    "summary": "Carte HD importee depuis Gobeline Dev.",
+    "image": "data/images/worlds/world-2-underworld.png",
+    "hdImage": "data/images/worlds/world-2-underworld.png",
+    "nmsImage": "data/images/worlds/world-2-underworld.png",
+    "abetsicImage": "data/images/worlds/world-2-underworld.png",
+    "calibration": {
+      "gamePoints": [
+        { "name": "Point 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
+        { "name": "Point 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
+        { "name": "Point 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
+      ]
+    },
+    "pois": [],
+    "_meta": {
+      "checkUrls": [
+        "https://gobeline-dev.github.io/t4c-nms-overview/"
+      ],
+      "nmsSourceUrl": "https://gobeline-dev.github.io/t4c-nms-overview/",
+      "abetsicSourceUrl": "https://gobeline-dev.github.io/t4c-nms-overview/",
+      "checkedAt": "2026-05-02",
+      "lastModified": null,
+      "etag": null
+    },
+    "subMaps": []
+  }
+}

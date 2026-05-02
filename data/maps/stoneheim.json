@@ -1,6 +1,7 @@
 ﻿{
   "map": {
     "id": "stoneheim",
+    "worldId": 0,
     "name": "Stoneheim",
     "summary": "Troisieme ile principale. Contient StoneCrest, les caves et les donjons avances.",
     "image": "data/images/regions/stoneheim/stoneheim.png",
