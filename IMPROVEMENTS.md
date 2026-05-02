@@ -84,7 +84,7 @@ Couvrir tests unitaires + e2e + automatiser builds
   - **Impact**: Testabilité modules
   - **Effort**: 2-3h
 
-- [ ] **P2.2** - Tests unitaires modules
+- [x] **P2.2** - Tests unitaires modules (67 tests, 94% coverage — state, utils, calibration, filters, data-loader)
   - Tests `data-loader.js` (chargement JSON, erreurs)
   - Tests `filters.js` (logique filtres)
   - Tests `state.js` (state management)
