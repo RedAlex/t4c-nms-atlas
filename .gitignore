@@ -2,6 +2,9 @@ node_modules/
 release/
 docs/
 version/
+playwright-report/
+test-results/
+blob-report/
 *.exe
 .DS_Store
 Thumbs.db

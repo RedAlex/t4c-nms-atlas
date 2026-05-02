@@ -37,6 +37,9 @@ export function renderInteractivePoints() {
     marker.style.left = `${position.x}%`;
     marker.style.top = `${position.y}%`;
     marker.setAttribute("aria-label", poi.name || poi.type);
+    if (poi.openSubMapId) {
+      marker.dataset.submapId = poi.openSubMapId;
+    }
     if (poi.name) {
       const title = document.createElement("span");
       title.className = "poi-title";
@@ -187,7 +190,10 @@ export function renderSubmapPois() {
     marker.addEventListener("blur", () => hideHoverCard(submapHoverCard));
     marker.addEventListener("contextmenu", (event) => {
       event.preventDefault();
-      const wikiUrl = normalizeUrlCandidate(poi.wikiUrl);
+      const wikiUrl =
+        normalizeUrlCandidate(poi.wikiUrl) ||
+        buildWikiSearchUrl(poi.name) ||
+        normalizeUrlCandidate(state.activeSubMap?._meta?.checkUrls?.[0]);
       if (wikiUrl) {
         window.open(wikiUrl, "_blank", "noopener");
       }

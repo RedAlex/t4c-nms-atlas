@@ -92,11 +92,16 @@ Couvrir tests unitaires + e2e + automatiser builds
   - **Impact**: Confiance refactoring
   - **Effort**: 4-5h
 
-- [ ] **P2.3** - Tests e2e (Playwright - déjà en roadmap)
-  - Créer `tests/e2e/` structure
-  - Test scénarios: Monde → Carte → Sous-carte
-  - Test filtres, navigation, tooltips
-  - **Impact**: Validation flux utilisateur
+- [x] **P2.3** - Tests e2e (Playwright - déjà en roadmap)
+  - ✅ Installer `@playwright/test` + `playwright.config.js` (workers: 1, reporter html)
+  - ✅ `tests/e2e/app.test.js` — lancement, titre, 4 cartes, version footer (5 tests)
+  - ✅ `tests/e2e/navigation.test.js` — Monde→Carte→Sous-carte→Retour (5 tests)
+  - ✅ `tests/e2e/filters.test.js` — filtres carte + sous-carte, Titres ON/OFF (7 tests)
+  - ✅ Ajout `data-submap-id` sur markers POI (ouverture sous-carte testable)
+  - ✅ `"type": "module"` ajouté dans `package.json` (cohérence ESM)
+  - ✅ 17/17 tests e2e passent — scénarios: lancement, navigation complète, filtres
+  - Script npm: `test:e2e`
+  - **Impact**: Validation flux utilisateur complet
   - **Effort**: 5-6h
 
 - [ ] **P2.4** - GitHub Actions CI/CD
