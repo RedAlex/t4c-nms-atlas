@@ -39,6 +39,7 @@ async function runPackager() {
     prune: true,
     appVersion: version,
     ignore: [/^\/release$/],
+    electronDownload: { unsafelyDisableChecksums: true },
   });
 
   if (!appPaths?.length) {
