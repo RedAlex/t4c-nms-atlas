@@ -27,12 +27,41 @@ import { handleCalibrationClickCopy } from "./js/modules/poi-renderer.js";
 import { loadFavoritesFromStorage, showFavoritesView } from "./js/modules/favorites.js";
 import { validateData } from "./js/modules/validator.js";
 
+/**
+ * Synchronise la hauteur de viewport réelle (utile sur desktop et mobile)
+ */
+function syncViewportHeight() {
+  const vh = window.visualViewport?.height || window.innerHeight;
+  document.documentElement.style.setProperty("--app-vh", `${Math.round(vh)}px`);
+}
+
+/**
+ * Observe les changements de taille d'un stage pour recalculer son layer
+ * @param {string} stageId - ID de l'élément stage à observer
+ * @param {Function} onResize - Callback de recalcul
+ * @returns {ResizeObserver|null}
+ */
+function observeStageResize(stageId, onResize) {
+  const stage = document.getElementById(stageId);
+  if (!stage || typeof ResizeObserver === "undefined") {
+    return null;
+  }
+
+  const ro = new ResizeObserver(() => {
+    onResize();
+  });
+  ro.observe(stage);
+  return ro;
+}
+
 init();
 
 /**
  * Initialise l'application - point d'entrée
  */
 async function init() {
+  syncViewportHeight();
+
   const data = await loadMapsData();
   if (!data?.maps?.length) {
     return;
@@ -126,7 +155,14 @@ async function init() {
   });
   mapStage.addEventListener("click", handleCalibrationClickCopy);
   mapBgImg.addEventListener("load", updateZoneLayerLayout);
-  window.addEventListener("resize", updateZoneLayerLayout);
+  window.addEventListener("resize", () => {
+    syncViewportHeight();
+    updateZoneLayerLayout();
+    updateSubmapZoneLayerLayout();
+  });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", syncViewportHeight);
+  }
   if (toggleGridCoordsBtn) {
     toggleGridCoordsBtn.addEventListener("click", async () => {
       toggleGridCoords();
@@ -191,6 +227,9 @@ async function init() {
   if (submapBgImg) {
     submapBgImg.addEventListener("load", updateSubmapZoneLayerLayout);
   }
+
+  observeStageResize("map-stage", updateZoneLayerLayout);
+  observeStageResize("submap-stage", updateSubmapZoneLayerLayout);
 
   if (mapSearchInput) {
     mapSearchInput.addEventListener("input", async () => {
