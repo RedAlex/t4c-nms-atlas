@@ -4,7 +4,7 @@
  */
 
 import state, { updateState } from "./state.js";
-import { normalizeUrlCandidate, fuzzyMatchText } from "./utils.js";
+import { normalizeUrlCandidate } from "./utils.js";
 import { updateDevLabel } from "./ui-helpers.js";
 import config from "./config.js";
 
@@ -103,19 +103,12 @@ export function renderWorldCards() {
   const mapCardsGrid = document.getElementById("map-cards-grid");
   const mapCards = document.getElementById("map-cards");
   const worldEmpty = document.getElementById("world-empty");
-  const searchCount = document.getElementById("world-search-count");
-  const worldSubtitle = document.getElementById("world-subtitle");
   const container = mapCardsGrid || mapCards;
   if (!container) return;
 
   container.innerHTML = "";
-  const query = state.worldSearchQuery || "";
   const maps = state.maps || [];
   const worlds = state.worlds || [];
-
-  if (worldSubtitle) {
-    worldSubtitle.textContent = "Choisissez une carte";
-  }
 
   // Dédupliquer par worldId : 1 carte représentante par monde
   let representativeMaps;
@@ -133,14 +126,7 @@ export function renderWorldCards() {
     });
   }
 
-  const filteredMaps = representativeMaps.filter((map) => {
-    const haystack = `${map.name || ""} ${map.summary || ""}`;
-    return fuzzyMatchText(haystack, query);
-  });
-
-  if (searchCount) {
-    searchCount.textContent = query ? `${filteredMaps.length} resultat(s) sur ${representativeMaps.length}` : "";
-  }
+  const filteredMaps = representativeMaps;
 
   if (worldEmpty) {
     worldEmpty.classList.toggle("hidden", filteredMaps.length > 0);

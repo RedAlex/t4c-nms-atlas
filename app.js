@@ -25,6 +25,7 @@ import {
 import { updateDevLabel, applyDevUiVisibility } from "./js/modules/ui-helpers.js";
 import { handleCalibrationClickCopy } from "./js/modules/poi-renderer.js";
 import { loadFavoritesFromStorage, showFavoritesView } from "./js/modules/favorites.js";
+import { validateData } from "./js/modules/validator.js";
 
 init();
 
@@ -40,6 +41,7 @@ async function init() {
   if (Array.isArray(data.worlds)) {
     updateState("worlds", data.worlds);
   }
+  validateData(data.maps, data.worlds || null);
   loadFavoritesFromStorage();
   renderWorldTabs();
   renderWorldCards();
@@ -77,7 +79,6 @@ async function init() {
   const mapBgImg = document.getElementById("map-bg-img");
   const submapBgImg = document.getElementById("submap-bg-img");
   const toggleGridCoordsBtn = document.getElementById("toggle-grid-coords");
-  const worldSearchInput = document.getElementById("world-search-input");
   const mapSearchInput = document.getElementById("map-search-input");
   const submapSearchInput = document.getElementById("submap-search-input");
 
@@ -191,12 +192,6 @@ async function init() {
     submapBgImg.addEventListener("load", updateSubmapZoneLayerLayout);
   }
 
-  if (worldSearchInput) {
-    worldSearchInput.addEventListener("input", () => {
-      updateState("worldSearchQuery", worldSearchInput.value || "");
-      renderWorldCards();
-    });
-  }
   if (mapSearchInput) {
     mapSearchInput.addEventListener("input", async () => {
       updateState("mapSearchQuery", mapSearchInput.value || "");

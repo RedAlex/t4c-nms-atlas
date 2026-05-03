@@ -64,16 +64,17 @@ describe("createAffineTransform", () => {
 describe("resolvePoiPosition", () => {
   const mockTransform = (x, y) => ({ x: x / 50, y: y / 50 });
 
-  it("utilise gameX/gameY si disponibles", () => {
+  it("utilise gameX/gameY avec calibration affine si disponibles", () => {
     const poi = { gameX: 100, gameY: 200 };
     const result = resolvePoiPosition(poi, mockTransform);
     expect(result).toEqual({ x: 2, y: 4 });
   });
 
-  it("utilise gx/gy en fallback", () => {
+  it("retourne null si gx/gy sans world fourni", () => {
     const poi = { gx: 50, gy: 100 };
-    const result = resolvePoiPosition(poi, mockTransform);
-    expect(result).toEqual({ x: 1, y: 2 });
+    // Sans world, le chemin Gobeline n'est pas disponible
+    const result = resolvePoiPosition(poi, null);
+    expect(result).toBeNull();
   });
 
   it("utilise x/y en pourcentage direct si disponibles", () => {
@@ -126,13 +127,10 @@ describe("resolvePoiPosition - format Gobeline (P4)", () => {
     expect(result.y).toBeCloseTo(4, 5);
   });
 
-  it("retourne null si gx/gy présents mais world absent et aucune calibration", () => {
+  it("retourne null si gx/gy présents mais world absent et sans calibration", () => {
     const poi = { gx: 100, gy: 100, worldId: 0 };
-    // Sans world et sans transform classique, doit retourner null
-    // (sauf si le code tombe en fallback gx→gameX — comportement à vérifier)
+    // Sans world et sans gameToPercent transform, gx/gy ne peuvent pas être résolus
     const result = resolvePoiPosition(poi, null, null);
-    // Si le code utilise gx comme gameX en dernier fallback, c'est acceptable (non null)
-    // Le test vérifie juste qu'il n'y a pas d'exception
-    expect(() => resolvePoiPosition(poi, null, null)).not.toThrow();
+    expect(result).toBeNull();
   });
 });

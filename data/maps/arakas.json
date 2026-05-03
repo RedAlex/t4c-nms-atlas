@@ -69,6 +69,21 @@
         "description": "[DEMO] Portail de transition vers Drake Island.",
         "targetMapId": "drake-island",
         "wikiUrl": ""
+      },
+      {
+        "id": "arakas-lh-cave-entry",
+        "type": "transition",
+        "transitionType": "cave",
+        "name": "Entrée grotte LightHaven",
+        "gx": 2870,
+        "gy": 1120,
+        "worldId": 0,
+        "gameX": 2870,
+        "gameY": 1120,
+        "description": "[DEMO] Descente dans la grotte sous LightHaven.",
+        "openSubMapId": "lighthaven",
+        "targetPoiId": "lh-cave-exit",
+        "wikiUrl": ""
       }
     ],
     "_meta": {
@@ -131,6 +146,18 @@
             "x": 20,
             "y": 70,
             "description": "[DEMO] Araignées de niveau 1-5.",
+            "wikiUrl": ""
+          },
+          {
+            "id": "lh-cave-exit",
+            "type": "transition",
+            "transitionType": "cave",
+            "name": "Sortie grotte LightHaven",
+            "x": 48,
+            "y": 80,
+            "description": "[DEMO] Remontée vers Arakas depuis la grotte.",
+            "targetMapId": "arakas",
+            "targetPoiId": "arakas-lh-cave-entry",
             "wikiUrl": ""
           }
         ]

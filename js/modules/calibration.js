@@ -108,12 +108,12 @@ export function createAffineTransform(anchors, sxKey, syKey, txKey, tyKey) {
 /**
  * Résout la position d'un POI
  * @param {Object} poi - Point d'intérêt
- * @param {Function|null} gameToPercent - Fonction de transformation (calibration affine)
- * @param {Object|null} world - Données du monde Gobeline (pour coords gx/gy directes)
+ * @param {Function|null} gameToPercent - Fonction de transformation (calibration affine, pour sous-cartes)
+ * @param {Object|null} world - Données du monde Gobeline (pour coords gx/gy directes sur cartes principales)
  * @returns {Object|null} Position en pourcentage ou null
  */
 export function resolvePoiPosition(poi, gameToPercent, world = null) {
-  // Coords Gobeline directes : gx/gy sans calibration affine
+  // Priorité 1: Coords Gobeline directes : gx/gy sans calibration affine (modèle P4+ pour cartes principales)
   if (typeof poi.gx === "number" && typeof poi.gy === "number" &&
       world?.imageWidth && world?.imageHeight) {
     return {
@@ -122,17 +122,12 @@ export function resolvePoiPosition(poi, gameToPercent, world = null) {
     };
   }
 
-  // Coords jeu classiques via calibration affine
+  // Priorité 2: Coords jeu classiques via calibration affine (modèle legacy pour sous-cartes)
   if (typeof poi.gameX === "number" && typeof poi.gameY === "number" && gameToPercent) {
     return gameToPercent(poi.gameX, poi.gameY);
   }
 
-  // Coords gx/gy via calibration affine (fallback)
-  if (typeof poi.gx === "number" && typeof poi.gy === "number" && gameToPercent) {
-    return gameToPercent(poi.gx, poi.gy);
-  }
-
-  // Coords en pourcentage direct
+  // Priorité 3: Coords en pourcentage direct (modèle pour sous-cartes)
   if (typeof poi.x === "number" && typeof poi.y === "number") {
     return { x: poi.x, y: poi.y };
   }

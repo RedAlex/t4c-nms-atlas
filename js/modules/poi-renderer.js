@@ -3,7 +3,7 @@
  * @module poi-renderer
  */
 
-import state from "./state.js";
+import state, { updateState } from "./state.js";
 import { createGameToPercentTransform, resolvePoiPosition } from "./calibration.js";
 import { getDisplayedImageRect, copyTextToClipboard, percentToDisplayCoords, normalizeUrlCandidate, buildWikiSearchUrl, fuzzyMatchText } from "./utils.js";
 import { showHoverCard, hideHoverCard } from "./ui-helpers.js";
@@ -29,7 +29,13 @@ export function renderInteractivePoints() {
   const typedPois =
     state.activeFilter === "favoris"
       ? pois.filter((poi) => isPoiFavorite(poi))
-      : pois.filter((poi) => poi.type === state.activeFilter);
+      : pois.filter((poi) => {
+          if (state.activeFilter === "lieux") {
+            // Les transitions et portails sont assimilés aux lieux pour rester visibles.
+            return poi.type === "lieux" || poi.type === "portal" || poi.type === "transition";
+          }
+          return poi.type === state.activeFilter;
+        });
   const visiblePois = typedPois.filter((poi) => fuzzyMatchText(poi.name || "", query));
 
   if (mapSearchCount) {
@@ -52,6 +58,9 @@ export function renderInteractivePoints() {
     marker.style.left = `${position.x}%`;
     marker.style.top = `${position.y}%`;
     marker.setAttribute("aria-label", poi.name || poi.type);
+    if (poi.id) {
+      marker.dataset.poiId = poi.id;
+    }
     if (poi.openSubMapId) {
       marker.dataset.submapId = poi.openSubMapId;
     }
@@ -66,9 +75,12 @@ export function renderInteractivePoints() {
     const mapStage = document.getElementById("map-stage");
     const mapHoverCard = document.getElementById("map-hover-card");
 
+    const hasTargetPoi = typeof poi.targetPoiId === "string" && poi.targetPoiId.length > 0;
     const isPortal = poi.type === "portal";
     const hintText = isPortal
       ? `Clic: aller vers ${poi.targetMapId || "carte liée"}`
+      : hasTargetPoi
+        ? "Clic: teleporter vers POI cible | Shift+Clic: favori | Clic droit: wiki"
       : "Clic: ouvrir carte | Shift+Clic: favori | Clic droit: wiki";
 
     if (isPortal && poi.targetMapId) {
@@ -193,7 +205,12 @@ export function renderSubmapPois() {
   const typedPois =
     state.activeSubmapFilter === "favoris"
       ? pois.filter((poi) => isPoiFavorite(poi))
-      : pois.filter((poi) => poi.type === state.activeSubmapFilter);
+      : pois.filter((poi) => {
+          if (state.activeSubmapFilter === "lieux") {
+            return poi.type === "lieux" || poi.type === "portal" || poi.type === "transition";
+          }
+          return poi.type === state.activeSubmapFilter;
+        });
   const visiblePois = typedPois.filter((poi) => fuzzyMatchText(poi.name || "", query));
 
   if (submapSearchCount) {
@@ -216,6 +233,9 @@ export function renderSubmapPois() {
     marker.style.left = `${position.x}%`;
     marker.style.top = `${position.y}%`;
     marker.setAttribute("aria-label", poi.name || poi.type);
+    if (poi.id) {
+      marker.dataset.poiId = poi.id;
+    }
     marker.classList.toggle("favorite", isPoiFavorite(poi));
 
     if (poi.name) {
@@ -250,6 +270,7 @@ export function renderSubmapPois() {
     marker.addEventListener("blur", () => hideHoverCard(submapHoverCard));
     marker.addEventListener("click", (event) => {
       if (!event.shiftKey) {
+        handlePoiOpenMap(poi);
         return;
       }
       event.preventDefault();
@@ -339,6 +360,12 @@ export function handlePoiOpenMap(poi) {
     return;
   }
 
+  // Navigation prioritaire : un POI explicitement ciblé.
+  if (poi.targetPoiId) {
+    navigateToTargetPoi(poi);
+    return;
+  }
+
   // Type portal : navigation vers une autre carte
   if (poi.type === "portal" && poi.targetMapId) {
     import("./map-view.js").then(({ openMap }) => {
@@ -357,6 +384,141 @@ export function handlePoiOpenMap(poi) {
   import("./submap-view.js").then(({ openSubMap }) => {
     openSubMap(targetSubMapId);
   });
+}
+
+/**
+ * Trouve le POI cible d'une transition.
+ * @param {Object} poi - POI source cliqué
+ * @returns {{ mapId: string, subMapId: string|null, targetPoi: Object }|null}
+ */
+export function resolvePoiTargetLocation(poi) {
+  if (!poi?.targetPoiId || !state.maps?.length) {
+    return null;
+  }
+
+  // Cas 1: cible explicitement sur une carte donnée
+  if (poi.targetMapId) {
+    const targetMap = state.maps.find((m) => m.id === poi.targetMapId);
+    if (!targetMap) {
+      return null;
+    }
+    const mapPoi = (targetMap.pois || []).find((p) => p.id === poi.targetPoiId);
+    if (mapPoi) {
+      return { mapId: targetMap.id, subMapId: null, targetPoi: mapPoi };
+    }
+    for (const subMap of targetMap.subMaps || []) {
+      const subPoi = (subMap.pois || []).find((p) => p.id === poi.targetPoiId);
+      if (subPoi) {
+        return { mapId: targetMap.id, subMapId: subMap.id, targetPoi: subPoi };
+      }
+    }
+  }
+
+  // Cas 2: cible explicitement sur une sous-carte de la carte active
+  if (poi.openSubMapId && state.activeMap) {
+    const targetSubMap = (state.activeMap.subMaps || []).find((s) => s.id === poi.openSubMapId);
+    const subPoi = (targetSubMap?.pois || []).find((p) => p.id === poi.targetPoiId);
+    if (subPoi) {
+      return { mapId: state.activeMap.id, subMapId: targetSubMap.id, targetPoi: subPoi };
+    }
+  }
+
+  // Cas 3: fallback global (recherche sur toutes les cartes/sous-cartes)
+  for (const map of state.maps) {
+    const mapPoi = (map.pois || []).find((p) => p.id === poi.targetPoiId);
+    if (mapPoi) {
+      return { mapId: map.id, subMapId: null, targetPoi: mapPoi };
+    }
+    for (const subMap of map.subMaps || []) {
+      const subPoi = (subMap.pois || []).find((p) => p.id === poi.targetPoiId);
+      if (subPoi) {
+        return { mapId: map.id, subMapId: subMap.id, targetPoi: subPoi };
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Attend l'apparition d'un marqueur POI dans un layer.
+ * @param {string} layerId - ID du layer DOM
+ * @param {string} poiId - ID du POI
+ * @returns {Promise<HTMLElement|null>}
+ */
+async function waitForPoiMarker(layerId, poiId) {
+  const escapedPoiId = typeof CSS !== "undefined" && CSS.escape ? CSS.escape(poiId) : poiId;
+  const selector = `.poi[data-poi-id="${escapedPoiId}"]`;
+  for (let i = 0; i < 12; i++) {
+    const layer = document.getElementById(layerId);
+    const marker = layer?.querySelector(selector);
+    if (marker) {
+      return marker;
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, 30));
+  }
+  return null;
+}
+
+/**
+ * Centre visuellement la vue sur un marqueur POI (si présent).
+ * @param {string} layerId - ID du layer contenant les POIs
+ * @param {string} stageId - ID du stage (viewport)
+ * @param {string} poiId - ID du POI
+ */
+async function centerViewOnPoi(layerId, stageId, poiId) {
+  const marker = await waitForPoiMarker(layerId, poiId);
+  if (!marker) {
+    return;
+  }
+
+  marker.classList.add("poi-target-focus");
+  marker.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+
+  const stage = document.getElementById(stageId);
+  stage?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+
+  window.setTimeout(() => {
+    marker.classList.remove("poi-target-focus");
+  }, 1700);
+}
+
+/**
+ * Navigue vers un POI cible et centre la vue dessus.
+ * @param {Object} poi - POI source cliqué
+ */
+async function navigateToTargetPoi(poi) {
+  const target = resolvePoiTargetLocation(poi);
+  if (!target) {
+    return;
+  }
+
+  const { openMap } = await import("./map-view.js");
+  openMap(target.mapId);
+
+  // Forcer un filtre compatible avec la cible pour garantir son rendu.
+  if (target.targetPoi?.type === "pnj" || target.targetPoi?.type === "monstres") {
+    updateState("activeFilter", target.targetPoi.type);
+  } else {
+    updateState("activeFilter", "lieux");
+  }
+  renderInteractivePoints();
+
+  if (target.subMapId) {
+    const { openSubMap } = await import("./submap-view.js");
+    openSubMap(target.subMapId);
+
+    if (target.targetPoi?.type === "pnj" || target.targetPoi?.type === "monstres") {
+      updateState("activeSubmapFilter", target.targetPoi.type);
+    } else {
+      updateState("activeSubmapFilter", "lieux");
+    }
+    renderSubmapPois();
+    await centerViewOnPoi("submap-zone-layer", "submap-stage", target.targetPoi.id);
+    return;
+  }
+
+  await centerViewOnPoi("zone-layer", "map-stage", target.targetPoi.id);
 }
 
 /**

@@ -1,7 +1,7 @@
 # 🚀 Plan d'Amélioration - Atlas NMS Revolution
 
 **Date**: 2 mai 2026  
-**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ♻️ À faire | PHASE 6 🆕 Planifiée
+**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ♻️ EN COURS (P5.1 ✅ P5.2 ✅) | PHASE 6 🆕 Planifiée
 
 **Session du 2 mai 2026** :
 - ✅ P4 entièrement complétée (P4.1 → P4.6, 87/87 tests)
@@ -302,7 +302,7 @@ Passer d'un modèle "régions fixes" à un modèle multi-carte connecté, en uti
 
 ---
 
-## PHASE 5 - Consolidation Post-Migration Données ♻️ (prochaine étape)
+## PHASE 5 - Consolidation Post-Migration Données ♻️ EN COURS
 
 ### Objectif
 
@@ -310,19 +310,27 @@ Stabiliser et industrialiser la donnée après migration multi-carte (P4), en su
 
 ### Tâches
 
-- [ ] **P5.1** - Retirer le mode legacy région/sous-carte
-  - Supprimer les adaptateurs temporaires introduits pendant P4
-  - Uniformiser le code sur le modèle `maps[]` + transitions POI
-  - Ajouter garde-fous si anciennes données détectées
-  - **Impact**: Base code simplifiée et lisible
-  - **Effort**: 2-3h
+- [x] **P5.1** - Retirer les adaptateurs temporaires de calibration ✅
+  - ✅ Supprimé le fallback `gx/gy + calibration affine` (adaptateur temporaire)
+  - ✅ Conservé le modèle Gobeline `gx/gy + world.imageWidth/imageHeight` pour cartes principales
+  - ✅ Conservé le modèle legacy `gameX/gameY + calibration affine` pour sous-cartes (necessaire)
+  - ✅ Conservé le modèle `x/y` direct pour sous-cartes
+  - ✅ Mis à jour tests: `resolvePoiPosition()` exclusivement priorisé
+  - ✅ **Code nettoyé**: `calibration.js` maintenant exact et lisible (3 chemins, pas 4)
+  - **Impact**: Architecture plus claire post-migration ✅
+  - **Effort**: 1-2h ✅
 
-- [ ] **P5.2** - Validation stricte du nouveau modèle
-  - Créer schémas Zod pour carte, POI, portail, lien et graphe de navigation
-  - Valider au chargement avec erreurs actionnables (fichier + identifiant)
-  - Refuser les références cassées (`targetMapId`, `targetPoiId` inexistants)
-  - **Impact**: Zéro données cassées en production
-  - **Effort**: 3-4h
+- [x] **P5.2** - Validation stricte du nouveau modèle ✅
+  - ✅ Ajout du type POI "lien" (lien POI→POI inter-cartes) dans `VALID_POI_TYPES`
+  - ✅ Validation `targetPoiId` : vérifie que l'id de POI cible existe dans la carte `targetMapId`
+  - ✅ Annotation `_sourceFile` sur chaque carte chargée (data-loader.js)
+  - ✅ Erreurs actionnables incluant le chemin du fichier source et l'identifiant
+  - ✅ `validateData()` retourne le tableau des erreurs (testable, exploitable)
+  - ✅ Registre `poiIdsByMap` pour la résolution des références croisées
+  - ✅ 8 nouveaux tests couvrant : lien valide, lien sans cible, targetPoiId valide/cassé, _sourceFile, retour d'erreurs
+  - Note: Zod non utilisé — renderer sandbox (nodeIntegration: false) sans bundler, validation manuelle équivalente
+  - **Impact**: Zéro données cassées en production ✅
+  - **Effort**: 3-4h ✅
 
 - [ ] **P5.3** - Outillage data QA et versioning
   - Ajouter `data/CHANGELOG.md` avec version des datasets

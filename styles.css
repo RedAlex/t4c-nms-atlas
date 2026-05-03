@@ -103,6 +103,11 @@ body {
   margin-bottom: 0.8rem;
 }
 
+.panel-head--compact {
+  margin-bottom: 0.5rem;
+  justify-content: flex-end;
+}
+
 .panel-head.row {
   display: flex;
   align-items: center;
@@ -584,6 +589,11 @@ body {
   animation: portal-pulse 2s ease-in-out infinite;
 }
 
+.poi.transition {
+  background: #f59e0b;
+  border-color: #b45309;
+}
+
 .poi.portal::before {
   content: "⬡";
   position: absolute;
@@ -617,6 +627,26 @@ body {
   box-shadow:
     0 0 0 5px rgba(255, 214, 77, 0.35),
     0 0 18px rgba(255, 214, 77, 0.6);
+}
+
+.poi.poi-target-focus {
+  z-index: 15;
+  animation: poi-target-focus 1.7s ease-out;
+}
+
+@keyframes poi-target-focus {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 214, 77, 0.7);
+  }
+  35% {
+    transform: translate(-50%, -50%) scale(1.35);
+    box-shadow: 0 0 0 10px rgba(255, 214, 77, 0.18);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 2px rgba(255, 214, 77, 0);
+  }
 }
 
 .poi.favorite {

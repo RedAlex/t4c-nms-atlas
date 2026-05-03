@@ -89,6 +89,9 @@ export async function loadMapsFromFiles(mapFiles, worlds = null) {
     const map = data?.map || null;
     if (!map) return null;
 
+    // Annoter la source du fichier pour les messages d'erreur de validation
+    map._sourceFile = filePath;
+
     // Enrichissement : attacher les données du monde (image HD, dimensions)
     if (worlds && typeof map.worldId === "number") {
       const world = worlds.find((w) => w.worldId === map.worldId) || null;
