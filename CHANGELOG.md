@@ -1,3 +1,34 @@
+## [0.3.0] — 2026-05-03
+
+### Nouveautés
+
+- ajout d'un contrôle de qualité des données pour la cohérence cartographique
+- ajout de la synchronisation de la hauteur de viewport et amélioration de la réactivité des éléments de la carte
+- ajout du système de validation des données pour les cartes et POIs test: ajout de tests unitaires pour la validation des données test: ajout de tests pour la navigation des cibles POI test: ajout de tests pour le routage entre POIs
+- ajout de la recherche et des onglets de sélection de monde feat: amélioration de la gestion des coordonnées Gobeline pour les POI feat: chargement des données des mondes et enrichissement des cartes style: mise à jour du style des onglets et des messages pour les mondes vides test: ajout de tests pour la gestion des mondes et des cartes
+- mettre à jour les instructions de Copilot et le README pour clarifier les règles de contribution et les sources d'information
+- mettre à jour le script de génération du CHANGELOG pour inclure des exemples de messages de commits
+
+### Corrections
+
+- corriger le chemin du zip dans le job release CI/CD
+
+### Refactorisation
+
+- réorganisation de l'initialisation des cartes et amélioration de la gestion des éléments de la carte
+- simplification de la vue monde et amélioration de la gestion des événements
+
+### Documentation
+
+- mise à jour de la documentation sur le modèle multi-carte et les transitions POI
+
+### Maintenance
+
+- audit sécurité : validation du chemin d'accès dans `readMapFile` (protection path traversal)
+- audit qualité : correction lint ESLint sur `data-loader.js`, `poi-renderer.js`, `router.js`, `validator.js`, `world-view.js`
+- suppression du dossier `coverage/` du suivi git (ajout au `.gitignore`)
+- migrer Node.js 20 vers 24 dans le workflow CI/CD et supprimer FORCE_JAVASCRIPT_ACTIONS_TO_NODE24
+
 ## [0.2.0] — 2026-05-01
 
 ### Nouveautés
