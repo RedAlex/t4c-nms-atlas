@@ -1,7 +1,7 @@
 # 🚀 Plan d'Amélioration - Atlas NMS Revolution
 
 **Date**: 2 mai 2026  
-**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ♻️ EN COURS (P5.1 ✅ P5.2 ✅) | PHASE 6 🆕 Planifiée
+**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ♻️ EN COURS (P5.1 ✅ P5.2 ✅ P5.3 ✅) | PHASE 6 🆕 Planifiée
 
 **Session du 2 mai 2026** :
 - ✅ P4 entièrement complétée (P4.1 → P4.6, 87/87 tests)
@@ -332,12 +332,13 @@ Stabiliser et industrialiser la donnée après migration multi-carte (P4), en su
   - **Impact**: Zéro données cassées en production ✅
   - **Effort**: 3-4h ✅
 
-- [ ] **P5.3** - Outillage data QA et versioning
-  - Ajouter `data/CHANGELOG.md` avec version des datasets
-  - Créer script de vérification des données (lint data)
-  - Ajouter contrôle CI sur cohérence cartographique
-  - **Impact**: Régressions détectées avant merge
-  - **Effort**: 2-3h
+- [x] **P5.3** - Outillage data QA et versioning ✅
+  - ✅ Changelog centralisé via le script `version/changelog.bat` (pas de changelog dataset séparé)
+  - ✅ Création du script `scripts/data-lint.mjs` (vérification JSON, assets locaux, références world/map, validation stricte)
+  - ✅ Ajout du script npm `data:lint`
+  - ✅ Ajout du contrôle CI `Data QA (cartographic consistency)` dans `.github/workflows/build.yml`
+  - **Impact**: Régressions détectées avant merge ✅
+  - **Effort**: 2-3h ✅
 
 - [ ] **P5.4** - Documentation finale contributeurs
   - Mettre à jour `CONTRIBUTING.md` sur le modèle multi-carte

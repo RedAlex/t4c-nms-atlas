@@ -22,6 +22,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
+    "data:lint": "node scripts/data-lint.mjs",
     "changelog": "node scripts/changelog.mjs",
     "release:patch": "npm version patch && node scripts/changelog.mjs",
     "release:minor": "npm version minor && node scripts/changelog.mjs",
