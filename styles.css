@@ -787,7 +787,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 #world-view {
@@ -809,9 +809,24 @@ body {
 }
 
 .footer {
-  text-align: left;
+  text-align: center;
   color: #aab7cf;
   padding: 0 1rem 1.2rem 1rem;
+}
+
+.footer-credit {
+  font-size: 0.8rem;
+  color: #5a6a84;
+  margin-top: 0.5rem;
+}
+
+.footer-credit a {
+  color: #7b9fd4;
+  text-decoration: none;
+}
+
+.footer-credit a:hover {
+  text-decoration: underline;
 }
 
 .app-version {

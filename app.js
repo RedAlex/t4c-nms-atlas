@@ -6,7 +6,7 @@
 
 import { loadMapsData } from "./js/modules/data-loader.js";
 import state, { updateState } from "./js/modules/state.js";
-import { renderWorldCards, renderWorldTabs, showWorldView } from "./js/modules/world-view.js";
+import { renderWorldTabs } from "./js/modules/world-view.js";
 import { openMap, updateZoneLayerLayout, handleMapStageMouseMove } from "./js/modules/map-view.js";
 import {
   updateSubmapZoneLayerLayout,
@@ -73,7 +73,6 @@ async function init() {
   validateData(data.maps, data.worlds || null);
   loadFavoritesFromStorage();
   renderWorldTabs();
-  renderWorldCards();
 
   // Ouvrir la première carte par défaut
   if (data.maps.length > 0) {
@@ -88,7 +87,6 @@ async function init() {
   }
 
   // Récupère les éléments DOM
-  const backToWorld = document.getElementById("back-to-world");
   const backToMap = document.getElementById("back-to-map");
   const openFavoritesBtn = document.getElementById("open-favorites");
   const backToWorldFromFavorites = document.getElementById("back-to-world-from-favorites");
@@ -111,10 +109,9 @@ async function init() {
   const mapSearchInput = document.getElementById("map-search-input");
   const submapSearchInput = document.getElementById("submap-search-input");
 
-  // Événements - Vue Monde
-  backToWorld.addEventListener("click", showWorldView);
+  // Événements - Favoris
   openFavoritesBtn?.addEventListener("click", showFavoritesView);
-  backToWorldFromFavorites?.addEventListener("click", showWorldView);
+  backToWorldFromFavorites?.addEventListener("click", () => openMap(state.activeMap?.id ?? data.maps[0].id));
 
   // Événements - Vue Carte Principale
   backToMap.addEventListener("click", async () => {
@@ -258,10 +255,8 @@ async function init() {
     const favoritesView = document.getElementById("favorites-view");
     if (submapView && !submapView.classList.contains("hidden")) {
       openMap(state.activeMap.id);
-    } else if (mapView && !mapView.classList.contains("hidden")) {
-      showWorldView();
     } else if (favoritesView && !favoritesView.classList.contains("hidden")) {
-      showWorldView();
+      openMap(state.activeMap?.id ?? data.maps[0].id);
     }
   });
 

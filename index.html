@@ -29,20 +29,7 @@
     </header>
 
     <main class="layout">
-      <section id="world-view" class="panel" aria-label="Vue monde — choisissez une carte">
-        <div class="panel-head row panel-head--compact">
-          <div class="actions">
-            <button id="open-favorites" class="btn ghost" type="button">Mes favoris</button>
-          </div>
-        </div>
-        <div id="world-cards-container">
-          <div id="map-cards-grid" class="map-cards"></div>
-          <div id="world-empty" class="world-empty hidden" aria-live="polite">
-            <p class="world-empty-title">Monde non disponible</p>
-            <p class="world-empty-sub">Les données pour ce monde seront ajoutées prochainement.</p>
-          </div>
-        </div>
-      </section>
+      <section id="world-view" class="panel hidden" aria-label="Vue monde" aria-hidden="true"></section>
 
       <!-- Vue favoris -->
       <section id="favorites-view" class="panel hidden" aria-live="polite">
@@ -53,7 +40,7 @@
           </div>
           <div class="actions">
             <button id="back-to-world-from-favorites" class="btn ghost" type="button">
-              &#8592; Mondes
+              &#8592; Carte
             </button>
           </div>
         </div>
@@ -61,7 +48,7 @@
       </section>
 
       <!-- Vue carte principale -->
-      <section id="map-view" class="panel hidden" aria-live="polite" aria-label="Vue carte principale">
+      <section id="map-view" class="panel" aria-live="polite" aria-label="Vue carte principale">
         <div class="panel-head row">
           <div>
             <p id="map-breadcrumb" class="map-breadcrumb hidden"></p>
@@ -70,7 +57,7 @@
             <span id="map-calib-badge" class="completion-badge calib-badge hidden"></span>
           </div>
           <div class="actions">
-            <button id="back-to-world" class="btn ghost" type="button" aria-label="Retour à la liste des mondes">&#8592; Mondes</button>
+            <button id="open-favorites" class="btn ghost" type="button">Mes favoris</button>
           </div>
         </div>
         <div id="map-tabs" class="world-tabs" role="tablist" aria-label="Selection de la carte"></div>
@@ -164,6 +151,7 @@
     <footer class="footer">
       <p>Donnees de demonstration. Verifier chaque information avant integration finale.</p>
       <p id="app-version" class="app-version"></p>
+      <p class="footer-credit">Créé par Alex Garcio &mdash; <a href="https://github.com/RedAlex/t4c-nms-atlas" target="_blank" rel="noopener">GitHub</a></p>
     </footer>
 
     <script src="app.js" type="module"></script>

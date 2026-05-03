@@ -48,7 +48,7 @@ export function openMap(mapId) {
   const hasFavoriteOnMap = mapPois.some((poi) => isPoiFavorite(poi));
   updateState("activeFilter", hasFavoriteOnMap ? "favoris" : "lieux");
 
-  worldView.classList.add("hidden");
+  worldView?.classList.add("hidden");
   submapView.classList.add("hidden");
   mapView.classList.remove("hidden");
   updateDevLabel("map-view", state.activeMap.name);
