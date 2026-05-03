@@ -246,7 +246,6 @@ async function init() {
       return;
     }
     const submapView = document.getElementById("submap-view");
-    const mapView = document.getElementById("map-view");
     const favoritesView = document.getElementById("favorites-view");
     if (submapView && !submapView.classList.contains("hidden")) {
       openMap(state.activeMap.id);

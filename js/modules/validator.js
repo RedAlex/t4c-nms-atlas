@@ -137,7 +137,7 @@ function validateMap(map, mapIds, poiIdsByMap) {
   const errors = [];
 
   if (!map.id || typeof map.id !== "string") {
-    errors.push(`carte inconnue: id manquant`);
+    errors.push("carte inconnue: id manquant");
     return errors;
   }
 
@@ -183,10 +183,14 @@ function validateMap(map, mapIds, poiIdsByMap) {
 function buildPoiIdsByMap(maps) {
   const registry = new Map();
   maps.forEach((map) => {
-    if (!map.id) return;
+    if (!map.id) {
+      return;
+    }
     const ids = new Set();
     (map.pois || []).forEach((poi) => {
-      if (poi.id && typeof poi.id === "string") ids.add(poi.id);
+      if (poi.id && typeof poi.id === "string") {
+        ids.add(poi.id);
+      }
     });
     registry.set(map.id, ids);
   });
@@ -201,7 +205,9 @@ function buildPoiIdsByMap(maps) {
  * @returns {string[]} Liste de toutes les erreurs détectées
  */
 export function validateData(maps, worlds) {
-  if (!Array.isArray(maps) || maps.length === 0) return [];
+  if (!Array.isArray(maps) || maps.length === 0) {
+    return [];
+  }
 
   const allErrors = [];
   const mapIds = new Set(maps.map((m) => m.id).filter(Boolean));

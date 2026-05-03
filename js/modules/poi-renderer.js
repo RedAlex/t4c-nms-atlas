@@ -30,12 +30,12 @@ export function renderInteractivePoints() {
     state.activeFilter === "favoris"
       ? pois.filter((poi) => isPoiFavorite(poi))
       : pois.filter((poi) => {
-          if (state.activeFilter === "lieux") {
-            // Les transitions et portails sont assimilés aux lieux pour rester visibles.
-            return poi.type === "lieux" || poi.type === "portal" || poi.type === "transition";
-          }
-          return poi.type === state.activeFilter;
-        });
+        if (state.activeFilter === "lieux") {
+          // Les transitions et portails sont assimilés aux lieux pour rester visibles.
+          return poi.type === "lieux" || poi.type === "portal" || poi.type === "transition";
+        }
+        return poi.type === state.activeFilter;
+      });
   const visiblePois = typedPois.filter((poi) => fuzzyMatchText(poi.name || "", query));
 
   if (mapSearchCount) {
@@ -81,7 +81,7 @@ export function renderInteractivePoints() {
       ? `Clic: aller vers ${poi.targetMapId || "carte liée"}`
       : hasTargetPoi
         ? "Clic: teleporter vers POI cible | Shift+Clic: favori | Clic droit: wiki"
-      : "Clic: ouvrir carte | Shift+Clic: favori | Clic droit: wiki";
+        : "Clic: ouvrir carte | Shift+Clic: favori | Clic droit: wiki";
 
     if (isPortal && poi.targetMapId) {
       marker.dataset.targetMapId = poi.targetMapId;
@@ -206,11 +206,11 @@ export function renderSubmapPois() {
     state.activeSubmapFilter === "favoris"
       ? pois.filter((poi) => isPoiFavorite(poi))
       : pois.filter((poi) => {
-          if (state.activeSubmapFilter === "lieux") {
-            return poi.type === "lieux" || poi.type === "portal" || poi.type === "transition";
-          }
-          return poi.type === state.activeSubmapFilter;
-        });
+        if (state.activeSubmapFilter === "lieux") {
+          return poi.type === "lieux" || poi.type === "portal" || poi.type === "transition";
+        }
+        return poi.type === state.activeSubmapFilter;
+      });
   const visiblePois = typedPois.filter((poi) => fuzzyMatchText(poi.name || "", query));
 
   if (submapSearchCount) {

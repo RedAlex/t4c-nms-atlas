@@ -87,7 +87,9 @@ export async function loadMapsFromFiles(mapFiles, worlds = null) {
       }
     }
     const map = data?.map || null;
-    if (!map) return null;
+    if (!map) {
+      return null;
+    }
 
     // Annoter la source du fichier pour les messages d'erreur de validation
     map._sourceFile = filePath;

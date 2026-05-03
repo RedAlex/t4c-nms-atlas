@@ -16,13 +16,19 @@ function computeCompletion(map) {
   const total = allPois.length;
   const documented = allPois.filter((p) => p.name && p.name !== "TODO").length;
 
-  if (total === 0) return { documented, total, status: "vide" };
-  if (documented === total) return { documented, total, status: "complet" };
+  if (total === 0) {
+    return { documented, total, status: "vide" };
+  }
+  if (documented === total) {
+    return { documented, total, status: "complet" };
+  }
   return { documented, total, status: "en-cours" };
 }
 
 function renderMapTabsInContainer(container) {
-  if (!container) return;
+  if (!container) {
+    return;
+  }
   container.innerHTML = "";
 
   const maps = state.maps || [];
@@ -51,7 +57,9 @@ function renderMapTabsInContainer(container) {
 
     uniqueWorldIds.forEach((worldId) => {
       const firstMap = maps.find((m) => m.worldId === worldId) || null;
-      if (!firstMap) return;
+      if (!firstMap) {
+        return;
+      }
       worldEntries.push({
         worldId,
         label: firstMap.name || `Monde ${worldId}`,
@@ -104,7 +112,9 @@ export function renderWorldCards() {
   const mapCards = document.getElementById("map-cards");
   const worldEmpty = document.getElementById("world-empty");
   const container = mapCardsGrid || mapCards;
-  if (!container) return;
+  if (!container) {
+    return;
+  }
 
   container.innerHTML = "";
   const maps = state.maps || [];
@@ -120,7 +130,9 @@ export function renderWorldCards() {
     const seen = new Set();
     representativeMaps = maps.filter((m) => {
       const key = m.worldId ?? m.id;
-      if (seen.has(key)) return false;
+      if (seen.has(key)) {
+        return false;
+      }
       seen.add(key);
       return true;
     });

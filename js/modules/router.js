@@ -36,10 +36,15 @@ export function nodeKey(contextId, poiId) {
  * @returns {{ x: number, y: number } | null}
  */
 function poiCoords(poi) {
-  if (typeof poi.gx === "number" && typeof poi.gy === "number") return { x: poi.gx, y: poi.gy };
-  if (typeof poi.gameX === "number" && typeof poi.gameY === "number")
+  if (typeof poi.gx === "number" && typeof poi.gy === "number") {
+    return { x: poi.gx, y: poi.gy };
+  }
+  if (typeof poi.gameX === "number" && typeof poi.gameY === "number") {
     return { x: poi.gameX, y: poi.gameY };
-  if (typeof poi.x === "number" && typeof poi.y === "number") return { x: poi.x, y: poi.y };
+  }
+  if (typeof poi.x === "number" && typeof poi.y === "number") {
+    return { x: poi.x, y: poi.y };
+  }
   return null;
 }
 
@@ -50,7 +55,9 @@ function poiCoords(poi) {
  * @returns {number}
  */
 function euclidean(a, b) {
-  if (!a || !b) return 0;
+  if (!a || !b) {
+    return 0;
+  }
   return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
 }
 
@@ -75,7 +82,9 @@ export function buildGraph(maps) {
 
   // ── 1. Enregistrer tous les noeuds ────────────────────────────────────────
   function registerNode(contextId, poi) {
-    if (!poi.id || typeof poi.id !== "string") return;
+    if (!poi.id || typeof poi.id !== "string") {
+      return;
+    }
     const key = nodeKey(contextId, poi.id);
     if (!nodes.has(key)) {
       nodes.set(key, {
@@ -105,7 +114,9 @@ export function buildGraph(maps) {
   /** @type {Map<string, Array<{key: string, node: Object}>>} */
   const byContext = new Map();
   for (const [key, node] of nodes) {
-    if (!byContext.has(node.contextId)) byContext.set(node.contextId, []);
+    if (!byContext.has(node.contextId)) {
+      byContext.set(node.contextId, []);
+    }
     byContext.get(node.contextId).push({ key, node });
   }
 
@@ -124,9 +135,13 @@ export function buildGraph(maps) {
 
   // ── 3. Arêtes inter-contexte (transitions) ────────────────────────────────
   function addTransitionEdge(fromContextId, poi) {
-    if (!poi.id || !TRANSITION_TYPES.includes(poi.type)) return;
+    if (!poi.id || !TRANSITION_TYPES.includes(poi.type)) {
+      return;
+    }
     const fromKey = nodeKey(fromContextId, poi.id);
-    if (!graph.has(fromKey)) return;
+    if (!graph.has(fromKey)) {
+      return;
+    }
 
     const bidi = poi.bidirectional !== false; // bidirectionnel par défaut
 
@@ -179,7 +194,9 @@ export function buildGraph(maps) {
  * @returns {{ steps: Object[], totalWeight: number } | null}
  */
 export function findPath(graph, nodes, startKey, endKey) {
-  if (!graph.has(startKey) || !graph.has(endKey)) return null;
+  if (!graph.has(startKey) || !graph.has(endKey)) {
+    return null;
+  }
   if (startKey === endKey) {
     return { steps: [{ ...nodes.get(startKey), nodeKey: startKey, edgeType: null }], totalWeight: 0 };
   }
@@ -203,13 +220,19 @@ export function findPath(graph, nodes, startKey, endKey) {
     queue.sort((a, b) => a.weight - b.weight);
     const { key: u } = queue.shift();
 
-    if (visited.has(u)) continue;
+    if (visited.has(u)) {
+      continue;
+    }
     visited.add(u);
 
-    if (u === endKey) break;
+    if (u === endKey) {
+      break;
+    }
 
     for (const { to, weight } of graph.get(u) || []) {
-      if (visited.has(to)) continue;
+      if (visited.has(to)) {
+        continue;
+      }
       const alt = dist.get(u) + weight;
       const dTo = dist.has(to) ? dist.get(to) : Infinity;
       if (alt < dTo) {
@@ -220,7 +243,9 @@ export function findPath(graph, nodes, startKey, endKey) {
     }
   }
 
-  if (dist.get(endKey) === Infinity) return null;
+  if (dist.get(endKey) === Infinity) {
+    return null;
+  }
 
   // Reconstruction du chemin
   const path = [];
@@ -253,7 +278,9 @@ export function findPath(graph, nodes, startKey, endKey) {
  * @returns {string[]}
  */
 export function summarizeRoute(route) {
-  if (!route) return ["Aucun chemin trouvé."];
+  if (!route) {
+    return ["Aucun chemin trouvé."];
+  }
   return route.steps.map((step, i) => {
     const prefix = i === 0 ? "Départ" : i === route.steps.length - 1 ? "Arrivée" : `Étape ${i}`;
     const transition = step.edgeType && step.edgeType !== "walk" ? ` → [${step.transitionType || step.edgeType}]` : "";

@@ -45,7 +45,11 @@ async function readWorldsData() {
 }
 
 async function readMapFile(relPath) {
-  const filePath = path.join(__dirname, "..", relPath);
+  const dataDir = path.resolve(path.join(__dirname, "..", "data"));
+  const filePath = path.resolve(path.join(__dirname, "..", relPath));
+  if (!filePath.startsWith(dataDir + path.sep) && filePath !== dataDir) {
+    throw new Error("Accès refusé : chemin hors du répertoire data/");
+  }
   const raw = await fs.readFile(filePath, "utf-8");
   return JSON.parse(raw);
 }
