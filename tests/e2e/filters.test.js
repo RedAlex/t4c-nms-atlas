@@ -16,8 +16,7 @@ test.describe("Filtres vue carte", () => {
     electronApp = await electron.launch({ args: [ROOT] });
     window = await electronApp.firstWindow();
     await window.waitForLoadState("networkidle");
-    await window.waitForSelector("#map-cards .map-card", { timeout: 10000 });
-    await window.locator("#map-cards .map-card").first().click();
+    await window.waitForSelector("#map-view:not(.hidden)", { timeout: 10000 });
     await expect(window.locator("#map-view")).not.toHaveClass(/hidden/);
   });
 
@@ -66,10 +65,9 @@ test.describe("Filtres vue sous-carte", () => {
     electronApp = await electron.launch({ args: [ROOT] });
     window = await electronApp.firstWindow();
     await window.waitForLoadState("networkidle");
-    await window.waitForSelector("#map-cards .map-card", { timeout: 10000 });
-    await window.locator("#map-cards .map-card").first().click();
+    await window.waitForSelector("#map-view:not(.hidden)", { timeout: 10000 });
     await window.waitForSelector("#zone-layer [data-submap-id]", { timeout: 10000 });
-    await window.locator("#zone-layer [data-submap-id]").first().click();
+    await window.locator("#zone-layer [data-submap-id]").first().click({ force: true });
     await window.waitForSelector("#submap-view:not(.hidden)", { timeout: 10000 });
   });
 

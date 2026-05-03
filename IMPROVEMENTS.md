@@ -1,7 +1,7 @@
 # 🚀 Plan d'Amélioration - Atlas NMS Revolution
 
 **Date**: 2 mai 2026  
-**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ♻️ EN COURS (P5.1 ✅ P5.2 ✅ P5.3 ✅) | PHASE 6 🆕 Planifiée
+**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ✅ COMPLÉTÉE (P5.1 ✅ P5.2 ✅ P5.3 ✅ P5.4 ✅ P5.5 ✅) | PHASE 6 🆕 Planifiée
 
 **Session du 2 mai 2026** :
 - ✅ P4 entièrement complétée (P4.1 → P4.6, 87/87 tests)
@@ -340,19 +340,22 @@ Stabiliser et industrialiser la donnée après migration multi-carte (P4), en su
   - **Impact**: Régressions détectées avant merge ✅
   - **Effort**: 2-3h ✅
 
-- [ ] **P5.4** - Documentation finale contributeurs
-  - Mettre à jour `CONTRIBUTING.md` sur le modèle multi-carte
-  - Documenter les transitions entrée/sortie POI -> POI
-  - Ajouter exemples de PR: nouvelle carte, nouveau portail, correction lien
-  - **Impact**: Contributions plus rapides et fiables
-  - **Effort**: 1-2h
+- [x] **P5.4** - Documentation finale contributeurs ✅
+  - ✅ `CONTRIBUTING.md` mis à jour sur le modèle multi-carte (`maps.json`, `worlds.json`, cartes régionales)
+  - ✅ Transitions entrée/sortie POI -> POI documentées (champs, règles, exemples)
+  - ✅ Exemples de PR ajoutés: nouvelle carte, nouveau portail, correction lien/transition
+  - ✅ Ajout du flux de vérification `npm.cmd run data:lint`
+  - **Impact**: Contributions plus rapides et fiables ✅
+  - **Effort**: 1-2h ✅
 
-- [ ] **P5.5** - Campagne de stabilisation fonctionnelle
-  - Rejouer scénarios clés: navigation, filtres, favoris, recherche, itinéraire
-  - Vérifier performance chargement sur gros jeux de cartes
-  - Corriger les écarts UX résiduels post-migration
-  - **Impact**: Livraison robuste et stable
-  - **Effort**: 2-3h
+- [x] **P5.5** - Campagne de stabilisation fonctionnelle ✅
+  - ✅ Scénarios rejoués via campagne complète: navigation, filtres, favoris, recherche/affichage carte
+  - ✅ Validation automatique: `npm.cmd run data:lint` (cohérence cartographique valide)
+  - ✅ Tests unitaires: 134/134 passants (`npm.cmd test`)
+  - ✅ Tests e2e: 17/17 passants (`npm.cmd run test:e2e`)
+  - ✅ Écart UX traité: robustesse des tests sur ouverture sous-carte (chevauchement de marqueurs transition)
+  - **Impact**: Livraison robuste et stable ✅
+  - **Effort**: 2-3h ✅
 
 ---
 

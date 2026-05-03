@@ -15,58 +15,124 @@ Merci pour votre aide.
 2. Branche de travail: `feature/nom-court`
 3. Commit clair et atomique
 4. Pull Request avec:
-   - resume du changement
-   - source(s)
-   - captures ecran si UI
+  - resume du changement
+  - source(s)
+  - captures ecran si UI
 
-## Convention donnees
+## Modele multi-carte (phase 4+)
 
-Le projet utilise un index + des fichiers regionaux:
+Le projet fonctionne avec un registre de mondes + des fichiers de cartes:
 
-- `data/maps.json`: contient `_source` et `mapFiles[]`
-- `data/maps/<region>.json`: contient l'objet `map` complet de la region
+- `data/maps.json`: index principal (`mapFiles[]`, `worldsFile`)
+- `data/worlds.json`: registre des mondes (`worldId`, image HD, dimensions, `mapFiles`)
+- `data/maps/<carte>.json`: definition d'une carte (objet `map`)
 
-Dans chaque `map` regional:
+Dans une carte:
 
 - `id`: identifiant stable en kebab-case
-- `image`: image affichee sur la page region
-- `nmsImage`: image de la carte monde (tuile de la page d'accueil)
-- `calibration.gamePoints[]`: au moins 3 points valides (`gameX`, `gameY`, `mapX`, `mapY`)
-- `pois[]`: points d'interet filtres par `type` parmi `lieux`, `pnj`, `monstres`
+- `worldId`: identifiant du monde de reference
+- `image` / `hdImage`: images principales de rendu
+- `subMaps[]`: sous-cartes navigables
+- `pois[]`: POI de carte principale
 
-## Ajouter un POI
+Types de POI valides:
 
-1. Ouvrir le fichier region dans `data/maps/`.
-2. Ajouter une entree dans `map.pois[]` avec les champs suivants:
-   - `type`: `lieux`, `pnj` ou `monstres`
-   - `name`: nom affiche
-   - `description`: texte du tooltip
-   - Position:
-     - soit `gameX` + `gameY` (recommande, base sur la calibration)
-     - soit `x` + `y` (pourcentage direct 0-100)
-   - `openSubMapId`: id d'une sous-carte existante dans `map.subMaps[]`
-   - `wikiUrl`: lien wiki a ouvrir au clic droit
-3. Verifier que `openSubMapId` reference bien une sous-carte presente dans `subMaps`.
-4. Verifier l'affichage dans l'app (filtre, tooltip, clic gauche, clic droit).
+- `lieux`
+- `pnj`
+- `monstres`
+- `portal`
+- `lien`
+- `transition`
 
-Exemple minimal:
+Systemes de coordonnees supportes:
+
+- Carte principale (mode Gobeline): `gx`, `gy` + `worldId`
+- Sous-carte (mode direct): `x`, `y` (0 a 100)
+- Sous-carte legacy (si necessaire): `gameX`, `gameY` + calibration
+
+## Transitions POI -> POI (entree/sortie)
+
+Une transition est un POI connecte a un autre POI de destination.
+
+Champs recommandes pour `type: "transition"`:
+
+- `id`: obligatoire (source)
+- `targetPoiId`: obligatoire (destination)
+- `targetMapId`: requis pour cibler une autre carte principale
+- `openSubMapId`: requis pour cibler une sous-carte
+- `transitionType`: optionnel (`cave`, `stairs`, `portal`, etc.)
+
+Exemple carte principale -> sous-carte:
 
 ```json
 {
-  "type": "pnj",
-  "name": "Marchand",
-  "description": "Vendeur principal de la ville.",
-  "gameX": 2850,
-  "gameY": 1080,
-  "openSubMapId": "arakas-general",
-  "wikiUrl": "https://t4c.fandom.com/fr/wiki/LightHaven"
+  "id": "arakas-lh-cave-entry",
+  "type": "transition",
+  "transitionType": "cave",
+  "name": "Entree grotte LightHaven",
+  "gx": 2870,
+  "gy": 1120,
+  "worldId": 0,
+  "openSubMapId": "lighthaven",
+  "targetPoiId": "lh-cave-exit",
+  "wikiUrl": ""
 }
 ```
 
-## Verification manuelle
+Exemple sous-carte -> carte principale:
+
+```json
+{
+  "id": "lh-cave-exit",
+  "type": "transition",
+  "transitionType": "cave",
+  "name": "Sortie grotte LightHaven",
+  "x": 48,
+  "y": 80,
+  "targetMapId": "arakas",
+  "targetPoiId": "arakas-lh-cave-entry",
+  "wikiUrl": ""
+}
+```
+
+## Ajouter ou modifier des donnees
+
+1. Mettre a jour `data/maps/<carte>.json` (ou ajouter un nouveau fichier carte).
+2. Mettre a jour `data/maps.json` si nouveau fichier de carte.
+3. Mettre a jour `data/worlds.json` si nouveau `worldId` ou changement de registre.
+4. Lancer la QA data:
+  - `npm.cmd run data:lint`
+5. Verifier l'app:
+  - navigation carte/sous-carte
+  - filtres
+  - favoris
+  - transitions POI -> POI
+
+## Exemples de PR attendues
+
+### 1) Nouvelle carte
+
+- Ajouter `data/maps/nouvelle-carte.json`
+- Referencer le fichier dans `data/maps.json`
+- Associer la carte a un `worldId` existant (ou ajouter un monde dans `data/worlds.json`)
+- Fournir source + capture d'ecran
+
+### 2) Nouveau portail inter-cartes
+
+- Ajouter un POI `type: "portal"` avec `targetMapId`
+- Verifier que `targetMapId` existe dans les cartes chargees
+- Tester le clic gauche dans l'application
+
+### 3) Correction d'un lien/transition casse(e)
+
+- Corriger `targetPoiId` et/ou `targetMapId`
+- Verifier l'existence des 2 POI (`id` source + `id` cible)
+- Lancer `npm.cmd run data:lint` et confirmer 0 erreur bloquante
+
+## Verification manuelle minimale
 
 - Ouvrir `index.html`
-- Verifier le filtre `Lieux / Pnj / Monstres`
-- Verifier le tooltip au survol d'un POI
-- Verifier le clic gauche POI -> sous-carte
-- Verifier le clic droit POI -> wiki externe
+- Verifier recherche, filtres et tooltips POI
+- Verifier ouverture sous-carte depuis un POI
+- Verifier transitions POI -> POI (aller + retour)
+- Verifier clic droit POI -> wiki externe

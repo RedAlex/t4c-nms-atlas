@@ -1,5 +1,5 @@
 ﻿/**
- * Tests e2e — Lancement de l''application et vue monde.
+ * Tests e2e — Lancement de l'application et vue carte par défaut.
  */
 import { test, expect, _electron as electron } from "@playwright/test";
 import path from "path";
@@ -8,7 +8,7 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "../..");
 
-test.describe("Lancement de l''application", () => {
+test.describe("Lancement de l'application", () => {
   let electronApp;
   let window;
 
@@ -26,17 +26,16 @@ test.describe("Lancement de l''application", () => {
     await expect(window.locator("h1")).toContainText("Atlas NMS Revolution");
   });
 
-  test("affiche la vue monde avec les cartes", async () => {
-    const worldView = window.locator("#world-view");
-    await expect(worldView).toBeVisible();
+  test("affiche la vue carte au démarrage", async () => {
+    const mapView = window.locator("#map-view");
+    await expect(mapView).toBeVisible();
+    await expect(mapView).not.toHaveClass(/hidden/);
 
-    await window.waitForSelector("#map-cards .map-card", { timeout: 10000 });
-    const cards = window.locator("#map-cards .map-card");
-    await expect(cards).toHaveCount(4);
+    const worldView = window.locator("#world-view");
+    await expect(worldView).toHaveClass(/hidden/);
   });
 
-  test("les vues carte et sous-carte sont masquees au demarrage", async () => {
-    await expect(window.locator("#map-view")).toHaveClass(/hidden/);
+  test("la vue sous-carte est masquée au démarrage", async () => {
     await expect(window.locator("#submap-view")).toHaveClass(/hidden/);
   });
 
@@ -47,12 +46,10 @@ test.describe("Lancement de l''application", () => {
     expect(text).toMatch(/^v/);
   });
 
-  test("affiche les noms des 4 regions", async () => {
-    await window.waitForSelector("#map-cards .map-card", { timeout: 10000 });
-    const cardTitles = await window.locator("#map-cards .map-card h3").allTextContents();
-    expect(cardTitles).toContain("Arakas");
-    expect(cardTitles.some((t) => t.includes("Raven"))).toBe(true);
-    expect(cardTitles).toContain("Stoneheim");
-    expect(cardTitles).toContain("Drake Island");
+  test("affiche un titre de carte active", async () => {
+    const title = window.locator("#active-map-title");
+    await expect(title).toBeVisible();
+    const text = await title.textContent();
+    expect((text || "").trim().length).toBeGreaterThan(0);
   });
 });
