@@ -74,11 +74,6 @@ async function init() {
   loadFavoritesFromStorage();
   renderWorldTabs();
 
-  // Ouvrir la première carte par défaut
-  if (data.maps.length > 0) {
-    openMap(data.maps[0].id);
-  }
-
   // Affiche la version de l'application
   const appVersionEl = document.getElementById("app-version");
   if (appVersionEl) {
@@ -225,8 +220,8 @@ async function init() {
     submapBgImg.addEventListener("load", updateSubmapZoneLayerLayout);
   }
 
-  observeStageResize("map-stage", updateZoneLayerLayout);
-  observeStageResize("submap-stage", updateSubmapZoneLayerLayout);
+  observeStageResize("map-stage-wrap", updateZoneLayerLayout);
+  observeStageResize("submap-stage-wrap", updateSubmapZoneLayerLayout);
 
   if (mapSearchInput) {
     mapSearchInput.addEventListener("input", async () => {
@@ -259,6 +254,11 @@ async function init() {
       openMap(state.activeMap?.id ?? data.maps[0].id);
     }
   });
+
+  // Ouvrir la première carte une fois les listeners en place
+  if (data.maps.length > 0) {
+    openMap(data.maps[0].id);
+  }
 
   applyDevUiVisibility();
   updateFilterButtons();

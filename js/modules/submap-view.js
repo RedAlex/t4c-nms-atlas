@@ -11,6 +11,27 @@ import { renderSubmapPois, getPointerPercentOnSubmap } from "./poi-renderer.js";
 import { updateSubmapFilterButtons } from "./filters.js";
 import { isPoiFavorite } from "./favorites.js";
 
+function fitSubmapStageToImage() {
+  const submapStageWrap = document.getElementById("submap-stage-wrap");
+  const submapStage = document.getElementById("submap-stage");
+  const submapBgImg = document.getElementById("submap-bg-img");
+  if (!submapStageWrap || !submapStage || !submapBgImg?.naturalWidth || !submapBgImg?.naturalHeight) {
+    return;
+  }
+
+  const frameWidth = submapStageWrap.clientWidth;
+  if (!frameWidth) {
+    return;
+  }
+
+  const imageRatio = submapBgImg.naturalWidth / submapBgImg.naturalHeight;
+  const stageWidth = frameWidth;
+  const stageHeight = stageWidth / imageRatio;
+
+  submapStage.style.width = `${stageWidth}px`;
+  submapStage.style.height = `${stageHeight}px`;
+}
+
 /**
  * Ouvre une sous-carte
  * @param {string} subMapId - ID de la sous-carte
@@ -100,6 +121,8 @@ export function updateSubmapZoneLayerLayout() {
   if (!submapStage || !submapZoneLayer) {
     return;
   }
+
+  fitSubmapStageToImage();
 
   const rect = submapStage.getBoundingClientRect();
   const displayRect = getDisplayedImageRect(

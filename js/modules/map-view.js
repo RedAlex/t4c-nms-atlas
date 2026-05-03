@@ -12,6 +12,27 @@ import config from "./config.js";
 import { isPoiFavorite } from "./favorites.js";
 import { renderWorldTabs } from "./world-view.js";
 
+function fitMapStageToImage() {
+  const mapStageWrap = document.getElementById("map-stage-wrap");
+  const mapStage = document.getElementById("map-stage");
+  const mapBgImg = document.getElementById("map-bg-img");
+  if (!mapStageWrap || !mapStage || !mapBgImg?.naturalWidth || !mapBgImg?.naturalHeight) {
+    return;
+  }
+
+  const frameWidth = mapStageWrap.clientWidth;
+  if (!frameWidth) {
+    return;
+  }
+
+  const imageRatio = mapBgImg.naturalWidth / mapBgImg.naturalHeight;
+  const stageWidth = frameWidth;
+  const stageHeight = stageWidth / imageRatio;
+
+  mapStage.style.width = `${stageWidth}px`;
+  mapStage.style.height = `${stageHeight}px`;
+}
+
 /**
  * Ouvre une carte
  * @param {string} mapId - ID de la carte
@@ -20,6 +41,7 @@ export function openMap(mapId) {
   const worldView = document.getElementById("world-view");
   const mapView = document.getElementById("map-view");
   const submapView = document.getElementById("submap-view");
+  const favoritesView = document.getElementById("favorites-view");
   const mapBgImg = document.getElementById("map-bg-img");
   const activeMapTitle = document.getElementById("active-map-title");
   const activeMapCaption = document.getElementById("active-map-caption");
@@ -50,6 +72,7 @@ export function openMap(mapId) {
 
   worldView?.classList.add("hidden");
   submapView.classList.add("hidden");
+  favoritesView?.classList.add("hidden");
   mapView.classList.remove("hidden");
   updateDevLabel("map-view", state.activeMap.name);
 
@@ -120,6 +143,8 @@ export function updateZoneLayerLayout() {
   if (!mapStage || !zoneLayer) {
     return;
   }
+
+  fitMapStageToImage();
 
   const rect = mapStage.getBoundingClientRect();
   const displayRect = getDisplayedImageRect(

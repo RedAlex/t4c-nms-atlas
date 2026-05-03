@@ -1,5 +1,6 @@
 :root {
   --app-vh: 100dvh;
+  --shell-gutter: clamp(0.75rem, 1.6vw, 1.5rem);
   --bg: #0b1220;
   --bg-2: #101a2e;
   --paper: #ecf1f8;
@@ -25,7 +26,9 @@ body {
     radial-gradient(1100px 500px at 15% -20%, #2b3f66 0%, transparent 70%),
     radial-gradient(900px 500px at 90% 0%, #3f2a4f 0%, transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-  min-height: 100vh;
+  min-height: var(--app-vh);
+  display: flex;
+  flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -57,9 +60,9 @@ body {
 }
 
 .hero {
-  width: min(1200px, calc(100vw - 2rem));
-  margin: 0 auto;
-  padding: clamp(0.9rem, 2.2vw, 1.5rem) 1rem 0.9rem;
+  width: 100%;
+  margin: 0;
+  padding: clamp(0.9rem, 2.2vw, 1.5rem) var(--shell-gutter) 0.9rem;
   display: grid;
   justify-items: center;
   text-align: center;
@@ -85,15 +88,18 @@ body {
 
 .hero-subtitle {
   margin: 0 auto;
-  max-width: min(780px, 100%);
+  max-width: min(920px, 100%);
   color: #cbd4e5;
 }
 
 .layout {
-  width: min(1200px, calc(100vw - 2rem));
-  margin: 0 auto 2rem;
+  width: 100%;
+  margin: 0 0 2rem;
+  padding: 0 var(--shell-gutter);
   display: grid;
   gap: 1rem;
+  flex: 1;
+  min-height: 0;
   min-width: 0;
 }
 
@@ -493,15 +499,20 @@ body {
 
 .map-stage-wrap {
   display: flex;
-  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 0;
+  overflow: visible;
 }
 
 .map-stage {
   position: relative;
-  height: clamp(300px, calc(var(--app-vh) - 22rem), 82vh);
-  min-height: 300px;
-  max-height: calc(var(--app-vh) - 10rem);
+  min-height: 0;
+  height: 100%;
   width: 100%;
+  max-width: 100%;
+  max-height: 100%;
   min-width: 0;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -934,14 +945,22 @@ body {
 .submap-stage {
   position: relative;
   width: 100%;
-  height: clamp(300px, calc(var(--app-vh) - 22rem), 82vh);
-  min-height: 300px;
-  max-height: calc(var(--app-vh) - 10rem);
+  min-height: 0;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   min-width: 0;
   background: #0a0a12;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   overflow: hidden;
+}
+
+#map-view,
+#submap-view {
+  min-height: calc(var(--app-vh) - 11rem);
+  display: flex;
+  flex-direction: column;
 }
 
 .submap-bg-img {
@@ -1033,9 +1052,7 @@ body {
   }
 
   .map-stage {
-    height: clamp(260px, calc(var(--app-vh) - 18.5rem), 72vh);
-    min-height: 320px;
-    max-height: calc(var(--app-vh) - 8.5rem);
+    min-height: 0;
   }
 
   .panel-head.row {
@@ -1076,9 +1093,7 @@ body {
   }
 
   .submap-stage {
-    height: clamp(250px, calc(var(--app-vh) - 16.5rem), 72vh);
-    min-height: 300px;
-    max-height: calc(var(--app-vh) - 7.5rem);
+    min-height: 0;
   }
 
   .panel {
@@ -1129,9 +1144,7 @@ body {
   }
 
   .map-stage {
-    height: clamp(240px, calc(var(--app-vh) - 18.5rem), 68vh);
-    min-height: 280px;
-    max-height: calc(var(--app-vh) - 8rem);
+    min-height: 0;
   }
 
   .filter-buttons {
@@ -1201,9 +1214,6 @@ body {
   }
 
   .map-stage {
-    height: clamp(220px, calc(var(--app-vh) - 18rem), 66vh);
-    min-height: 250px;
-    max-height: calc(var(--app-vh) - 7rem);
     border-radius: 12px;
   }
 
@@ -1297,9 +1307,7 @@ body {
   }
 
   .submap-stage {
-    height: clamp(210px, calc(var(--app-vh) - 14.5rem), 66vh);
-    min-height: 240px;
-    max-height: calc(var(--app-vh) - 6.5rem);
+    min-height: 0;
   }
 
   .img-source {
@@ -1340,13 +1348,13 @@ body {
 
 @media (orientation: portrait) {
   .layout {
-    width: min(1200px, calc(100vw - 1rem));
+    width: 100%;
+    padding: 0 max(0.5rem, var(--shell-gutter));
   }
 
   .map-stage,
   .submap-stage {
-    height: clamp(240px, calc(var(--app-vh) - 20rem), 74vh);
-    max-height: calc(var(--app-vh) - 8rem);
+    min-height: 0;
   }
 }
 
