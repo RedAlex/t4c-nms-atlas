@@ -1,3 +1,14 @@
+## [0.3.1] — 2026-05-04
+
+### Nouveautés
+
+- ajout de nouveaux POI pour Stoneheim et mise à jour des fichiers de carte feat: ajout de la gestion des clics gauche pour les PNJ et monstres chore: ajout d'un script pour importer les POI depuis Gobeline Dev style: amélioration du positionnement des cartes de survol
+- ajout d'un panneau d'itinéraire et d'un système de navigation entre cartes feat: implémentation des contrôles de zoom pour la carte principale et la sous-carte feat: création d'un moteur de zoom/pan réutilisable pour les cartes test: ajout de tests unitaires pour le module de graphe de navigation style: amélioration du style du panneau d'itinéraire et des contrôles de zoom
+
+### Documentation
+
+- mise à jour du CHANGELOG pour v0.3.0
+
 ## [0.3.0] — 2026-05-03
 
 ### Nouveautés
