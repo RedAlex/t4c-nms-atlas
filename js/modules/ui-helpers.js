@@ -123,8 +123,30 @@ export function showHoverCard(hoverCard, stage, poi, event, hintText) {
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
 
-  hoverCard.style.left = `${Math.min(Math.max(x + 14, 12), rect.width - 230)}px`;
-  hoverCard.style.top = `${Math.min(Math.max(y + 14, 12), rect.height - 130)}px`;
+  // Le stage est transformé (zoom/pan). Les coordonnées souris sont en pixels écran,
+  // alors que left/top de la card sont en coordonnées locales du stage.
+  const poiScaleRaw = Number.parseFloat(
+    getComputedStyle(stage).getPropertyValue("--poi-scale")
+  );
+  const zoomScale = Number.isFinite(poiScaleRaw) && poiScaleRaw > 0
+    ? 1 / poiScaleRaw
+    : 1;
+  const localX = x / zoomScale;
+  const localY = y / zoomScale;
+  const localWidth = rect.width / zoomScale;
+  const localHeight = rect.height / zoomScale;
+
+  // Positionnement robuste: utiliser la taille réelle de la card et rester dans le stage.
+  const cardWidth = hoverCard.offsetWidth || 220;
+  const cardHeight = hoverCard.offsetHeight || 130;
+  const margin = 12;
+  const maxLeft = Math.max(margin, localWidth - cardWidth - margin);
+  const maxTop = Math.max(margin, localHeight - cardHeight - margin);
+  const left = Math.min(Math.max(localX + 14, margin), maxLeft);
+  const top = Math.min(Math.max(localY + 14, margin), maxTop);
+
+  hoverCard.style.left = `${left}px`;
+  hoverCard.style.top = `${top}px`;
   hoverCard.classList.add("visible");
 }
 

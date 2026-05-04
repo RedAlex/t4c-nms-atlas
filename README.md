@@ -12,7 +12,7 @@ Application bureau Windows (Electron) telechargeable. Toutes les cartes sont en 
 - (En cours)Vue carte principale (image Abetsic) avec points d'interet positionnés par coordonnées de jeu
 - Filtres exclusifs : Lieux / PNJ / Monstres
 - Tooltip au survol d'un POI (nom, description, type)
-- Clic gauche sur un POI : ouvre la sous-carte associee
+- Clic gauche sur un POI : ouvre la sous-carte associee (configurable ; PNJ/monstres peuvent etre non navigables)
 - Clic droit sur un POI : ouvre la page wiki correspondante dans le navigateur
 - (En cours)Vue sous-carte avec image détaillée et lien wiki
 - Affichage/masquage des titres de POI

@@ -10,12 +10,47 @@
     "abetsicImage": "data/images/worlds/world-4-stoneheim-ext.png",
     "calibration": {
       "gamePoints": [
-        { "name": "Point 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-        { "name": "Point 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-        { "name": "Point 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
+        {
+          "name": "Point 1",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        },
+        {
+          "name": "Point 2",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        },
+        {
+          "name": "Point 3",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        }
       ]
     },
-    "pois": [],
+    "pois": [
+      {
+        "type": "pnj",
+        "name": "Malclom Fello",
+        "gameX": 1768,
+        "gameY": 1233,
+        "description": "Au nord de son Frère Malcolm",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Malcolm Fello",
+        "gameX": 1768,
+        "gameY": 1233,
+        "description": "Nord est dans les plaines de glaces sur Nive",
+        "wikiUrl": ""
+      }
+    ],
     "_meta": {
       "checkUrls": [
         "https://gobeline-dev.github.io/t4c-nms-overview/"

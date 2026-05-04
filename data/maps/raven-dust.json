@@ -1,17 +1,35 @@
-﻿{
+{
   "map": {
     "id": "raven-dust",
     "worldId": 0,
-    "name": "Raven\u0027s Dust",
+    "name": "Raven's Dust",
     "summary": "Deuxieme ile principale. Zones plus hostiles et quetes intermediaires.",
     "image": "data/images/regions/raven-dust/ravendust.png",
     "nmsImage": "https://static.wikia.nocookie.net/t4c/images/f/ff/Ravensdust.jpg/revision/latest/scale-to-width-down/1000?cb=20160228012151&path-prefix=fr",
     "abetsicImage": "data/images/regions/raven-dust/autre/raven-dust-abetsic.gif",
     "calibration": {
       "gamePoints": [
-        { "name": "Point de calibration 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-        { "name": "Point de calibration 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-        { "name": "Point de calibration 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
+        {
+          "name": "Point de calibration 1",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        },
+        {
+          "name": "Point de calibration 2",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        },
+        {
+          "name": "Point de calibration 3",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        }
       ]
     },
     "pois": [
@@ -41,6 +59,870 @@
         "description": "",
         "openSubMapId": "rd-nms",
         "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Raven%27s_Dust"
+      },
+      {
+        "type": "pnj",
+        "name": "Adriana",
+        "gameX": 1587,
+        "gameY": 2523,
+        "description": "Silversky, dans la salle d'entrainement",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Aloysius Starbolt",
+        "gameX": 1483,
+        "gameY": 2355,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Amandra",
+        "gameX": 1587,
+        "gameY": 2523,
+        "description": "Salle d'entrainement de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Anrak",
+        "gameX": 1275,
+        "gameY": 1616,
+        "description": "Sous-sol d'une maison au Nord-Est du lac des tarentules",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Babulle",
+        "gameX": 1630,
+        "gameY": 2575,
+        "description": "Quartier des métiers, Silversky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Baldric Iraelis",
+        "gameX": 1575,
+        "gameY": 2549,
+        "description": "SilverSky, l'est de la taverne",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Bane Gwengad",
+        "gameX": 344,
+        "gameY": 1679,
+        "description": "Dans un chateau l'ouest de Raven's Dust",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Belagan",
+        "gameX": 1587,
+        "gameY": 2523,
+        "description": "Silversky, dans la salle d'entrainement",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Bobaborh",
+        "gameX": 1436,
+        "gameY": 2489,
+        "description": "Maison au sud du Château de Silversky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Boreas",
+        "gameX": 1531,
+        "gameY": 2557,
+        "description": "Marchand de Potions de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Capitaine Harock Harr",
+        "gameX": 1582,
+        "gameY": 1225,
+        "description": "Nord Ouest de Windhowl ( ct des mages)",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Capitaine Jambedefer",
+        "gameX": 1615,
+        "gameY": 2612,
+        "description": "Sud Est de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Celestina Avel",
+        "gameX": 1486,
+        "gameY": 2849,
+        "description": "Camp des druides",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Celydia",
+        "gameX": 1426,
+        "gameY": 2349,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Chambellan Thomar",
+        "gameX": 1417,
+        "gameY": 2340,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Corsaire Leowald",
+        "gameX": 1616,
+        "gameY": 2634,
+        "description": "Sud Est de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Dafyd",
+        "gameX": 440,
+        "gameY": 2285,
+        "description": "Entre le dsert et la cave du Profondus Supremus",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Darius Moonglow",
+        "gameX": 1463,
+        "gameY": 2885,
+        "description": "Camp des druides",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Delilah",
+        "gameX": 1420,
+        "gameY": 2320,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Derran Talandre",
+        "gameX": 1450,
+        "gameY": 2353,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Doremas",
+        "gameX": 1436,
+        "gameY": 2497,
+        "description": "Sud ouest de la fontaine de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Dwarthon Lithin",
+        "gameX": 303,
+        "gameY": 1683,
+        "description": "Chateau de Bane",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Edden",
+        "gameX": 1430,
+        "gameY": 2398,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Elysana Blackrose",
+        "gameX": 1571,
+        "gameY": 2478,
+        "description": "Une Maison droite du temple de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Etheanan",
+        "gameX": 614,
+        "gameY": 1897,
+        "description": "A l'ouest du lac des tarentules",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Evelyn",
+        "gameX": 830,
+        "gameY": 1825,
+        "description": "Nord de la plaine des tarentules",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Evque Crowbanner",
+        "gameX": 1415,
+        "gameY": 2334,
+        "description": "Chteau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Frère Giamas",
+        "gameX": 1554,
+        "gameY": 2404,
+        "description": "Temple de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Frère Thorkas",
+        "gameX": 1554,
+        "gameY": 2404,
+        "description": "Temple de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Geram",
+        "gameX": 1503,
+        "gameY": 2547,
+        "description": "Taverne de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Hervert",
+        "gameX": 1671,
+        "gameY": 2564,
+        "description": "Quartier des métiers, Silversky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Idas",
+        "gameX": 1402,
+        "gameY": 2384,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Jamar",
+        "gameX": 1520,
+        "gameY": 2500,
+        "description": "Sud Ouest de la fontaine de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Jon Hamhoo",
+        "gameX": 1480,
+        "gameY": 2375,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Kalir",
+        "gameX": 275,
+        "gameY": 2524,
+        "description": "L'oasis du Dsert",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Kederic Steriad",
+        "gameX": 1404,
+        "gameY": 2854,
+        "description": "Camp des druides",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Kiadus",
+        "gameX": 1428,
+        "gameY": 2339,
+        "description": "Marchand d'armes du Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Laren",
+        "gameX": 1502,
+        "gameY": 2534,
+        "description": "Taverne de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Leana",
+        "gameX": 1596,
+        "gameY": 2569,
+        "description": "A l'est dans SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Maletis",
+        "gameX": 1654,
+        "gameY": 2540,
+        "description": "Quartier des métiers, Silversky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Metanas",
+        "gameX": 1507,
+        "gameY": 2532,
+        "description": "Taverne de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Monseigneur Damien",
+        "gameX": 1035,
+        "gameY": 2111,
+        "description": "A l'est de la Runed aprs le pont",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Mordrick Maensel",
+        "gameX": 1428,
+        "gameY": 2339,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Morindin Tennglaw",
+        "gameX": 699,
+        "gameY": 1919,
+        "description": "Au dessus du lac des tarentules",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Naadriel",
+        "gameX": 1440,
+        "gameY": 2515,
+        "description": "Maison au sud du Château de Silversky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Nafuhr Morzhol",
+        "gameX": 1450,
+        "gameY": 2474,
+        "description": "Marchand d'armures de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Norel",
+        "gameX": 1274,
+        "gameY": 2714,
+        "description": "Maison au nord-est du camp druide de Raven's Dust",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Owinyc Sovan",
+        "gameX": 986,
+        "gameY": 1386,
+        "description": "1er tage de la grande bibliothque",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Princesse Delilah",
+        "gameX": 1420,
+        "gameY": 2320,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Rawlin",
+        "gameX": 1589,
+        "gameY": 2315,
+        "description": "Au nord-est de l'enceinte de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Rhodar Pyras",
+        "gameX": 1492,
+        "gameY": 2419,
+        "description": "Marchand d'armes de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Riaze",
+        "gameX": 1284,
+        "gameY": 2724,
+        "description": "Maison au nord du camp druide de Raven's Dust",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Roi Théodore XIII",
+        "gameX": 1416,
+        "gameY": 2346,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Rolianne",
+        "gameX": 1658,
+        "gameY": 2606,
+        "description": "Quartier des métiers, Silversky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Rondy",
+        "gameX": 1595,
+        "gameY": 2499,
+        "description": "SilverSky, prs des champs dans une maison",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Salma",
+        "gameX": 745,
+        "gameY": 2388,
+        "description": "Derrière l'entrée du Barde",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Samuel",
+        "gameX": 1388,
+        "gameY": 2353,
+        "description": "Chateau de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Skipper Barberouge",
+        "gameX": 1574,
+        "gameY": 1229,
+        "description": "Nord Ouest de Windhowl (proche tour des mages)",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Sonia",
+        "gameX": 1678,
+        "gameY": 2581,
+        "description": "Quartier des métiers, Silversky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Taliron",
+        "gameX": 1553,
+        "gameY": 2522,
+        "description": "Marchand d'armures de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Tarissa",
+        "gameX": 1661,
+        "gameY": 2549,
+        "description": "Quartier des métiers, Silversky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Thea",
+        "gameX": 617,
+        "gameY": 1900,
+        "description": "Taverne de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Thorbin Kaloneg",
+        "gameX": 1507,
+        "gameY": 2532,
+        "description": "Taverne de SilverSky",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Un voyageur paisible",
+        "gameX": 425,
+        "gameY": 2270,
+        "description": "Montagnes de Zhakar",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Victor Poingdacier",
+        "gameX": 1374,
+        "gameY": 2372,
+        "description": "Château de Silversky, RDC (Ouest)",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Zhakar",
+        "gameX": 68,
+        "gameY": 1782,
+        "description": "Tour de Zakhar",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Abeille tueuse",
+        "gameX": 821,
+        "gameY": 1913,
+        "description": "79 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Anthropophage",
+        "gameX": 605,
+        "gameY": 1739,
+        "description": "23 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Araignée voleuse de vie",
+        "gameX": 2776,
+        "gameY": 2010,
+        "description": "35 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Arpenteur forestier",
+        "gameX": 2771,
+        "gameY": 2002,
+        "description": "63 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Artherkienne capturée",
+        "gameX": 2267,
+        "gameY": 1946,
+        "description": "4 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Bugar Sakkor",
+        "gameX": 1232,
+        "gameY": 2256,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Charwinguhm",
+        "gameX": 1290,
+        "gameY": 2799,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Cheval en fuite",
+        "gameX": 355,
+        "gameY": 1719,
+        "description": "5 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Cobra royal de Jade",
+        "gameX": 2780,
+        "gameY": 2004,
+        "description": "20 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Disciple de l'ombre",
+        "gameX": 495,
+        "gameY": 2223,
+        "description": "97 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Dragon Ashardalonn",
+        "gameX": 180,
+        "gameY": 2715,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Fataliste",
+        "gameX": 738,
+        "gameY": 1498,
+        "description": "8 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Garde de l'ombre",
+        "gameX": 877,
+        "gameY": 2318,
+        "description": "193 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Gardien sombre",
+        "gameX": 2795,
+        "gameY": 2008,
+        "description": "34 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Golem de chair",
+        "gameX": 72,
+        "gameY": 1569,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "GreyLeaf l'arbre démoniaque",
+        "gameX": 849,
+        "gameY": 2086,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Grott",
+        "gameX": 1058,
+        "gameY": 2431,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Guêpe drone",
+        "gameX": 346,
+        "gameY": 1129,
+        "description": "129 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Guerrier-mage orc",
+        "gameX": 1146,
+        "gameY": 1955,
+        "description": "122 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Gunthrek",
+        "gameX": 434,
+        "gameY": 1702,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Haden",
+        "gameX": 87,
+        "gameY": 2654,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Horreur railleuse",
+        "gameX": 476,
+        "gameY": 2129,
+        "description": "157 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Liedric Guergue",
+        "gameX": 495,
+        "gameY": 1624,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Loup de la meute",
+        "gameX": 467,
+        "gameY": 763,
+        "description": "220 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Loup noir",
+        "gameX": 2865,
+        "gameY": 1647,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Mage rôdeur",
+        "gameX": 877,
+        "gameY": 2318,
+        "description": "193 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Mystique",
+        "gameX": 2756,
+        "gameY": 2002,
+        "description": "33 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Orc berserker",
+        "gameX": 1146,
+        "gameY": 1955,
+        "description": "122 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Pillard des dunes",
+        "gameX": 304,
+        "gameY": 2512,
+        "description": "60 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Profundus",
+        "gameX": 330,
+        "gameY": 2246,
+        "description": "18 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Quardos le borgne",
+        "gameX": 879,
+        "gameY": 2441,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Rat vampire",
+        "gameX": 2777,
+        "gameY": 1999,
+        "description": "22 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Scélérat",
+        "gameX": 736,
+        "gameY": 2281,
+        "description": "66 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Scorpion géant",
+        "gameX": 382,
+        "gameY": 2441,
+        "description": "66 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Seigneur des sables",
+        "gameX": 266,
+        "gameY": 2400,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Skrull",
+        "gameX": 949,
+        "gameY": 1704,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Soldat du Lihongard",
+        "gameX": 662,
+        "gameY": 2892,
+        "description": "6 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Sorcier squelette",
+        "gameX": 731,
+        "gameY": 1498,
+        "description": "11 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Tarentule",
+        "gameX": 828,
+        "gameY": 2168,
+        "description": "79 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Ver géant des sables",
+        "gameX": 304,
+        "gameY": 2523,
+        "description": "42 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Ver Tisseur",
+        "gameX": 930,
+        "gameY": 2876,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Woogly",
+        "gameX": 928,
+        "gameY": 2871,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
       }
     ],
     "_meta": {
@@ -57,7 +939,7 @@
     "subMaps": [
       {
         "id": "rd-nms",
-        "name": "Raven\u0027s Dust (NMS)",
+        "name": "Raven's Dust (NMS)",
         "image": "data/images/regions/raven-dust/raven-dust-general.jpg",
         "wikiUrl": "https://t4c.fandom.com/fr/wiki/Ile_de_Raven%27s_Dust",
         "hotspot": null
@@ -78,7 +960,7 @@
       },
       {
         "id": "rd-cave-anrak",
-        "name": "Cave d\u0027Anrak",
+        "name": "Cave d'Anrak",
         "image": "data/images/regions/raven-dust/grotte/cave-anrak.jpg",
         "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cave_d%27Anrak",
         "hotspot": null

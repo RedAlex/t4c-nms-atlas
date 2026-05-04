@@ -110,6 +110,14 @@ export function renderInteractivePoints() {
         event.stopPropagation();
         return;
       }
+
+      if (
+        (poi.type === "pnj" || poi.type === "monstres") &&
+        !state.enableLeftClickNavigationOnNpcMonsters
+      ) {
+        return;
+      }
+
       handlePoiOpenMap(poi);
     });
     marker.addEventListener("keydown", async (event) => {
@@ -270,6 +278,12 @@ export function renderSubmapPois() {
     marker.addEventListener("blur", () => hideHoverCard(submapHoverCard));
     marker.addEventListener("click", (event) => {
       if (!event.shiftKey) {
+        if (
+          (poi.type === "pnj" || poi.type === "monstres") &&
+          !state.enableLeftClickNavigationOnNpcMonsters
+        ) {
+          return;
+        }
         handlePoiOpenMap(poi);
         return;
       }

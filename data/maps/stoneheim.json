@@ -1,4 +1,4 @@
-﻿{
+{
   "map": {
     "id": "stoneheim",
     "worldId": 0,
@@ -9,9 +9,27 @@
     "abetsicImage": "data/images/regions/stoneheim/autre/stoneheim-abetsic.jpg",
     "calibration": {
       "gamePoints": [
-        { "name": "Point de calibration 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-        { "name": "Point de calibration 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-        { "name": "Point de calibration 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
+        {
+          "name": "Point de calibration 1",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        },
+        {
+          "name": "Point de calibration 2",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        },
+        {
+          "name": "Point de calibration 3",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        }
       ]
     },
     "pois": [
@@ -41,6 +59,622 @@
         "description": "",
         "openSubMapId": "sh-general",
         "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Stoneheim"
+      },
+      {
+        "type": "pnj",
+        "name": "Annithae Teardrop",
+        "gameX": 300,
+        "gameY": 830,
+        "description": "Maison du Joalier de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Archibald Spielengnaffron",
+        "gameX": 829,
+        "gameY": 1451,
+        "description": "Nord de Raven's Dust devant la cave de l'Aveugle",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Bastien Milandra",
+        "gameX": 419,
+        "gameY": 1253,
+        "description": "Chateau de Sir Beltigan",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Bourgmestre Belamzer",
+        "gameX": 264,
+        "gameY": 863,
+        "description": "Situ dans la grande maison en bas droite de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Chryseida Yolangda",
+        "gameX": 259,
+        "gameY": 738,
+        "description": "Sud Est du temple de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Daran Pied-lger",
+        "gameX": 365,
+        "gameY": 820,
+        "description": "Taverne de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Delnar Lavndir",
+        "gameX": 315,
+        "gameY": 700,
+        "description": "Devant la Sortie Nord de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Dionysus Argantma",
+        "gameX": 1014,
+        "gameY": 1012,
+        "description": "Ville Centaure",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Ecion Bras De Fer",
+        "gameX": 892,
+        "gameY": 1050,
+        "description": "Ouest de la maison du forgeron centaure",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Eldrig",
+        "gameX": 329,
+        "gameY": 826,
+        "description": "Sud ouest de la taverne de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Eliadenne",
+        "gameX": 146,
+        "gameY": 819,
+        "description": "Quartier des métiers, Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Fliris",
+        "gameX": 166,
+        "gameY": 809,
+        "description": "Quartier des métiers, Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Gardien Vortimer",
+        "gameX": 2456,
+        "gameY": 192,
+        "description": "Nord d'Arakas, dans une maison sous l'asile",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Gladdius Jiboesavel",
+        "gameX": 935,
+        "gameY": 975,
+        "description": "Dans une maison droite de l'entre du Village Centaure",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Glaenshenmilandira",
+        "gameX": 1965,
+        "gameY": 2815,
+        "description": "Iles Ethres",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Grutt",
+        "gameX": 1140,
+        "gameY": 450,
+        "description": "Camp des Skraugs Verts",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Gulfrid Morzholdir",
+        "gameX": 230,
+        "gameY": 763,
+        "description": "Sud du temple de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Gustavo Melli",
+        "gameX": 119,
+        "gameY": 837,
+        "description": "Quartier des métiers, Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Herewald Herngwean",
+        "gameX": 286,
+        "gameY": 758,
+        "description": "Dans une maison au sud de la fontaine de Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Jelosine",
+        "gameX": 161,
+        "gameY": 849,
+        "description": "Quartier des métiers, Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Julian",
+        "gameX": 210,
+        "gameY": 735,
+        "description": "Au sud du temple de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Khan Wuuthgoran",
+        "gameX": 1230,
+        "gameY": 420,
+        "description": "Camp des Skraugs Verts",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Kheral Logotaer",
+        "gameX": 294,
+        "gameY": 707,
+        "description": "Devant la sortie Nord de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Kyathos Tarzhporan",
+        "gameX": 852,
+        "gameY": 999,
+        "description": "Entre de la Ville Centaure",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Lucrell",
+        "gameX": 172,
+        "gameY": 839,
+        "description": "Quartier des métiers, Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Malachai Thanatos",
+        "gameX": 893,
+        "gameY": 1115,
+        "description": "Ville Centaure",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Mithanna Snowraven",
+        "gameX": 120,
+        "gameY": 795,
+        "description": "Sud du cercle de pierres de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Nissus Talandra",
+        "gameX": 210,
+        "gameY": 675,
+        "description": "Temple de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Norimar Aveldir",
+        "gameX": 275,
+        "gameY": 785,
+        "description": "Banque de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Omar Hald",
+        "gameX": 300,
+        "gameY": 825,
+        "description": "Maison du Joalier de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Prvt Grant Anfust",
+        "gameX": 315,
+        "gameY": 740,
+        "description": "Dans une maison l'est de la fontaine de Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Resha",
+        "gameX": 274,
+        "gameY": 699,
+        "description": "StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Rilouff",
+        "gameX": 785,
+        "gameY": 1084,
+        "description": "Maison au sud-est de Stoneheim",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Roen Fanril",
+        "gameX": 800,
+        "gameY": 1110,
+        "description": "Dans une maison l'ouest de la Ville Centaure",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Roy Aedenas Valreus",
+        "gameX": 1050,
+        "gameY": 1091,
+        "description": "Ville des centaures, dans le grand bâtiment au sud",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Shaman Weethgwotha",
+        "gameX": 1183,
+        "gameY": 496,
+        "description": "Camp Skraugs Verts",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Sheriff Grant Hornkeep",
+        "gameX": 315,
+        "gameY": 740,
+        "description": "Poste de Garde avant la sortie Nord de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Sir Beltigan",
+        "gameX": 390,
+        "gameY": 1257,
+        "description": "Chateau de Sir Beltigan",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Sir Mordenthal",
+        "gameX": 1689,
+        "gameY": 1232,
+        "description": "Chateau de Sir Mordenthal",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Sulivan",
+        "gameX": 213,
+        "gameY": 832,
+        "description": "Maison, sur le petit îlot au sud de Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Theoran Feizdir",
+        "gameX": 565,
+        "gameY": 925,
+        "description": "Une Maison au Sud-est de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Torgas",
+        "gameX": 367,
+        "gameY": 807,
+        "description": "Taverne de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Un étrange cheval sauvage",
+        "gameX": 1507,
+        "gameY": 2544,
+        "description": "Se déplace sur Stoneheim",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Un forgeron occupé",
+        "gameX": 894,
+        "gameY": 1073,
+        "description": "Ville des centaures",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Un homme à l'air intelligent",
+        "gameX": 305,
+        "gameY": 870,
+        "description": "Au sud du camp Skraug Rouge",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Un mage errant",
+        "gameX": 306,
+        "gameY": 750,
+        "description": "Devant le temple de StoneCrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Un vieillard en bonne santé",
+        "gameX": 1110,
+        "gameY": 265,
+        "description": "Est du cercle de pierre du bois creux",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Vargus",
+        "gameX": 575,
+        "gameY": 237,
+        "description": "Dans les montagnes au milieu du camp des Skraugs rouge",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Vellis",
+        "gameX": 809,
+        "gameY": 853,
+        "description": "Maison au sud du territoire des araignées de Stoneheim",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Volecian",
+        "gameX": 132,
+        "gameY": 855,
+        "description": "Quartier des métiers, Stonecrest",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Wajpoothin",
+        "gameX": 1173,
+        "gameY": 437,
+        "description": "Camp des Skraugs Verts",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Weethgwotha",
+        "gameX": 1190,
+        "gameY": 500,
+        "description": "Village skraug",
+        "wikiUrl": ""
+      },
+      {
+        "type": "pnj",
+        "name": "Zion Coeur-de-Tonnerre",
+        "gameX": 935,
+        "gameY": 1150,
+        "description": "Ville des centaures",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Arachnide nécrite",
+        "gameX": 783,
+        "gameY": 749,
+        "description": "112 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Arachnide nemesis",
+        "gameX": 783,
+        "gameY": 749,
+        "description": "112 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Arpenteur de la nuit",
+        "gameX": 358,
+        "gameY": 715,
+        "description": "70 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Biche",
+        "gameX": 2636,
+        "gameY": 2786,
+        "description": "15 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Chapardeur",
+        "gameX": 358,
+        "gameY": 715,
+        "description": "70 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Chevalier spectral",
+        "gameX": 262,
+        "gameY": 235,
+        "description": "50 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Chien-loup",
+        "gameX": 632,
+        "gameY": 816,
+        "description": "40 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Défenseur de ruche",
+        "gameX": 329,
+        "gameY": 1130,
+        "description": "49 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Démon d'ossements",
+        "gameX": 262,
+        "gameY": 235,
+        "description": "50 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Dragon Livoxdrinn",
+        "gameX": 1100,
+        "gameY": 1300,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Gardien Équestre",
+        "gameX": 1013,
+        "gameY": 1110,
+        "description": "9 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Golem incrusté d'émeraudes",
+        "gameX": 989,
+        "gameY": 236,
+        "description": "12 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Gremlin",
+        "gameX": 943,
+        "gameY": 290,
+        "description": "168 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Leprechaun",
+        "gameX": 943,
+        "gameY": 290,
+        "description": "168 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Loup Fenris",
+        "gameX": 723,
+        "gameY": 855,
+        "description": "4 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Loup géant",
+        "gameX": 650,
+        "gameY": 726,
+        "description": "17 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Momie royale",
+        "gameX": 297,
+        "gameY": 705,
+        "description": "4 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Rejeton du chaos",
+        "gameX": 683,
+        "gameY": 470,
+        "description": "16 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Sentinelle de la colonie",
+        "gameX": 329,
+        "gameY": 1130,
+        "description": "49 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Terreur hurlante",
+        "gameX": 297,
+        "gameY": 705,
+        "description": "4 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Troll des ponts",
+        "gameX": 1976,
+        "gameY": 2741,
+        "description": "15 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Un puissant chasseur",
+        "gameX": 622,
+        "gameY": 695,
+        "description": "5 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Warg",
+        "gameX": 798,
+        "gameY": 835,
+        "description": "6 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Zombie acide",
+        "gameX": 262,
+        "gameY": 235,
+        "description": "50 point(s) de spawn",
+        "wikiUrl": ""
       }
     ],
     "_meta": {

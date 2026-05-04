@@ -1,4 +1,4 @@
-﻿{
+{
   "map": {
     "id": "drake-island",
     "worldId": 3,
@@ -9,9 +9,27 @@
     "abetsicImage": "data/images/regions/drake-island/autre/drake-island-abetsic.jpg",
     "calibration": {
       "gamePoints": [
-        { "name": "Point de calibration 1", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-        { "name": "Point de calibration 2", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 },
-        { "name": "Point de calibration 3", "gameX": 0, "gameY": 0, "mapX": 0, "mapY": 0 }
+        {
+          "name": "Point de calibration 1",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        },
+        {
+          "name": "Point de calibration 2",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        },
+        {
+          "name": "Point de calibration 3",
+          "gameX": 0,
+          "gameY": 0,
+          "mapX": 0,
+          "mapY": 0
+        }
       ]
     },
     "pois": [
@@ -41,6 +59,22 @@
         "description": "",
         "openSubMapId": "di-abysses",
         "wikiUrl": "https://t4c.fandom.com/fr/wiki/Cartes_Drake_Island"
+      },
+      {
+        "type": "monstres",
+        "name": "Dalle étrange",
+        "gameX": 2727,
+        "gameY": 451,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
+      },
+      {
+        "type": "monstres",
+        "name": "Hurbag Digitus",
+        "gameX": 1257,
+        "gameY": 1811,
+        "description": "1 point(s) de spawn",
+        "wikiUrl": ""
       }
     ],
     "_meta": {

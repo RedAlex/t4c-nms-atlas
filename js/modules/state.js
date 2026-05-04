@@ -11,6 +11,8 @@ const state = {
   activeSubMap: null,
   activeFilter: "lieux",
   activeSubmapFilter: "lieux",
+  // Si false, le clic gauche sur PNJ/monstres ne déclenche pas de navigation.
+  enableLeftClickNavigationOnNpcMonsters: false,
   showPoiTitles: true,
   showSubmapPoiTitles: true,
   showGridCoords: false,
