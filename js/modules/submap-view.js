@@ -10,6 +10,50 @@ import { setSourceLink, updateDevLabel } from "./ui-helpers.js";
 import { renderSubmapPois, getPointerPercentOnSubmap } from "./poi-renderer.js";
 import { updateSubmapFilterButtons } from "./filters.js";
 import { isPoiFavorite } from "./favorites.js";
+import { createZoomPanController } from "./zoom-pan.js";
+
+let submapZoomController = null;
+const submapViewportCache = new Map();
+
+function getActiveSubmapZoomLimits() {
+  const zoom = state.activeSubMap?.zoom || {};
+  return {
+    min: Number.isFinite(zoom.min) ? zoom.min : 1,
+    max: Number.isFinite(zoom.max) ? zoom.max : 5,
+    step: Number.isFinite(zoom.step) ? zoom.step : 0.2,
+  };
+}
+
+function updateSubmapZoomButtons({ scale, limits }) {
+  const btnIn = document.getElementById("submap-zoom-in");
+  const btnOut = document.getElementById("submap-zoom-out");
+  if (btnIn) {
+    btnIn.disabled = scale >= limits.max - 0.001;
+  }
+  if (btnOut) {
+    btnOut.disabled = scale <= limits.min + 0.001;
+  }
+  const badge = document.getElementById("submap-zoom-level");
+  if (badge) {
+    badge.textContent = `x${scale.toFixed(1)}`;
+    badge.classList.toggle("hidden", scale <= limits.min + 0.001);
+  }
+}
+
+function ensureSubmapZoomController() {
+  if (submapZoomController) {
+    return submapZoomController;
+  }
+
+  submapZoomController = createZoomPanController({
+    wrapId: "submap-stage-wrap",
+    stageId: "submap-stage",
+    getLimits: getActiveSubmapZoomLimits,
+    onScaleChange: updateSubmapZoomButtons,
+  });
+
+  return submapZoomController;
+}
 
 function fitSubmapStageToImage() {
   const submapStageWrap = document.getElementById("submap-stage-wrap");
@@ -45,6 +89,11 @@ export function openSubMap(subMapId) {
   const submapWikiLink = document.getElementById("submap-wiki-link");
 
   const subMaps = state.activeMap.subMaps || [];
+  // Sauvegarder le viewport de la sous-carte actuelle avant de changer
+  if (state.activeSubMap?.id && submapZoomController) {
+    submapViewportCache.set(state.activeSubMap.id, submapZoomController.getViewport());
+  }
+
   updateState("activeSubMap", subMaps.find((s) => s.id === subMapId) || null);
   updateState("submapSearchQuery", "");
   if (!state.activeSubMap) {
@@ -96,6 +145,8 @@ export function openSubMap(subMapId) {
   submapBgImg.src = state.activeSubMap.image;
   submapBgImg.alt = state.activeSubMap.name;
 
+  ensureSubmapZoomController()?.reset();
+
   const submapImgSource = document.getElementById("submap-img-source");
   const safeSubmapWikiUrl = normalizeUrlCandidate(state.activeSubMap.wikiUrl);
   if (safeSubmapWikiUrl) {
@@ -124,7 +175,7 @@ export function updateSubmapZoneLayerLayout() {
 
   fitSubmapStageToImage();
 
-  const rect = submapStage.getBoundingClientRect();
+  const rect = { width: submapStage.clientWidth, height: submapStage.clientHeight };
   const displayRect = getDisplayedImageRect(
     rect.width,
     rect.height,
@@ -136,6 +187,20 @@ export function updateSubmapZoneLayerLayout() {
   submapZoneLayer.style.top = `${displayRect.top}px`;
   submapZoneLayer.style.width = `${displayRect.width}px`;
   submapZoneLayer.style.height = `${displayRect.height}px`;
+
+  ensureSubmapZoomController()?.refresh();
+}
+
+export function zoomInSubmap() {
+  ensureSubmapZoomController()?.zoomIn();
+}
+
+export function zoomOutSubmap() {
+  ensureSubmapZoomController()?.zoomOut();
+}
+
+export function resetSubmapZoom() {
+  ensureSubmapZoomController()?.reset();
 }
 
 /**

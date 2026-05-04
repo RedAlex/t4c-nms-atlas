@@ -7,11 +7,21 @@
 import { loadMapsData } from "./js/modules/data-loader.js";
 import state, { updateState } from "./js/modules/state.js";
 import { renderWorldTabs } from "./js/modules/world-view.js";
-import { openMap, updateZoneLayerLayout, handleMapStageMouseMove } from "./js/modules/map-view.js";
+import {
+  openMap,
+  updateZoneLayerLayout,
+  handleMapStageMouseMove,
+  zoomInMap,
+  zoomOutMap,
+  resetMapZoom,
+} from "./js/modules/map-view.js";
 import {
   updateSubmapZoneLayerLayout,
   handleSubmapStageMouseMove,
   handleSubmapStageClick,
+  zoomInSubmap,
+  zoomOutSubmap,
+  resetSubmapZoom,
 } from "./js/modules/submap-view.js";
 import {
   toggleFilter,
@@ -26,6 +36,8 @@ import { updateDevLabel, applyDevUiVisibility } from "./js/modules/ui-helpers.js
 import { handleCalibrationClickCopy } from "./js/modules/poi-renderer.js";
 import { loadFavoritesFromStorage, showFavoritesView } from "./js/modules/favorites.js";
 import { validateData } from "./js/modules/validator.js";
+import { buildMapGraph } from "./js/modules/graph.js";
+import { initItineraryPanel, computeItinerary, openItineraryPanel, closeItineraryPanel } from "./js/modules/itinerary.js";
 
 /**
  * Synchronise la hauteur de viewport réelle (utile sur desktop et mobile)
@@ -74,6 +86,10 @@ async function init() {
   loadFavoritesFromStorage();
   renderWorldTabs();
 
+  // Construction du graphe de navigation inter-cartes
+  const mapGraph = buildMapGraph(data.maps);
+  initItineraryPanel(mapGraph);
+
   // Affiche la version de l'application
   const appVersionEl = document.getElementById("app-version");
   if (appVersionEl) {
@@ -103,6 +119,20 @@ async function init() {
   const toggleGridCoordsBtn = document.getElementById("toggle-grid-coords");
   const mapSearchInput = document.getElementById("map-search-input");
   const submapSearchInput = document.getElementById("submap-search-input");
+  const mapZoomInBtn = document.getElementById("map-zoom-in");
+  const mapZoomOutBtn = document.getElementById("map-zoom-out");
+  const mapZoomResetBtn = document.getElementById("map-zoom-reset");
+  const submapZoomInBtn = document.getElementById("submap-zoom-in");
+  const submapZoomOutBtn = document.getElementById("submap-zoom-out");
+  const submapZoomResetBtn = document.getElementById("submap-zoom-reset");
+  const openItineraryBtn = document.getElementById("open-itinerary");
+  const itineraryCloseBtn = document.getElementById("itinerary-close");
+  const itineraryComputeBtn = document.getElementById("itinerary-compute");
+
+  // Événements - Itinéraire
+  openItineraryBtn?.addEventListener("click", openItineraryPanel);
+  itineraryCloseBtn?.addEventListener("click", closeItineraryPanel);
+  itineraryComputeBtn?.addEventListener("click", computeItinerary);
 
   // Événements - Favoris
   openFavoritesBtn?.addEventListener("click", showFavoritesView);
@@ -146,6 +176,9 @@ async function init() {
     }
   });
   mapStage.addEventListener("click", handleCalibrationClickCopy);
+  mapZoomInBtn?.addEventListener("click", zoomInMap);
+  mapZoomOutBtn?.addEventListener("click", zoomOutMap);
+  mapZoomResetBtn?.addEventListener("click", resetMapZoom);
   mapBgImg.addEventListener("load", updateZoneLayerLayout);
   window.addEventListener("resize", () => {
     syncViewportHeight();
@@ -216,6 +249,9 @@ async function init() {
     });
     submapStage.addEventListener("click", handleSubmapStageClick);
   }
+  submapZoomInBtn?.addEventListener("click", zoomInSubmap);
+  submapZoomOutBtn?.addEventListener("click", zoomOutSubmap);
+  submapZoomResetBtn?.addEventListener("click", resetSubmapZoom);
   if (submapBgImg) {
     submapBgImg.addEventListener("load", updateSubmapZoneLayerLayout);
   }
@@ -240,17 +276,34 @@ async function init() {
 
   window.addEventListener("resize", updateSubmapZoneLayerLayout);
 
-  // Navigation clavier — Esc pour revenir en arrière
+  // Navigation clavier — Esc pour revenir en arrière, +/- pour zoom
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") {
+    // Ignorer si focus dans un champ de saisie
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
       return;
     }
-    const submapView = document.getElementById("submap-view");
-    const favoritesView = document.getElementById("favorites-view");
-    if (submapView && !submapView.classList.contains("hidden")) {
-      openMap(state.activeMap.id);
-    } else if (favoritesView && !favoritesView.classList.contains("hidden")) {
-      openMap(state.activeMap?.id ?? data.maps[0].id);
+
+    if (event.key === "Escape") {
+      const submapView = document.getElementById("submap-view");
+      const favoritesView = document.getElementById("favorites-view");
+      if (submapView && !submapView.classList.contains("hidden")) {
+        openMap(state.activeMap.id);
+      } else if (favoritesView && !favoritesView.classList.contains("hidden")) {
+        openMap(state.activeMap?.id ?? data.maps[0].id);
+      }
+      return;
+    }
+
+    const submapVisible = !document.getElementById("submap-view")?.classList.contains("hidden");
+    if (event.key === "+" || event.key === "=") {
+      event.preventDefault();
+      submapVisible ? zoomInSubmap() : zoomInMap();
+    } else if (event.key === "-") {
+      event.preventDefault();
+      submapVisible ? zoomOutSubmap() : zoomOutMap();
+    } else if (event.key === "0") {
+      event.preventDefault();
+      submapVisible ? resetSubmapZoom() : resetMapZoom();
     }
   });
 

@@ -11,6 +11,50 @@ import { updateFilterDisplay, updateFilterButtons } from "./filters.js";
 import config from "./config.js";
 import { isPoiFavorite } from "./favorites.js";
 import { renderWorldTabs } from "./world-view.js";
+import { createZoomPanController } from "./zoom-pan.js";
+
+let mapZoomController = null;
+const mapViewportCache = new Map();
+
+function getActiveMapZoomLimits() {
+  const zoom = state.activeMap?.zoom || {};
+  return {
+    min: Number.isFinite(zoom.min) ? zoom.min : 1,
+    max: Number.isFinite(zoom.max) ? zoom.max : 4,
+    step: Number.isFinite(zoom.step) ? zoom.step : 0.2,
+  };
+}
+
+function updateMapZoomButtons({ scale, limits }) {
+  const btnIn = document.getElementById("map-zoom-in");
+  const btnOut = document.getElementById("map-zoom-out");
+  if (btnIn) {
+    btnIn.disabled = scale >= limits.max - 0.001;
+  }
+  if (btnOut) {
+    btnOut.disabled = scale <= limits.min + 0.001;
+  }
+  const badge = document.getElementById("map-zoom-level");
+  if (badge) {
+    badge.textContent = `x${scale.toFixed(1)}`;
+    badge.classList.toggle("hidden", scale <= limits.min + 0.001);
+  }
+}
+
+function ensureMapZoomController() {
+  if (mapZoomController) {
+    return mapZoomController;
+  }
+
+  mapZoomController = createZoomPanController({
+    wrapId: "map-stage-wrap",
+    stageId: "map-stage",
+    getLimits: getActiveMapZoomLimits,
+    onScaleChange: updateMapZoomButtons,
+  });
+
+  return mapZoomController;
+}
 
 function fitMapStageToImage() {
   const mapStageWrap = document.getElementById("map-stage-wrap");
@@ -45,6 +89,11 @@ export function openMap(mapId) {
   const mapBgImg = document.getElementById("map-bg-img");
   const activeMapTitle = document.getElementById("active-map-title");
   const activeMapCaption = document.getElementById("active-map-caption");
+
+  // Sauvegarder le viewport de la carte actuelle avant de changer
+  if (state.activeMap?.id && mapZoomController) {
+    mapViewportCache.set(state.activeMap.id, mapZoomController.getViewport());
+  }
 
   updateState("activeMap", state.maps.find((m) => m.id === mapId) || null);
   updateState("activeSubMap", null);
@@ -115,6 +164,8 @@ export function openMap(mapId) {
     mapBgImg.alt = `Carte ${state.activeMap.name}`;
   }
 
+  ensureMapZoomController()?.reset();
+
   updateZoneLayerLayout();
 
   renderInteractivePoints();
@@ -146,7 +197,7 @@ export function updateZoneLayerLayout() {
 
   fitMapStageToImage();
 
-  const rect = mapStage.getBoundingClientRect();
+  const rect = { width: mapStage.clientWidth, height: mapStage.clientHeight };
   const displayRect = getDisplayedImageRect(
     rect.width,
     rect.height,
@@ -158,6 +209,20 @@ export function updateZoneLayerLayout() {
   zoneLayer.style.top = `${displayRect.top}px`;
   zoneLayer.style.width = `${displayRect.width}px`;
   zoneLayer.style.height = `${displayRect.height}px`;
+
+  ensureMapZoomController()?.refresh();
+}
+
+export function zoomInMap() {
+  ensureMapZoomController()?.zoomIn();
+}
+
+export function zoomOutMap() {
+  ensureMapZoomController()?.zoomOut();
+}
+
+export function resetMapZoom() {
+  ensureMapZoomController()?.reset();
 }
 
 /**

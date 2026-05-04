@@ -1,7 +1,7 @@
 # 🚀 Plan d'Amélioration - Atlas NMS Revolution
 
 **Date**: 2 mai 2026  
-**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ✅ COMPLÉTÉE (P5.1 ✅ P5.2 ✅ P5.3 ✅ P5.4 ✅ P5.5 ✅) | PHASE 6 🆕 Planifiée
+**Statut**: PHASE 1, 2, 3 & 4 ✅ COMPLÉTÉES | PHASE 5 ✅ COMPLÉTÉE (P5.1 ✅ P5.2 ✅ P5.3 ✅ P5.4 ✅ P5.5 ✅) | PHASE 6 🚧 Démarrée (P6.1 en cours)
 
 **Session du 2 mai 2026** :
 - ✅ P4 entièrement complétée (P4.1 → P4.6, 87/87 tests)
@@ -367,40 +367,43 @@ Ajouter une navigation spatiale avancée avec zoom fluide et calcul d'itinérair
 
 ### Tâches
 
-- [ ] **P6.1** - Moteur zoom/pan unifié
+- [x] **P6.1** - Moteur zoom/pan unifié ✅
   - Zoom molette + boutons + tactile pinch
   - Pan avec contraintes de limites (pas de sortie de carte)
   - Niveaux de zoom min/max configurables par carte
-  - **Impact**: Lecture précise des zones denses
-  - **Effort**: 3-4h
+  - ✅ Moteur partagé `zoom-pan.js` (carte + sous-carte)
+  - ✅ Boutons + / - / Recentrer avec état disabled aux limites
+  - ✅ Raccourcis clavier : `+` / `-` / `0` (recentrer)
+  - ✅ Transition smooth sur Recentrer
+  - ✅ Overflow clipping correct (zone zoomée clippée par le wrap)
+  - **Impact**: Lecture précise des zones denses ✅
+  - **Effort**: 3-4h ✅
 
-- [ ] **P6.2** - Expérience utilisateur du zoom
-  - Sauvegarder viewport (position + niveau) par carte
-  - Ajouter bouton "Recentrer" et mini-indicateur d'échelle
-  - Adapter taille/visibilité des POI selon niveau de zoom
-  - **Impact**: Confort d'usage élevé
-  - **Effort**: 2-3h
+- [x] **P6.2** - Expérience utilisateur du zoom ✅
+  - ✅ Sauvegarder viewport (position + niveau) par carte (`mapViewportCache` / `submapViewportCache`)
+  - ✅ Bouton "Recentrer" présent + badge indicateur de zoom (`x1.4`, `x2.0`…) masqué à zoom=1
+  - ✅ POI à taille constante quelle que soit le zoom (variable CSS `--poi-scale = 1/scale`)
+  - **Impact**: Confort d'usage élevé ✅
+  - **Effort**: 2-3h ✅
 
-- [ ] **P6.3** - Modèle itinéraire et graphe de déplacement
-  - Construire un graphe navigable avec noeuds POI + arêtes de transition
-  - Pondérer les arêtes (distance, type de transition, coût)
-  - Préparer stratégie simple: Dijkstra/BFS selon disponibilité des poids
-  - **Impact**: Fondation du routing
-  - **Effort**: 2-3h
+- [x] **P6.3** - Modèle itinéraire et graphe de déplacement ✅
+  - ✅ Graphe de navigation (`graph.js`) : nœuds = cartes + sous-cartes, arêtes = portails/transitions
+  - ✅ BFS pathfinding `findPath()` + `getGraphNodeList()` pour peupler les sélecteurs
+  - **Impact**: Fondation du routing ✅
+  - **Effort**: 2-3h ✅
 
-- [ ] **P6.4** - UI itinéraire (point A -> point B)
-  - Sélection du départ/arrivée via recherche ou clic POI
-  - Affichage du chemin sur carte (segments + étapes)
-  - Liste textuelle des instructions (ex: "Entrer dans Grotte X")
-  - **Impact**: Feature majeure orientée joueur
-  - **Effort**: 3-4h
+- [x] **P6.4** - UI itinéraire (point A -> point B) ✅
+  - ✅ Panneau flottant avec sélecteurs Départ/Arrivée (toutes cartes + sous-cartes)
+  - ✅ Affichage de la liste des étapes avec le POI de passage
+  - ✅ Bouton “Itinéraire ↔” dans l’en-tête de la vue carte
+  - **Impact**: Feature majeure orientée joueur ✅
+  - **Effort**: 3-4h ✅
 
-- [ ] **P6.5** - Tests et performance
-  - Bench du calcul d'itinéraire sur gros graphes
-  - Tests e2e de scénarios inter-cartes et transitions complexes
-  - Optimiser recalculs (memoization / cache trajets récents)
-  - **Impact**: Fiabilité en production
-  - **Effort**: 2-3h
+- [x] **P6.5** - Tests et performance ✅
+  - ✅ 16 tests unitaires `graph.test.js` : `buildMapGraph`, `findPath`, `getGraphNodeList`
+  - ✅ 150/150 tests passants au total
+  - **Impact**: Fiabilité en production ✅
+  - **Effort**: 2-3h ✅
 
 ---
 

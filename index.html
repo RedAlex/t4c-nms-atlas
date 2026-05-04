@@ -58,6 +58,7 @@
           </div>
           <div class="actions">
             <button id="open-favorites" class="btn ghost" type="button">Mes favoris</button>
+            <button id="open-itinerary" class="btn ghost" type="button" title="Calculer un itinéraire entre deux lieux">Itinéraire ↔</button>
           </div>
         </div>
         <div id="map-tabs" class="world-tabs" role="tablist" aria-label="Selection de la carte"></div>
@@ -90,9 +91,37 @@
             <div id="map-dev-coords" class="map-dev-coords hidden"></div>
             <div id="map-hover-card" class="map-hover-card" aria-live="polite"></div>
           </div>
+          <div class="zoom-controls" aria-label="Contrôles de zoom carte principale">
+            <button id="map-zoom-in" class="btn-filter" type="button" aria-label="Zoom avant">
+              +
+            </button>
+            <button id="map-zoom-out" class="btn-filter" type="button" aria-label="Zoom arrière">
+              -
+            </button>
+            <button id="map-zoom-reset" class="btn-filter" type="button" aria-label="Recentrer la carte">
+              Recentrer
+            </button>
+            <span id="map-zoom-level" class="zoom-level-badge hidden" aria-live="polite"></span>
+          </div>
         </div>
         <p id="map-img-source" class="img-source map-img-source"></p>
       </section>
+
+      <!-- Panneau itinéraire flottant -->
+      <div id="itinerary-panel" class="itinerary-panel hidden" role="dialog" aria-modal="false" aria-label="Calculer un itinéraire">
+        <div class="itinerary-panel-head">
+          <span class="itinerary-panel-title">Itinéraire</span>
+          <button id="itinerary-close" class="btn ghost" type="button" aria-label="Fermer le panneau">✕</button>
+        </div>
+        <div class="itinerary-panel-body">
+          <label class="itinerary-label" for="itinerary-from">Départ</label>
+          <select id="itinerary-from" class="itinerary-select"></select>
+          <label class="itinerary-label" for="itinerary-to">Arrivée</label>
+          <select id="itinerary-to" class="itinerary-select"></select>
+          <button id="itinerary-compute" class="btn" type="button">Calculer l'itinéraire</button>
+          <div id="itinerary-result" class="itinerary-result" aria-live="polite"></div>
+        </div>
+      </div>
 
       <!-- Vue sous-carte -->
       <section id="submap-view" class="panel hidden" aria-live="polite" aria-label="Vue sous-carte">
@@ -142,6 +171,18 @@
             <div id="submap-zone-layer" class="submap-zone-layer"></div>
             <div id="submap-dev-coords" class="map-dev-coords hidden"></div>
             <div id="submap-hover-card" class="map-hover-card" aria-live="polite"></div>
+          </div>
+          <div class="zoom-controls" aria-label="Contrôles de zoom sous-carte">
+            <button id="submap-zoom-in" class="btn-filter" type="button" aria-label="Zoom avant sous-carte">
+              +
+            </button>
+            <button id="submap-zoom-out" class="btn-filter" type="button" aria-label="Zoom arrière sous-carte">
+              -
+            </button>
+            <button id="submap-zoom-reset" class="btn-filter" type="button" aria-label="Recentrer la sous-carte">
+              Recentrer
+            </button>
+            <span id="submap-zoom-level" class="zoom-level-badge hidden" aria-live="polite"></span>
           </div>
         </div>
         <p id="submap-img-source" class="img-source submap-img-source"></p>

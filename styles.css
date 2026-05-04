@@ -503,7 +503,8 @@ body {
   justify-content: flex-start;
   width: 100%;
   min-height: 0;
-  overflow: visible;
+  overflow: hidden;
+  position: relative;
 }
 
 .map-stage {
@@ -519,6 +520,176 @@ body {
   overflow: hidden;
   background: #0a0a12;
   transition: transform 350ms ease;
+}
+
+.zoomable-stage {
+  transition: none;
+  touch-action: none;
+  cursor: grab;
+}
+
+.zoomable-stage.is-panning {
+  cursor: grabbing;
+}
+
+.zoomable-stage.is-resetting {
+  transition: transform 280ms ease;
+  cursor: default;
+}
+
+.zoom-controls {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.45rem;
+  z-index: 12;
+}
+
+.zoom-controls .btn-filter {
+  min-height: 34px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  line-height: 1;
+}
+
+.zoom-controls .btn-filter:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.zoom-level-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: rgba(241, 246, 255, 0.65);
+  min-width: 2.8rem;
+  padding: 0.2rem 0.3rem;
+  user-select: none;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Panneau Itinéraire ─────────────────────────────────────────── */
+
+.itinerary-panel {
+  position: fixed;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+  z-index: 60;
+  width: clamp(260px, 28vw, 360px);
+  background: rgba(13, 22, 42, 0.97);
+  border: 1px solid var(--stroke);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.itinerary-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem 0.6rem;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.itinerary-panel-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--paper);
+  letter-spacing: 0.04em;
+}
+
+.itinerary-panel-body {
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.itinerary-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: -0.2rem;
+}
+
+.itinerary-select {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--paper);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+}
+
+.itinerary-select:focus {
+  border-color: var(--accent);
+}
+
+.itinerary-result {
+  margin-top: 0.4rem;
+}
+
+.itinerary-error {
+  font-size: 0.8rem;
+  color: var(--danger);
+  margin: 0;
+  padding: 0.4rem 0;
+}
+
+.itinerary-summary {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+}
+
+.itinerary-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.itinerary-step {
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.itinerary-step-first {
+  background: rgba(6, 214, 160, 0.12);
+}
+
+.itinerary-step-last {
+  background: rgba(255, 122, 24, 0.12);
+}
+
+.itinerary-via {
+  font-size: 0.7rem;
+  color: var(--muted);
+  padding-bottom: 0.1rem;
+}
+
+.itinerary-node {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--paper);
 }
 
 .map-bg-img {
@@ -575,7 +746,7 @@ body {
   border-radius: 50%;
   border: 2px solid rgba(255, 255, 255, 0.95);
   cursor: pointer;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(var(--poi-scale, 1));
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
   transition:
     transform 120ms ease,
@@ -640,7 +811,7 @@ body {
 
 .poi:hover,
 .poi:focus-visible {
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(calc(var(--poi-scale, 1) * 1.2));
   box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.2);
   outline: none;
 }
@@ -658,15 +829,15 @@ body {
 
 @keyframes poi-target-focus {
   0% {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(var(--poi-scale, 1));
     box-shadow: 0 0 0 0 rgba(255, 214, 77, 0.7);
   }
   35% {
-    transform: translate(-50%, -50%) scale(1.35);
+    transform: translate(-50%, -50%) scale(calc(var(--poi-scale, 1) * 1.35));
     box-shadow: 0 0 0 10px rgba(255, 214, 77, 0.18);
   }
   100% {
-    transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(var(--poi-scale, 1));
     box-shadow: 0 0 0 2px rgba(255, 214, 77, 0);
   }
 }
