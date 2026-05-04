@@ -1,6 +1,6 @@
 {
   "name": "t4c-nms-atlas",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Carte interactive telechargeable T4C NMS Revolution",
   "main": "electron/main.cjs",
   "type": "module",
