@@ -138,16 +138,27 @@ async function checkForUpdates(mainWindow) {
   }
 
   // ── Script de remplacement (s'exécute après la fermeture de l'app) ──
-  // Le script : attend la fermeture → extrait → copie → relance
+  // Séquence : attend fermeture → extrait ZIP → copie avec robocopy → relance
+  // robocopy retourne 0-7 = succès (0=rien copié, 1=OK, 3=OK+extra…), ≥8 = erreur
+  const errorLog = path.join(tmpDir, "atlas-update-error.log");
   const script = [
     "@echo off",
-    "timeout /t 2 /nobreak > nul",
+    "timeout /t 3 /nobreak > nul",
     `powershell -Command "if (Test-Path '${extractTo}') { Remove-Item -Recurse -Force '${extractTo}' }"`,
     `powershell -Command "Expand-Archive -Force -LiteralPath '${zipPath}' -DestinationPath '${extractTo}'"`,
-    `xcopy /E /Y /I "${extractTo}\\Atlas NMS Revolution-win32-x64\\*" "${appDir}\\"`,
+    `if %errorlevel% neq 0 (`,
+    `  echo [%date% %time%] Echec extraction ZIP (code %errorlevel%) > "${errorLog}"`,
+    `  goto :cleanup`,
+    `)`,
+    `robocopy "${extractTo}\\Atlas NMS Revolution-win32-x64" "${appDir}" /E /IS /IT /NFL /NDL /NJH /NJS`,
+    `if %errorlevel% geq 8 (`,
+    `  echo [%date% %time%] Echec copie fichiers (code %errorlevel%) > "${errorLog}"`,
+    `  goto :cleanup`,
+    `)`,
     `start "" "${exePath}"`,
-    `rmdir /S /Q "${extractTo}"`,
-    `del "${zipPath}"`,
+    `:cleanup`,
+    `if exist "${extractTo}" rmdir /S /Q "${extractTo}"`,
+    `if exist "${zipPath}" del "${zipPath}"`,
     `del "%~f0"`,
   ].join("\r\n");
 
@@ -162,4 +173,4 @@ async function checkForUpdates(mainWindow) {
   app.quit();
 }
 
-module.exports = { checkForUpdates };
+module.exports = { checkForUpdates, isNewer };
